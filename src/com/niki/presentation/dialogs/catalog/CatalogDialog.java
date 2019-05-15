@@ -11,7 +11,7 @@ public class CatalogDialog extends JDialog {
     private JButton deleteButton;
     private JTable table1;
 
-    public CatalogDialog() {
+    public CatalogDialog(CatalogType type) {
         setContentPane(contentPane);
         setModal(true);
 
@@ -41,5 +41,19 @@ public class CatalogDialog extends JDialog {
     private void onCancel() {
         // buttonAdd your code here if necessary
         dispose();
+    }
+
+    public enum CatalogType{
+        USERS,
+        POSITIONS,
+        COUNTRIES,
+        MANUFACTURES,
+        DRUGS,
+        DRUG_FORMS,
+        DRUG_CLASS,
+        NEW_SALES,
+        NEW_INTAKES,
+        STARAGES,
+        PROVIDERS
     }
 }
