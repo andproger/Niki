@@ -47,13 +47,13 @@ public class CatalogDialog extends JDialog {
         USERS,
         POSITIONS,
         COUNTRIES,
-        MANUFACTURES,
+        MANUFACTURERS,
         DRUGS,
         DRUG_FORMS,
-        DRUG_CLASS,
+        DRUG_CLASSES,
         NEW_SALES,
         NEW_INTAKES,
-        STARAGES,
+        STORAGES,
         PROVIDERS
     }
 }
