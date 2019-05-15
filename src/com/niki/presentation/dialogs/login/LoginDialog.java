@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class LoginDialog extends JDialog implements LoginView {
+    private ResultType result;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -38,7 +39,7 @@ public class LoginDialog extends JDialog implements LoginView {
 
     @Override
     public void onSuccessLogin() {
-        openMainDialog();
+        result = ResultType.SUCCESS_LOGIN;
         dispose();
     }
 
@@ -59,7 +60,17 @@ public class LoginDialog extends JDialog implements LoginView {
     }
 
     private void onCancel() {
+        result = ResultType.CANCEL;
         // add your code here if necessary
         dispose();
+    }
+
+    public ResultType getResult() {
+        return result;
+    }
+
+    public enum ResultType{
+        SUCCESS_LOGIN,
+        CANCEL
     }
 }
