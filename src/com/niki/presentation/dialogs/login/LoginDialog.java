@@ -45,13 +45,12 @@ public class LoginDialog extends JDialog implements LoginView {
 
     @Override
     public void onWrongLogin() {
-        //TODO:
+        showLoginError();
     }
 
-    private void openMainDialog() {
-        MainDialog dialog = new MainDialog();
-        dialog.pack();
-        dialog.setVisible(true);
+    private void showLoginError(){
+        JOptionPane.showMessageDialog(this,
+                "Не удалось войти. Проверьте имя пользователя и пароль", "Ошибка", JOptionPane.ERROR_MESSAGE);
     }
 
     private void initViews() {
@@ -61,7 +60,6 @@ public class LoginDialog extends JDialog implements LoginView {
 
     private void onCancel() {
         result = ResultType.CANCEL;
-        // add your code here if necessary
         dispose();
     }
 
