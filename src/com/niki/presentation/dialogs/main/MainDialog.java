@@ -1,4 +1,4 @@
-package com.niki;
+package com.niki.presentation.dialogs.main;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -61,12 +61,5 @@ public class MainDialog extends JDialog {
     private void onCancel() {
         // add your code here if necessary
         dispose();
-    }
-
-    public static void main(String[] args) {
-        MainDialog dialog = new MainDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
     }
 }
