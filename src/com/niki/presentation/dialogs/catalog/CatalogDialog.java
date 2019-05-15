@@ -1,8 +1,22 @@
 package com.niki.presentation.dialogs.catalog;
 
-import com.niki.presentation.dialogs.catalog.impl.*;
+import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.dclass.DrugClassPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.form.DrugFormsPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.intake.NewIntakesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.manufacturer.ManufacturesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.position.PositionsPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.provider.ProvidersPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.sale.NewSalesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.storage.StoragesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.user.UsersPresenterImpl;
 
 import javax.swing.*;
+import javax.swing.CellEditor;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
 import java.awt.event.*;
 
 public class CatalogDialog extends JDialog implements CatalogView {
@@ -48,6 +62,21 @@ public class CatalogDialog extends JDialog implements CatalogView {
         dispose();
     }
 
+    @Override
+    public void setTableModel(AbstractTableModel tableModel) {
+        table1.setModel(tableModel);
+    }
+
+    @Override
+    public void setTableCellEditor(Class aClass, TableCellEditor cellEditor) {
+        table1.setDefaultEditor(aClass, cellEditor);
+    }
+
+    @Override
+    public void setTableCellRenderer(Class aClass, DefaultTableCellRenderer cellRenderer) {
+        table1.setDefaultRenderer(aClass, cellRenderer);
+    }
+
     private void setupPresenter(CatalogType type) {
         switch (type) {
             case USERS:
@@ -59,7 +88,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case STARAGES:
-                presenter = new StaragesPresenterImpl(this);
+                presenter = new StoragesPresenterImpl(this);
                 break;
 
             case COUNTRIES:
