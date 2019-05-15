@@ -1,11 +1,14 @@
 package com.niki.presentation.dialogs.login;
 
+import com.niki.domain.interactors.login.LoginInteractorImpl;
+import com.niki.presentation.dialogs.main.MainDialog;
+
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class LoginDialog extends JDialog {
+public class LoginDialog extends JDialog implements LoginView {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -13,10 +16,13 @@ public class LoginDialog extends JDialog {
     private JTextField serverField;
     private JTextField loginField;
 
+    private LoginPresenter presenter;
+
     public LoginDialog() {
         setContentPane(contentPane);
         setModal(true);
 
+        presenter = new LoginPresenterImpl(this, new LoginInteractorImpl());
         initViews();
 
         getRootPane().setDefaultButton(buttonOK);
@@ -30,14 +36,26 @@ public class LoginDialog extends JDialog {
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void initViews() {
-        buttonOK.addActionListener(e -> onOK());
-        buttonCancel.addActionListener(e -> onCancel());
+    @Override
+    public void onSuccessLogin() {
+        openMainDialog();
+        dispose();
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
+    @Override
+    public void onWrongLogin() {
+        //TODO:
+    }
+
+    private void openMainDialog() {
+        MainDialog dialog = new MainDialog();
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+
+    private void initViews() {
+        buttonOK.addActionListener(e -> presenter.onOkClicked("server-1", "login-2", "password-3"));
+        buttonCancel.addActionListener(e -> onCancel());
     }
 
     private void onCancel() {
