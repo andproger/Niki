@@ -1,7 +1,10 @@
 package com.niki.presentation.dialogs.catalog;
 
-import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
+import com.niki.data.repository.ClassRepositorySql;
+import com.niki.data.repository.CountryRepositorySql;
+import com.niki.data.repository.FormRepositorySql;
+import com.niki.data.repository.StorageRepositorySql;
 import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.classes.DrugClassesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
@@ -53,7 +56,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
     private void initViews() {
         buttonSave.addActionListener(e -> presenter.onSaveClicked());
         buttonCancel.addActionListener(e -> onCancel());
-        buttonAdd.addActionListener(e->presenter.onAddClicked());
+        buttonAdd.addActionListener(e -> presenter.onAddClicked());
         buttonDelete.addActionListener(e -> presenter.onDeleteClicked(table1.getSelectedRows()));
     }
 
