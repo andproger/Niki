@@ -1,4 +1,4 @@
-package com.niki.presentation.dialogs.catalog.impl.dclass;
+package com.niki.presentation.dialogs.catalog.impl.classes;
 
 
 import com.niki.domain.entities.DrugClass;
@@ -65,10 +65,8 @@ public class DrugClassesTableModel extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         var item = classes.get(rowIndex);
 
-        switch (columnIndex) {
-            case 1:
-                item.setName((String) aValue);
-                break;
+        if (columnIndex == 1) {
+            item.setName((String) aValue);
         }
 
         super.setValueAt(aValue, rowIndex, columnIndex);
