@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class LoginDialog extends JDialog implements LoginView {
+    private ResultType result;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -38,19 +39,18 @@ public class LoginDialog extends JDialog implements LoginView {
 
     @Override
     public void onSuccessLogin() {
-        openMainDialog();
+        result = ResultType.SUCCESS_LOGIN;
         dispose();
     }
 
     @Override
     public void onWrongLogin() {
-        //TODO:
+        showLoginError();
     }
 
-    private void openMainDialog() {
-        MainDialog dialog = new MainDialog();
-        dialog.pack();
-        dialog.setVisible(true);
+    private void showLoginError(){
+        JOptionPane.showMessageDialog(this,
+                "Не удалось войти. Проверьте имя пользователя и пароль", "Ошибка", JOptionPane.ERROR_MESSAGE);
     }
 
     private void initViews() {
@@ -59,7 +59,16 @@ public class LoginDialog extends JDialog implements LoginView {
     }
 
     private void onCancel() {
-        // add your code here if necessary
+        result = ResultType.CANCEL;
         dispose();
+    }
+
+    public ResultType getResult() {
+        return result;
+    }
+
+    public enum ResultType{
+        SUCCESS_LOGIN,
+        CANCEL
     }
 }
