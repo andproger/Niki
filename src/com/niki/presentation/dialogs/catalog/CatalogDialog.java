@@ -1,7 +1,8 @@
 package com.niki.presentation.dialogs.catalog;
 
+import com.niki.domain.interactors.catalog.country.CountryInteractorImpl;
 import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
-import com.niki.presentation.dialogs.catalog.impl.dclass.DrugClassPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.dclass.DrugClassesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.form.DrugFormsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.intake.NewIntakesPresenterImpl;
@@ -83,12 +84,12 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new DrugsPresenterImpl(this);
                 break;
 
-            case STARAGES:
+            case STORAGES:
                 presenter = new StoragesPresenterImpl(this);
                 break;
 
             case COUNTRIES:
-                presenter = new CountriesPresenterImpl(this);
+                presenter = new CountriesPresenterImpl(this, new CountryInteractorImpl());
                 break;
 
             case NEW_SALES:
@@ -103,8 +104,8 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new ProvidersPresenterImpl(this);
                 break;
 
-            case DRUG_CLASS:
-                presenter = new DrugClassPresenterImpl(this);
+            case DRUG_CLASSES:
+                presenter = new DrugClassesPresenterImpl(this);
                 break;
 
             case DRUG_FORMS:
@@ -115,7 +116,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new NewIntakesPresenterImpl(this);
                 break;
 
-            case MANUFACTURES:
+            case MANUFACTURERS:
                 presenter = new ManufacturesPresenterImpl(this);
                 break;
 

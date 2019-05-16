@@ -6,11 +6,11 @@ import com.niki.domain.entities.DrugClass;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
-public class DrugsTableModel extends AbstractTableModel {
+public class DrugClassesTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Класс"};
     private ArrayList<DrugClass> classes;
 
-    public DrugsTableModel(ArrayList<DrugClass> classes) {
+    public DrugClassesTableModel(ArrayList<DrugClass> classes) {
         this.classes = classes;
     }
 
