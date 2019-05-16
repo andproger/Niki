@@ -13,7 +13,7 @@ public abstract class BaseCatalogPresenter implements CatalogPresenter {
     }
 
     @Override
-    public void onDeleteClicked() {
+    public void onDeleteClicked(int[] rows) {
 
     }
 

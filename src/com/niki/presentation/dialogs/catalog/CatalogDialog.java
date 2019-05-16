@@ -51,7 +51,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
         buttonSave.addActionListener(e -> presenter.onSaveClicked());
         buttonCancel.addActionListener(e -> onCancel());
         buttonAdd.addActionListener(e->presenter.onAddClicked());
-        buttonDelete.addActionListener(e -> presenter.onDeleteClicked());
+        buttonDelete.addActionListener(e -> presenter.onDeleteClicked(table1.getSelectedRows()));
     }
 
     private void onCancel() {
