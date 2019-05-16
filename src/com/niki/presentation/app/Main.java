@@ -11,13 +11,13 @@ public class Main {
         LoginDialog dialog = new LoginDialog();
         dialog.pack();
         dialog.setVisible(true);
-        if(dialog.getResult() == LoginDialog.ResultType.SUCCESS_LOGIN)
+        if (dialog.getResult() == LoginDialog.ResultType.SUCCESS_LOGIN)
             openMainDialog();
 
         System.exit(0);
     }
 
-    private static void openMainDialog(){
+    private static void openMainDialog() {
         var dialog = new MainDialog();
         dialog.pack();
         dialog.setVisible(true);
