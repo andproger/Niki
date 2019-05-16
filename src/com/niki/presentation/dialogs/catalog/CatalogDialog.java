@@ -1,6 +1,7 @@
 package com.niki.presentation.dialogs.catalog;
 
 import com.niki.data.repository.CountryRepositorySql;
+import com.niki.data.repository.StorageRepositorySql;
 import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.dclass.DrugClassesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
@@ -17,7 +18,9 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class CatalogDialog extends JDialog implements CatalogView {
     private JPanel contentPane;
@@ -50,7 +53,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
     private void initViews() {
         buttonSave.addActionListener(e -> presenter.onSaveClicked());
         buttonCancel.addActionListener(e -> onCancel());
-        buttonAdd.addActionListener(e->presenter.onAddClicked());
+        buttonAdd.addActionListener(e -> presenter.onAddClicked());
         buttonDelete.addActionListener(e -> presenter.onDeleteClicked(table1.getSelectedRows()));
     }
 
@@ -85,7 +88,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case STORAGES:
-                presenter = new StoragesPresenterImpl(this);
+                presenter = new StoragesPresenterImpl(this, new StorageRepositorySql());
                 break;
 
             case COUNTRIES:
