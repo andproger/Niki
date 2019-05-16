@@ -1,21 +1,17 @@
 package com.niki.presentation.dialogs.catalog.impl.user;
 
 import com.niki.domain.entities.Position;
-import com.niki.domain.entities.User;
+import com.niki.domain.interactors.catalog.user.UserContract;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class UsersTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Login", "First Name", "Last Name", "Position"};
-    private ArrayList<User> users;
-    private ArrayList<Position> positions;
+    private ArrayList<UserContract> users;
 
-    public UsersTableModel(ArrayList<User> users, ArrayList<Position> positions) {
+    public UsersTableModel(ArrayList<UserContract> users) {
         this.users = users;
-        this.positions = positions;
     }
 
     @Override
@@ -41,11 +37,8 @@ public class UsersTableModel extends AbstractTableModel {
                 return row.getFirstName();
             case 3:
                 return row.getLastName();
-            case 4: {
-                var position = new Position(row.getId(), 0, "");
-                var index = Collections.binarySearch(positions, position, Comparator.comparingInt(Position::getId));
-                return index >= 0 ? positions.get(index) : null;
-            }
+            case 4:
+                return row.getPosition();
         }
 
         return null;
@@ -91,7 +84,7 @@ public class UsersTableModel extends AbstractTableModel {
                 item.setLastName((String) aValue);
                 break;
             case 3:
-                item.setPositionId(((Position) aValue).getId());
+                item.setPosition((Position) aValue);
                 break;
         }
 
