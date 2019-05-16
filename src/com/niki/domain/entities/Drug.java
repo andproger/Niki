@@ -10,8 +10,9 @@ public class Drug {
     private String name;
     private String description;
 
-    public Drug(int id, int classId, int manufacturerId, int starageId, int formId, String name, String description) {
+    public Drug(int id, double cost, int classId, int manufacturerId, int starageId, int formId, String name, String description) {
         this.id = id;
+        this.cost = cost;
         this.classId = classId;
         this.manufacturerId = manufacturerId;
         this.storageId = starageId;

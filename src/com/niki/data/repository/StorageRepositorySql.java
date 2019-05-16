@@ -10,9 +10,8 @@ public class StorageRepositorySql implements StorageRepository {
     @Override
     public ArrayList<Storage> getStorages() {
         var storages = new ArrayList<Storage>();
-        var storage = new Storage(0, "TEST");
         for (int i = 0; i < 10; i++)
-            storages.add(storage);
+            storages.add(new Storage(i, "TEST"));
         return storages;
     }
 

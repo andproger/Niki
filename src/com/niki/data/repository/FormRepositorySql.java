@@ -10,9 +10,8 @@ public class FormRepositorySql implements FormRepository {
     @Override
     public ArrayList<Form> getForms() {
         var forms = new ArrayList<Form>();
-        var form = new Form(0, "TEST");
         for (int i = 0; i < 10; i++)
-            forms.add(form);
+            forms.add(new Form(i, "TEST"));
         return forms;
     }
 

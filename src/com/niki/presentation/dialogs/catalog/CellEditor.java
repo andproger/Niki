@@ -38,12 +38,6 @@ public class CellEditor<T> extends AbstractCellEditor
         formsCombo.setSelectedItem(item);
         formsCombo.addActionListener(this);
 
-        if (isSelected) {
-            formsCombo.setBackground(table.getSelectionBackground());
-        } else {
-            formsCombo.setBackground(table.getSelectionForeground());
-        }
-
         return formsCombo;
     }
 
