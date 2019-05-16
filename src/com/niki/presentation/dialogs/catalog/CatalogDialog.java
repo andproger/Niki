@@ -1,10 +1,7 @@
 package com.niki.presentation.dialogs.catalog;
 
+import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
-import com.niki.data.repository.ClassRepositorySql;
-import com.niki.data.repository.CountryRepositorySql;
-import com.niki.data.repository.FormRepositorySql;
-import com.niki.data.repository.StorageRepositorySql;
 import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.classes.DrugClassesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
