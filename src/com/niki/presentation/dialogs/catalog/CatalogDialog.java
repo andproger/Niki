@@ -2,8 +2,9 @@ package com.niki.presentation.dialogs.catalog;
 
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
-import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
+import com.niki.domain.interactors.catalog.manufacturer.ManufacturerInteractorImpl;
 import com.niki.presentation.dialogs.catalog.impl.classes.DrugClassesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.form.DrugFormsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.intake.NewIntakesPresenterImpl;
@@ -89,7 +90,8 @@ public class CatalogDialog extends JDialog implements CatalogView {
                                 new DrugRepositorySql(),
                                 new ClassRepositorySql(),
                                 new FormRepositorySql(),
-                                new StorageRepositorySql()
+                                new StorageRepositorySql(),
+                                new ManufacturerRepositorySql()
                         ));
                 break;
 
@@ -126,7 +128,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case MANUFACTURERS:
-                presenter = new ManufacturesPresenterImpl(this);
+                presenter = new ManufacturesPresenterImpl(this, new ManufacturerInteractorImpl(new ManufacturerRepositorySql(), new CountryRepositorySql()));
                 break;
 
             default:
