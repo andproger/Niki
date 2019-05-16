@@ -13,7 +13,6 @@ import com.niki.presentation.dialogs.catalog.impl.storage.StoragesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.user.UsersPresenterImpl;
 
 import javax.swing.*;
-import javax.swing.CellEditor;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
@@ -21,10 +20,10 @@ import java.awt.event.*;
 
 public class CatalogDialog extends JDialog implements CatalogView {
     private JPanel contentPane;
-    private JButton buttonOK;
+    private JButton buttonSave;
     private JButton buttonCancel;
     private JButton buttonAdd;
-    private JButton deleteButton;
+    private JButton buttonDelete;
     private JTable table1;
 
     private CatalogPresenter presenter;
@@ -36,7 +35,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
         setupPresenter(type);
         initViews();
 
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(buttonSave);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -48,13 +47,10 @@ public class CatalogDialog extends JDialog implements CatalogView {
     }
 
     private void initViews() {
-        buttonOK.addActionListener(e -> onOK());
+        buttonSave.addActionListener(e -> presenter.onSaveClicked());
         buttonCancel.addActionListener(e -> onCancel());
-    }
-
-    private void onOK() {
-        // buttonAdd your code here
-        dispose();
+        buttonAdd.addActionListener(e->presenter.onAddClicked());
+        buttonDelete.addActionListener(e -> presenter.onDeleteClicked());
     }
 
     private void onCancel() {
