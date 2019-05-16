@@ -7,7 +7,6 @@ import com.niki.domain.gateways.repositories.CountryRepository;
 import java.util.ArrayList;
 
 public class CountryRepositorySql implements CountryRepository {
-
     private final CountryDataStore dataStore;
 
     public CountryRepositorySql(CountryDataStore dataStore) {

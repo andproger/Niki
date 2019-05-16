@@ -1,11 +1,10 @@
-package com.niki.data.cache;
+package com.niki.data.cache.utils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SqlUtils {
+public class Utils {
 
     public static String columnsToSqlParams(String[] columns) {
         //"name = ?, code = ?";
@@ -62,6 +61,19 @@ public class SqlUtils {
         }
 
         return sb.toString();
+    }
+
+    public static String idsDivided(List<Integer> ids) {
+        //1, 2, 3
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < ids.size(); i++) {
+            s.append(ids.get(i));
+
+            if (i != ids.size() - 1)
+                s.append(", ");
+        }
+
+        return s.toString();
     }
 
     public static String[] filterNot(String[] columnsArr, String str) {
