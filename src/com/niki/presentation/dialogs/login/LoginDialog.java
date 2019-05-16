@@ -1,7 +1,7 @@
 package com.niki.presentation.dialogs.login;
 
+import com.niki.data.cache.connection.ConnectionServiceImpl;
 import com.niki.domain.interactors.login.LoginInteractorImpl;
-import com.niki.presentation.dialogs.main.MainDialog;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -23,7 +23,7 @@ public class LoginDialog extends JDialog implements LoginView {
         setContentPane(contentPane);
         setModal(true);
 
-        presenter = new LoginPresenterImpl(this, new LoginInteractorImpl());
+        presenter = new LoginPresenterImpl(this, new LoginInteractorImpl(), new ConnectionServiceImpl());
         initViews();
 
         getRootPane().setDefaultButton(buttonOK);
@@ -48,13 +48,28 @@ public class LoginDialog extends JDialog implements LoginView {
         showLoginError();
     }
 
-    private void showLoginError(){
+    @Override
+    public void onWrongConnection() {
+        JOptionPane.showMessageDialog(this,
+                "Не удалось подключится к серверу базы данных", "Ошибка подключения", JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void showProgress(boolean show) {
+        passwordField.setEnabled(!show);
+        serverField.setEnabled(!show);
+        loginField.setEnabled(!show);
+        buttonOK.setEnabled(!show);
+    }
+
+    private void showLoginError() {
         JOptionPane.showMessageDialog(this,
                 "Не удалось войти. Проверьте имя пользователя и пароль", "Ошибка", JOptionPane.ERROR_MESSAGE);
     }
 
     private void initViews() {
-        buttonOK.addActionListener(e -> presenter.onOkClicked("server-1", "login-2", "password-3"));
+        //TODO onOkClicked params
+        buttonOK.addActionListener(e -> presenter.onOkClicked("VSS", "login-2", "password-3"));
         buttonCancel.addActionListener(e -> onCancel());
     }
 
@@ -67,7 +82,7 @@ public class LoginDialog extends JDialog implements LoginView {
         return result;
     }
 
-    public enum ResultType{
+    public enum ResultType {
         SUCCESS_LOGIN,
         CANCEL
     }
