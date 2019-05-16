@@ -6,7 +6,7 @@ import com.niki.presentation.dialogs.main.MainDialog;
 
 public class Main {
     public static void main(String[] args) {
-        Sql.init("25.48.169.93", "drugs", "admin", "admin");
+        Sql.init("VSS", "drugs", "admin", "admin");
 
         LoginDialog dialog = new LoginDialog();
         dialog.pack();

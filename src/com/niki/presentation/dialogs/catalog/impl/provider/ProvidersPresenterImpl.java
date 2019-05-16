@@ -1,4 +1,4 @@
-package com.niki.presentation.dialogs.catalog.impl;
+package com.niki.presentation.dialogs.catalog.impl.provider;
 
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;

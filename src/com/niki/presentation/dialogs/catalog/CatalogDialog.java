@@ -1,16 +1,30 @@
 package com.niki.presentation.dialogs.catalog;
 
-import com.niki.presentation.dialogs.catalog.impl.*;
+import com.niki.data.repository.CountryRepositorySql;
+import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.dclass.DrugClassesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.form.DrugFormsPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.intake.NewIntakesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.manufacturer.ManufacturesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.position.PositionsPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.provider.ProvidersPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.sale.NewSalesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.storage.StoragesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.user.UsersPresenterImpl;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
 import java.awt.event.*;
 
 public class CatalogDialog extends JDialog implements CatalogView {
     private JPanel contentPane;
-    private JButton buttonOK;
+    private JButton buttonSave;
     private JButton buttonCancel;
     private JButton buttonAdd;
-    private JButton deleteButton;
+    private JButton buttonDelete;
     private JTable table1;
 
     private CatalogPresenter presenter;
@@ -22,7 +36,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
         setupPresenter(type);
         initViews();
 
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(buttonSave);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -34,18 +48,30 @@ public class CatalogDialog extends JDialog implements CatalogView {
     }
 
     private void initViews() {
-        buttonOK.addActionListener(e -> onOK());
+        buttonSave.addActionListener(e -> presenter.onSaveClicked());
         buttonCancel.addActionListener(e -> onCancel());
-    }
-
-    private void onOK() {
-        // buttonAdd your code here
-        dispose();
+        buttonAdd.addActionListener(e->presenter.onAddClicked());
+        buttonDelete.addActionListener(e -> presenter.onDeleteClicked(table1.getSelectedRows()));
     }
 
     private void onCancel() {
         // buttonAdd your code here if necessary
         dispose();
+    }
+
+    @Override
+    public void setTableModel(AbstractTableModel tableModel) {
+        table1.setModel(tableModel);
+    }
+
+    @Override
+    public void setTableCellEditor(Class aClass, TableCellEditor cellEditor) {
+        table1.setDefaultEditor(aClass, cellEditor);
+    }
+
+    @Override
+    public void setTableCellRenderer(Class aClass, DefaultTableCellRenderer cellRenderer) {
+        table1.setDefaultRenderer(aClass, cellRenderer);
     }
 
     private void setupPresenter(CatalogType type) {
@@ -58,12 +84,12 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new DrugsPresenterImpl(this);
                 break;
 
-            case STARAGES:
-                presenter = new StaragesPresenterImpl(this);
+            case STORAGES:
+                presenter = new StoragesPresenterImpl(this);
                 break;
 
             case COUNTRIES:
-                presenter = new CountriesPresenterImpl(this);
+                presenter = new CountriesPresenterImpl(this, new CountryRepositorySql());
                 break;
 
             case NEW_SALES:
@@ -78,8 +104,8 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new ProvidersPresenterImpl(this);
                 break;
 
-            case DRUG_CLASS:
-                presenter = new DrugClassPresenterImpl(this);
+            case DRUG_CLASSES:
+                presenter = new DrugClassesPresenterImpl(this);
                 break;
 
             case DRUG_FORMS:
@@ -90,7 +116,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new NewIntakesPresenterImpl(this);
                 break;
 
-            case MANUFACTURES:
+            case MANUFACTURERS:
                 presenter = new ManufacturesPresenterImpl(this);
                 break;
 

@@ -4,7 +4,7 @@ public class Drug {
     private int id;
     private int classId;
     private int manufacturerId;
-    private int starageId;
+    private int storageId;
     private int formId;
     private double cost;
     private String name;
@@ -14,7 +14,7 @@ public class Drug {
         this.id = id;
         this.classId = classId;
         this.manufacturerId = manufacturerId;
-        this.starageId = starageId;
+        this.storageId = starageId;
         this.formId = formId;
         this.name = name;
         this.description = description;
@@ -44,12 +44,12 @@ public class Drug {
         this.manufacturerId = manufacturerId;
     }
 
-    public int getStarageId() {
-        return starageId;
+    public int getStorageId() {
+        return storageId;
     }
 
-    public void setStarageId(int starageId) {
-        this.starageId = starageId;
+    public void setStorageId(int storageId) {
+        this.storageId = storageId;
     }
 
     public int getFormId() {
