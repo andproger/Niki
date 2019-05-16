@@ -1,6 +1,6 @@
 package com.niki.presentation.dialogs.catalog;
 
-import com.niki.domain.interactors.catalog.country.CountryInteractorImpl;
+import com.niki.data.repository.CountryRepositorySql;
 import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.dclass.DrugClassesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
@@ -89,7 +89,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case COUNTRIES:
-                presenter = new CountriesPresenterImpl(this, new CountryInteractorImpl());
+                presenter = new CountriesPresenterImpl(this, new CountryRepositorySql());
                 break;
 
             case NEW_SALES:

@@ -1,10 +1,12 @@
-package com.niki.domain.interactors.catalog.country;
+package com.niki.data.repository;
 
 import com.niki.domain.entities.Country;
+import com.niki.domain.gateways.repositories.CountryRepository;
 
 import java.util.ArrayList;
 
-public class CountryInteractorImpl implements CountryInteractor {
+public class CountryRepositorySql implements CountryRepository {
+
     @Override
     public ArrayList<Country> getCountries() {
         var countries = new ArrayList<Country>();
