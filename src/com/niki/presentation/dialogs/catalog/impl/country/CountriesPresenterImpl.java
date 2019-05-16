@@ -36,4 +36,12 @@ public class CountriesPresenterImpl extends BaseCatalogPresenter {
         countries.add(new Country(0, "", ""));
         tableModel.fireTableDataChanged();
     }
+
+    @Override
+    public void onDeleteClicked(int[] rows) {
+        for(int i = rows.length - 1; i >= 0; i--)
+            this.countries.remove(rows[i]);
+
+        tableModel.fireTableDataChanged();
+    }
 }
