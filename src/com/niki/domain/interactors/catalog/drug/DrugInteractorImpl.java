@@ -18,7 +18,12 @@ public class DrugInteractorImpl implements DrugInteractor {
     private final FormRepository formRepository;
     private final StorageRepository storageRepository;
 
-    public DrugInteractorImpl(DrugRepository drugRepository, ClassRepository classRepository, FormRepository formRepository, StorageRepository storageRepository) {
+    public DrugInteractorImpl(
+            DrugRepository drugRepository,
+            ClassRepository classRepository,
+            FormRepository formRepository,
+            StorageRepository storageRepository
+    ) {
         this.drugRepository = drugRepository;
         this.classRepository = classRepository;
         this.formRepository = formRepository;
@@ -26,13 +31,13 @@ public class DrugInteractorImpl implements DrugInteractor {
     }
 
     @Override
-    public ArrayList<Drug> getDrugs() {
+    public ArrayList<DrugContract> getDrugs() {
         var drugs = drugRepository.getDrugs();
         var classes = classRepository.getClasses();
         var forms = formRepository.getForms();
         var storages = storageRepository.getStorages();
 
-        var drugsResult = new ArrayList<Drug>();
+        var drugsResult = new ArrayList<DrugContract>();
         for (var drug : drugs) {
 
             var drugClass = new DrugClass(drug.getClassId(), "");
@@ -47,7 +52,7 @@ public class DrugInteractorImpl implements DrugInteractor {
             index = Collections.binarySearch(forms, form, Comparator.comparingInt(Form::getId));
             form = index >= 0 ? forms.get(index) : null;
 
-            drugsResult.add(new Drug(
+            drugsResult.add(new DrugContract(
                     drug.getId(),
                     drug.getCost(),
                     drug.getName(),
@@ -63,7 +68,7 @@ public class DrugInteractorImpl implements DrugInteractor {
     }
 
     @Override
-    public void saveDrugs(ArrayList<Drug> drugs) {
+    public void saveDrugs(ArrayList<DrugContract> drugs) {
         var drugsResult = new ArrayList<com.niki.domain.entities.Drug>();
         for (var drug : drugs) {
             drugsResult.add(new com.niki.domain.entities.Drug(

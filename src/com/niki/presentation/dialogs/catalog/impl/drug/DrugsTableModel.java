@@ -3,16 +3,16 @@ package com.niki.presentation.dialogs.catalog.impl.drug;
 import com.niki.domain.entities.Form;
 import com.niki.domain.entities.Manufacturer;
 import com.niki.domain.entities.Storage;
-import com.niki.domain.interactors.catalog.drug.Drug;
+import com.niki.domain.interactors.catalog.drug.DrugContract;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class DrugsTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Имя", "Описание", "Цена", "Производитель", "Хранилище", "Форма"};
-    private ArrayList<Drug> drugs;
+    private ArrayList<DrugContract> drugs;
 
-    public DrugsTableModel(ArrayList<Drug> drugs) {
+    public DrugsTableModel(ArrayList<DrugContract> drugs) {
         this.drugs = drugs;
     }
 

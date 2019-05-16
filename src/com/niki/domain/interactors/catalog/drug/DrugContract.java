@@ -5,7 +5,7 @@ import com.niki.domain.entities.Form;
 import com.niki.domain.entities.Manufacturer;
 import com.niki.domain.entities.Storage;
 
-public class Drug {
+public class DrugContract {
     private int id;
     private double cost;
     private String name;
@@ -15,7 +15,7 @@ public class Drug {
     private Storage storage;
     private Form form;
 
-    public Drug(int id, double cost, String name, String description, DrugClass drugClass, Manufacturer manufacturer, Storage storage, Form form) {
+    public DrugContract(int id, double cost, String name, String description, DrugClass drugClass, Manufacturer manufacturer, Storage storage, Form form) {
         this.id = id;
         this.cost = cost;
         this.name = name;

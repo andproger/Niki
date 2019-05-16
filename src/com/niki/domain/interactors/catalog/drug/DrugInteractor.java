@@ -7,9 +7,9 @@ import com.niki.domain.entities.Storage;
 import java.util.ArrayList;
 
 public interface DrugInteractor {
-    ArrayList<Drug> getDrugs();
+    ArrayList<DrugContract> getDrugs();
 
-    void saveDrugs(ArrayList<Drug> drugs);
+    void saveDrugs(ArrayList<DrugContract> drugs);
 
     ArrayList<Form> getForms();
 

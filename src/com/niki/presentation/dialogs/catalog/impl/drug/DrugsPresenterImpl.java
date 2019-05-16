@@ -1,14 +1,11 @@
 package com.niki.presentation.dialogs.catalog.impl.drug;
 
 import com.niki.domain.entities.*;
-import com.niki.domain.gateways.repositories.CountryRepository;
-import com.niki.domain.interactors.catalog.drug.Drug;
+import com.niki.domain.interactors.catalog.drug.DrugContract;
 import com.niki.domain.interactors.catalog.drug.DrugInteractor;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 import com.niki.presentation.dialogs.catalog.CellEditor;
-import com.niki.presentation.dialogs.catalog.CellRenderer;
-import com.niki.presentation.dialogs.catalog.impl.country.CountriesTableModel;
 
 import java.util.ArrayList;
 
@@ -17,7 +14,7 @@ public class DrugsPresenterImpl extends BaseCatalogPresenter {
     private final DrugInteractor drugInteractor;
 
     private DrugsTableModel tableModel;
-    private ArrayList<Drug> drugs;
+    private ArrayList<DrugContract> drugs;
 
     public DrugsPresenterImpl(CatalogView view, DrugInteractor drugInteractor){
         super(view);
@@ -42,7 +39,7 @@ public class DrugsPresenterImpl extends BaseCatalogPresenter {
 
     @Override
     public void onAddClicked() {
-        drugs.add(new Drug(0, 0,"", "", null, null, null, null));
+        drugs.add(new DrugContract(0, 0,"", "", null, null, null, null));
         tableModel.fireTableDataChanged();
     }
 
