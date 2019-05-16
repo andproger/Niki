@@ -1,5 +1,11 @@
 package com.niki.domain.interactors.login;
 
 public interface LoginInteractor {
-    boolean login(String login, String password);
+    LoginResult login(String server, String login, String password);
+
+    enum  LoginResult{
+        WRONG_CONNECTION,
+        WRONG_LOGIN,
+        SUCCESS_LOGIN
+    }
 }

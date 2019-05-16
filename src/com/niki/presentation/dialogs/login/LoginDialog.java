@@ -23,7 +23,7 @@ public class LoginDialog extends JDialog implements LoginView {
         setContentPane(contentPane);
         setModal(true);
 
-        presenter = new LoginPresenterImpl(this, new LoginInteractorImpl(), new ConnectionServiceImpl());
+        presenter = new LoginPresenterImpl(this, new LoginInteractorImpl(new ConnectionServiceImpl()));
         initViews();
 
         getRootPane().setDefaultButton(buttonOK);
