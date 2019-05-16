@@ -9,9 +9,8 @@ public class ClassRepositorySql implements ClassRepository {
     @Override
     public ArrayList<DrugClass> getClasses() {
         var classes = new ArrayList<DrugClass>();
-        var drugClass = new DrugClass(0, "TEST");
         for (int i = 0; i < 10; i++)
-            classes.add(drugClass);
+            classes.add(new DrugClass(i, "TEST"));
         return classes;
     }
 

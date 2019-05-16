@@ -10,9 +10,8 @@ public class CountryRepositorySql implements CountryRepository {
     @Override
     public ArrayList<Country> getCountries() {
         var countries = new ArrayList<Country>();
-        var country = new Country(0, "TEST", "ST");
         for (int i = 0; i < 10; i++)
-            countries.add(country);
+            countries.add(new Country(i, "TEST", "ST"));
         return countries;
     }
 

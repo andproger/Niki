@@ -1,27 +1,19 @@
 package com.niki.presentation.dialogs.catalog.impl.drug;
 
-import com.niki.domain.entities.Drug;
 import com.niki.domain.entities.Form;
 import com.niki.domain.entities.Manufacturer;
 import com.niki.domain.entities.Storage;
+import com.niki.domain.interactors.catalog.drug.Drug;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class DrugsTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Имя", "Описание", "Цена", "Производитель", "Хранилище", "Форма"};
     private ArrayList<Drug> drugs;
-    private ArrayList<Manufacturer> manufacturers;
-    private ArrayList<Form> forms;
-    private ArrayList<Storage> storages;
 
-    public DrugsTableModel(ArrayList<Drug> drugs, ArrayList<Manufacturer> manufacturers, ArrayList<Form> forms, ArrayList<Storage> storages) {
+    public DrugsTableModel(ArrayList<Drug> drugs) {
         this.drugs = drugs;
-        this.manufacturers = manufacturers;
-        this.forms = forms;
-        this.storages = storages;
     }
 
     @Override
@@ -48,19 +40,13 @@ public class DrugsTableModel extends AbstractTableModel {
             case 3:
                 return row.getCost();
             case 4: {
-                var manufacturer = new Manufacturer(row.getManufacturerId(), 0, "", "");
-                var index = Collections.binarySearch(manufacturers, manufacturer, Comparator.comparingInt(Manufacturer::getId));
-                return index >= 0 ? manufacturers.get(index) : null;
+                return row.getManufacturer();
             }
             case 5: {
-                var storage = new Storage(row.getStorageId(), "");
-                var index = Collections.binarySearch(storages, storage, Comparator.comparingInt(Storage::getId));
-                return index >= 0 ? storages.get(index) : null;
+                return row.getStorage();
             }
             case 6: {
-                var form = new Form(row.getFormId(), "");
-                var index = Collections.binarySearch(forms, form, Comparator.comparingInt(Form::getId));
-                return index >= 0 ? forms.get(index) : null;
+                return row.getForm();
             }
         }
 
@@ -112,13 +98,16 @@ public class DrugsTableModel extends AbstractTableModel {
                 break;
             case 3:
                 item.setCost((Double) aValue);
+                break;
             case 4:
-                item.setManufacturerId(((Manufacturer) aValue).getId());
+                item.setManufacturer((Manufacturer) aValue);
+                break;
             case 5:
-                item.setStorageId(((Storage) aValue).getId());
+                item.setStorage((Storage) aValue);
+                break;
             case 6:
-                item.setFormId(((Form) aValue).getId());
-
+                item.setForm((Form) aValue);
+                break;
         }
 
         super.setValueAt(aValue, rowIndex, columnIndex);
