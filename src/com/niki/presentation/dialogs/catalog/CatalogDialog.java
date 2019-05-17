@@ -106,7 +106,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case POSITIONS:
-                presenter = new PositionsPresenterImpl(this);
+                presenter = new PositionsPresenterImpl(this, new PositionRepositorySql());
                 break;
 
             case PROVIDERS:
