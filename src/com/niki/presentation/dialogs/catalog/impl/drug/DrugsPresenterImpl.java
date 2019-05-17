@@ -30,6 +30,7 @@ public class DrugsPresenterImpl extends BaseCatalogPresenter {
         view.setTableCellEditor(Storage.class, new CellEditor<>(drugInteractor.getStorages()));
         view.setTableCellEditor(Form.class, new CellEditor<>(drugInteractor.getForms()));
         view.setTableCellEditor(DrugClass.class, new CellEditor<>(drugInteractor.getClasses()));
+        view.setTableCellEditor(Manufacturer.class, new CellEditor<>(drugInteractor.getManufacturers()));
     }
 
     @Override
