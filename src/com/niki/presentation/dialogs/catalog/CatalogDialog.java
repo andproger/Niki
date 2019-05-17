@@ -2,6 +2,7 @@ package com.niki.presentation.dialogs.catalog;
 
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
+import com.niki.domain.interactors.catalog.user.UserInteractorImpl;
 import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.classes.DrugClassesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
@@ -80,7 +81,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
     private void setupPresenter(CatalogType type) {
         switch (type) {
             case USERS:
-                presenter = new UsersPresenterImpl(this);
+                presenter = new UsersPresenterImpl(this, new UserInteractorImpl(new UserRepositorySql(), new PositionRepositorySql()));
                 break;
 
             case DRUGS:
