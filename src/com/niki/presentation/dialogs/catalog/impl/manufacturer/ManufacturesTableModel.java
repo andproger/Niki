@@ -1,21 +1,17 @@
 package com.niki.presentation.dialogs.catalog.impl.manufacturer;
 
 import com.niki.domain.entities.Country;
-import com.niki.domain.entities.Manufacturer;
+import com.niki.domain.interactors.catalog.manufacturer.ManufacturerContract;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class ManufacturesTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Имя", "Страна", "Адрес"};
-    private ArrayList<Manufacturer> manufacturers;
-    private ArrayList<Country> countries;
+    private ArrayList<ManufacturerContract> manufacturers;
 
-    public ManufacturesTableModel(ArrayList<Manufacturer> manufacturers, ArrayList<Country> countries) {
+    public ManufacturesTableModel(ArrayList<ManufacturerContract> manufacturers) {
         this.manufacturers = manufacturers;
-        this.countries = countries;
     }
 
     @Override
@@ -37,11 +33,8 @@ public class ManufacturesTableModel extends AbstractTableModel {
                 return row.getId();
             case 1:
                 return row.getName();
-            case 2: {
-                var country = new Country(row.getCountryId(), "", "");
-                var index = Collections.binarySearch(countries, country, Comparator.comparingInt(Country::getId));
-                return index >= 0 ? countries.get(index) : null;
-            }
+            case 2:
+                return row.getCountry();
             case 3:
                 return row.getAddress();
         }
@@ -84,7 +77,7 @@ public class ManufacturesTableModel extends AbstractTableModel {
                 item.setName((String) aValue);
                 break;
             case 2:
-                item.setCountryId(((Country) aValue).getId());
+                item.setCountry((Country) aValue);
                 break;
             case 3:
                 item.setAddress((String) aValue);

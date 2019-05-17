@@ -2,11 +2,9 @@ package com.niki.domain.interactors.catalog.drug;
 
 import com.niki.domain.entities.DrugClass;
 import com.niki.domain.entities.Form;
+import com.niki.domain.entities.Manufacturer;
 import com.niki.domain.entities.Storage;
-import com.niki.domain.gateways.repositories.ClassRepository;
-import com.niki.domain.gateways.repositories.DrugRepository;
-import com.niki.domain.gateways.repositories.FormRepository;
-import com.niki.domain.gateways.repositories.StorageRepository;
+import com.niki.domain.gateways.repositories.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,17 +15,20 @@ public class DrugInteractorImpl implements DrugInteractor {
     private final ClassRepository classRepository;
     private final FormRepository formRepository;
     private final StorageRepository storageRepository;
+    private final ManufacturerRepository manufacturerRepository;
 
     public DrugInteractorImpl(
             DrugRepository drugRepository,
             ClassRepository classRepository,
             FormRepository formRepository,
-            StorageRepository storageRepository
+            StorageRepository storageRepository,
+            ManufacturerRepository manufacturerRepository
     ) {
         this.drugRepository = drugRepository;
         this.classRepository = classRepository;
         this.formRepository = formRepository;
         this.storageRepository = storageRepository;
+        this.manufacturerRepository = manufacturerRepository;
     }
 
     @Override
@@ -36,6 +37,7 @@ public class DrugInteractorImpl implements DrugInteractor {
         var classes = classRepository.getClasses();
         var forms = formRepository.getForms();
         var storages = storageRepository.getStorages();
+        var manufacturers = manufacturerRepository.getManufacturers();
 
         var drugsResult = new ArrayList<DrugContract>();
         for (var drug : drugs) {
@@ -52,13 +54,17 @@ public class DrugInteractorImpl implements DrugInteractor {
             index = Collections.binarySearch(forms, form, Comparator.comparingInt(Form::getId));
             form = index >= 0 ? forms.get(index) : null;
 
+            var manufacturer = new Manufacturer(drug.getManufacturerId(), 0, "", "");
+            index = Collections.binarySearch(manufacturers, manufacturer, Comparator.comparingInt(Manufacturer::getId));
+            manufacturer = index >= 0 ? manufacturers.get(index) : null;
+
             drugsResult.add(new DrugContract(
                     drug.getId(),
                     drug.getCost(),
                     drug.getName(),
                     drug.getDescription(),
                     drugClass,
-                    null,
+                    manufacturer,
                     storage,
                     form)
             );
@@ -100,4 +106,11 @@ public class DrugInteractorImpl implements DrugInteractor {
     public ArrayList<DrugClass> getClasses() {
         return classRepository.getClasses();
     }
+
+    @Override
+    public ArrayList<Manufacturer> getManufacturers() {
+        return manufacturerRepository.getManufacturers();
+    }
+
+
 }

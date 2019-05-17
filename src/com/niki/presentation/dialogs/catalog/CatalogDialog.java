@@ -3,7 +3,9 @@ package com.niki.presentation.dialogs.catalog;
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
 import com.niki.domain.interactors.catalog.sale.SaleInteractorImpl;
+import com.niki.domain.interactors.catalog.user.UserInteractorImpl;
 import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
+import com.niki.domain.interactors.catalog.manufacturer.ManufacturerInteractorImpl;
 import com.niki.presentation.dialogs.catalog.impl.classes.DrugClassesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.form.DrugFormsPresenterImpl;
@@ -81,7 +83,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
     private void setupPresenter(CatalogType type) {
         switch (type) {
             case USERS:
-                presenter = new UsersPresenterImpl(this);
+                presenter = new UsersPresenterImpl(this, new UserInteractorImpl(new UserRepositorySql(), new PositionRepositorySql()));
                 break;
 
             case DRUGS:
@@ -90,7 +92,8 @@ public class CatalogDialog extends JDialog implements CatalogView {
                                 new DrugRepositorySql(),
                                 new ClassRepositorySql(),
                                 new FormRepositorySql(),
-                                new StorageRepositorySql()
+                                new StorageRepositorySql(),
+                                new ManufacturerRepositorySql()
                         ));
                 break;
 
@@ -107,7 +110,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case POSITIONS:
-                presenter = new PositionsPresenterImpl(this);
+                presenter = new PositionsPresenterImpl(this, new PositionRepositorySql());
                 break;
 
             case PROVIDERS:
@@ -127,7 +130,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case MANUFACTURERS:
-                presenter = new ManufacturesPresenterImpl(this);
+                presenter = new ManufacturesPresenterImpl(this, new ManufacturerInteractorImpl(new ManufacturerRepositorySql(), new CountryRepositorySql()));
                 break;
 
             default:
