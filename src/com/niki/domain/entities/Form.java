@@ -4,6 +4,10 @@ public class Form {
     private int id;
     private String name;
 
+    public Form() {
+
+    }
+
     public Form(int id, String name) {
         this.id = id;
         this.name = name;
