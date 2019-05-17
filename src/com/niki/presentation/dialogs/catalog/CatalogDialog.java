@@ -131,7 +131,9 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case MANUFACTURERS:
-                presenter = new ManufacturesPresenterImpl(this, new ManufacturerInteractorImpl(new ManufacturerRepositorySql(), new CountryRepositorySql()));
+                presenter = new ManufacturesPresenterImpl(this, new ManufacturerInteractorImpl(
+                        new ManufacturerRepositorySql(), new CountryRepositorySql(new SqlCountryDataStore())
+                ));
                 break;
 
             default:
