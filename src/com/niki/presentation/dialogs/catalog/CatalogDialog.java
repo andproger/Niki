@@ -86,7 +86,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
             case USERS:
                 presenter = new UsersPresenterImpl(this,
                         new UserInteractorImpl(
-                                new UserRepositorySql(),
+                                new UserRepositorySql(new SqlUserDataStore()),
                                 new PositionRepositorySql(new SqlPositionDataStore())
                         ));
                 break;
