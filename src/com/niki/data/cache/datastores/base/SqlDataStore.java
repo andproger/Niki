@@ -1,6 +1,7 @@
 package com.niki.data.cache.datastores.base;
 
 
+import com.niki.data.cache.Sql;
 import com.niki.data.cache.annotaion.Column;
 import com.niki.data.cache.annotaion.IntPrimaryKey;
 import com.niki.data.cache.annotaion.Table;
@@ -41,7 +42,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
 
         sqlGen = new SqlGen(DATABASE, table, columns, primaryKey);
 
-        //this.connection = Sql.getIntent().getConnection();
+        this.connection = Sql.getIntent().getConnection();
     }
 
     @Override
@@ -121,6 +122,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         try {
             var statement = this.connection.prepareStatement(sqlQuery);
 
+            System.out.println(sqlQuery);
             for (var item : items) {
                 prepareUpdate(statement, item);
                 statement.execute();
@@ -175,7 +177,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         for (int i = 0; i < columnFields.size(); i++) {
             setStatement(statement, i + 1, columnFields.get(i), item);
         }
-        setStatement(statement, columnFields.size(), primaryField, item);
+        setStatement(statement, columnFields.size()+1, primaryField, item);
     }
 
     private void setStatement(PreparedStatement statement, int index, Field field, T item) throws SQLException, IllegalAccessException {
@@ -260,6 +262,8 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
 
                     Column c = (Column) annotation;
                     list.add(c.value());
+
+                    field.setAccessible(true);
                     columnFields.add(field);
                 }
             }
