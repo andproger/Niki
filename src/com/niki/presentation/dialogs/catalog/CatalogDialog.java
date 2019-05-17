@@ -114,7 +114,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new NewSalesPresenterImpl(this,
                         new SaleInteractorImpl(
                                 new DrugRepositorySql(new SqlDrugDataStore()),
-                                new SaleItemItemRepositorySql()
+                                new SaleItemRepositorySql(new SqlSaleItemDataStore())
                         ));
                 break;
 
