@@ -1,9 +1,6 @@
 package com.niki.presentation.dialogs.catalog;
 
-import com.niki.data.cache.datastores.SqlCountryDataStore;
-import com.niki.data.cache.datastores.SqlDrugClassDataStore;
-import com.niki.data.cache.datastores.SqlDrugDataStore;
-import com.niki.data.cache.datastores.SqlFormDataStore;
+import com.niki.data.cache.datastores.*;
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
 import com.niki.domain.interactors.catalog.sale.SaleInteractorImpl;
@@ -97,7 +94,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                                 new ClassRepositorySql(new SqlDrugClassDataStore()),
                                 new FormRepositorySql(new SqlFormDataStore()),
                                 new StorageRepositorySql(),
-                                new ManufacturerRepositorySql()
+                                new ManufacturerRepositorySql(new SqlManufacturerDataStore())
                         ));
                 break;
 
@@ -139,7 +136,8 @@ public class CatalogDialog extends JDialog implements CatalogView {
 
             case MANUFACTURERS:
                 presenter = new ManufacturesPresenterImpl(this, new ManufacturerInteractorImpl(
-                        new ManufacturerRepositorySql(), new CountryRepositorySql(new SqlCountryDataStore())
+                        new ManufacturerRepositorySql(new SqlManufacturerDataStore()),
+                        new CountryRepositorySql(new SqlCountryDataStore())
                 ));
                 break;
 
