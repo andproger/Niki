@@ -1,9 +1,23 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.IntPrimaryKey;
+import com.niki.data.cache.annotaion.Table;
+
+@Table("country")
 public class Country {
+
+    @IntPrimaryKey("id")
     private int id;
+
+    @Column("name")
     private String name;
+
+    @Column("code")
     private String code;
+
+    public Country() {
+    }
 
     public Country(int id, String name, String code) {
         this.id = id;
