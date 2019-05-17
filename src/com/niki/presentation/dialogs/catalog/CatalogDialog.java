@@ -84,7 +84,11 @@ public class CatalogDialog extends JDialog implements CatalogView {
     private void setupPresenter(CatalogType type) {
         switch (type) {
             case USERS:
-                presenter = new UsersPresenterImpl(this, new UserInteractorImpl(new UserRepositorySql(), new PositionRepositorySql()));
+                presenter = new UsersPresenterImpl(this,
+                        new UserInteractorImpl(
+                                new UserRepositorySql(),
+                                new PositionRepositorySql(new SqlPositionDataStore())
+                        ));
                 break;
 
             case DRUGS:
@@ -115,7 +119,10 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case POSITIONS:
-                presenter = new PositionsPresenterImpl(this, new PositionRepositorySql());
+                presenter = new PositionsPresenterImpl(this,
+                        new PositionRepositorySql(
+                                new SqlPositionDataStore()
+                        ));
                 break;
 
             case PROVIDERS:
