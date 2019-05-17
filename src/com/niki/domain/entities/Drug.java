@@ -1,5 +1,6 @@
 package com.niki.domain.entities;
 
+
 public class Drug {
     private int id;
     private int classId;
@@ -9,6 +10,9 @@ public class Drug {
     private double cost;
     private String name;
     private String description;
+
+    public Drug() {
+    }
 
     public Drug(int id, double cost, int classId, int manufacturerId, int starageId, int formId, String name, String description) {
         this.id = id;

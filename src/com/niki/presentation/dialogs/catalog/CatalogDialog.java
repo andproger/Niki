@@ -2,6 +2,7 @@ package com.niki.presentation.dialogs.catalog;
 
 import com.niki.data.cache.datastores.SqlCountryDataStore;
 import com.niki.data.cache.datastores.SqlDrugClassDataStore;
+import com.niki.data.cache.datastores.SqlDrugDataStore;
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
 import com.niki.domain.interactors.catalog.sale.SaleInteractorImpl;
@@ -91,7 +92,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
             case DRUGS:
                 presenter = new DrugsPresenterImpl(this,
                         new DrugInteractorImpl(
-                                new DrugRepositorySql(),
+                                new DrugRepositorySql(new SqlDrugDataStore()),
                                 new ClassRepositorySql(new SqlDrugClassDataStore()),
                                 new FormRepositorySql(),
                                 new StorageRepositorySql(),
@@ -108,7 +109,11 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case NEW_SALES:
-                presenter = new NewSalesPresenterImpl(this, new SaleInteractorImpl(new DrugRepositorySql(), new SaleItemItemRepositorySql()));
+                presenter = new NewSalesPresenterImpl(this,
+                        new SaleInteractorImpl(
+                                new DrugRepositorySql(new SqlDrugDataStore()),
+                                new SaleItemItemRepositorySql()
+                        ));
                 break;
 
             case POSITIONS:
