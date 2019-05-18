@@ -1,13 +1,32 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.IntPrimaryKey;
+
 public class Drug {
+
+    @IntPrimaryKey("id")
     private int id;
+
+    @Column("unit_id")
     private int classId;
+
+    @Column("manufacturer_id")
     private int manufacturerId;
+
+    @Column("storage_id")
     private int storageId;
+
+    @Column("form_id")
     private int formId;
+
+    @Column("cost")
     private double cost;
+
+    @Column("name")
     private String name;
+
+    @Column("description")
     private String description;
 
     public Drug(int id, double cost, int classId, int manufacturerId, int starageId, int formId, String name, String description) {

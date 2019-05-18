@@ -1,7 +1,14 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.IntPrimaryKey;
+
 public class DrugClass {
+
+    @IntPrimaryKey("id")
     private Integer id;
+
+    @Column("class_name")
     private String name;
 
     public DrugClass(Integer id, String name) {

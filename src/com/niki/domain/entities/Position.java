@@ -1,8 +1,17 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.IntPrimaryKey;
+
 public class Position {
+
+    @IntPrimaryKey("id")
     private int id;
+
+    @Column("salary")
     private double salary;
+
+    @Column("name")
     private String name;
 
     public Position(int id, double salary, String name) {

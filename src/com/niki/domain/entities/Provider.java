@@ -1,8 +1,16 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.IntPrimaryKey;
+
 public class Provider {
+    @IntPrimaryKey("id")
     private int id;
+
+    @Column("name")
     private String name;
+
+    @Column("address")
     private String address;
 
     public Provider(int id, String name, String address) {

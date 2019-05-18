@@ -1,7 +1,13 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.IntPrimaryKey;
+
 public class Form {
+    @IntPrimaryKey("id")
     private int id;
+
+    @Column("form_name")
     private String name;
 
     public Form(int id, String name) {

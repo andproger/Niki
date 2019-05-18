@@ -1,7 +1,12 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.IntPrimaryKey;
+
 public class Indication {
+    @IntPrimaryKey("id")
     private int id;
+    @Column("indication_description")
     private String description;
 
     public Indication(int id, String description) {
