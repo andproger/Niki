@@ -1,7 +1,9 @@
 package com.niki.domain.entities;
 
 import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.Table;
 
+@Table("sales_map")
 public class SaleItem {
 
     @Column("sale_id")

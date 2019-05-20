@@ -2,7 +2,9 @@ package com.niki.domain.entities;
 
 import com.niki.data.cache.annotaion.Column;
 import com.niki.data.cache.annotaion.IntPrimaryKey;
+import com.niki.data.cache.annotaion.Table;
 
+@Table("sales")
 public class Sale {
     @IntPrimaryKey("id")
     private int id;
