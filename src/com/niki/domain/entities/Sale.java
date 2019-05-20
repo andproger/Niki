@@ -1,8 +1,18 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.IntPrimaryKey;
+import com.niki.data.cache.annotaion.Table;
+
+@Table("sales")
 public class Sale {
+    @IntPrimaryKey("id")
     private int id;
+
+    @Column("time")
     private int dateTime;
+
+    @Column("user_id")
     private int userId;
 
     public Sale(int id, int dateTime, int userId) {

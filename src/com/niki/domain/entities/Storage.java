@@ -1,7 +1,15 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.IntPrimaryKey;
+import com.niki.data.cache.annotaion.Table;
+
+@Table("storage")
 public class Storage {
+    @IntPrimaryKey("id")
     private int id;
+
+    @Column("description")
     private String description;
 
     public Storage() {
