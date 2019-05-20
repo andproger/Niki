@@ -1,6 +1,7 @@
 package com.niki.presentation.dialogs.login;
 
 import com.niki.data.cache.connection.ConnectionServiceImpl;
+import com.niki.data.repository.ConnectionSettingsJsonRepository;
 import com.niki.domain.interactors.login.LoginInteractorImpl;
 
 import javax.swing.*;
@@ -23,7 +24,9 @@ public class LoginDialog extends JDialog implements LoginView {
         setContentPane(contentPane);
         setModal(true);
 
-        presenter = new LoginPresenterImpl(this, new LoginInteractorImpl(new ConnectionServiceImpl()));
+        presenter = new LoginPresenterImpl(this, new LoginInteractorImpl(
+                new ConnectionServiceImpl(new ConnectionSettingsJsonRepository())
+        ));
         initViews();
 
         getRootPane().setDefaultButton(buttonOK);
