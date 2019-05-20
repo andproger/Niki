@@ -8,7 +8,7 @@ import com.niki.data.cache.annotaion.Table;
 public class DrugClass {
 
     @IntPrimaryKey("id")
-    private Integer id;
+    private int id;
 
     @Column("class_name")
     private String name;
@@ -21,11 +21,11 @@ public class DrugClass {
         this.name = name;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

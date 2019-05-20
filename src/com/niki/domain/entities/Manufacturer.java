@@ -13,7 +13,7 @@ public class Manufacturer {
     @Column("country_id")
     private int countryId;
 
-    @Column("name")
+    @Column("manufacturer_name")
     private String name;
 
     @Column("address")
