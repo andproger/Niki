@@ -10,7 +10,7 @@ public class Drug {
     @IntPrimaryKey("id")
     private int id;
 
-    @Column("unit_id")
+    @Column("drug_class_id")
     private int classId;
 
     @Column("manufacturer_id")

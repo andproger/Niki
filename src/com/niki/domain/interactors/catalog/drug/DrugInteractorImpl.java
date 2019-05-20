@@ -81,7 +81,7 @@ public class DrugInteractorImpl implements DrugInteractor {
                     drug.getId(),
                     drug.getCost(),
                     drug.getDrugClass().getId(),
-                    0,
+                    drug.getManufacturer().getId(),
                     drug.getStorage().getId(),
                     drug.getForm().getId(),
 

@@ -1,5 +1,6 @@
 package com.niki.presentation.dialogs.catalog.impl.drug;
 
+import com.niki.domain.entities.DrugClass;
 import com.niki.domain.entities.Form;
 import com.niki.domain.entities.Manufacturer;
 import com.niki.domain.entities.Storage;
@@ -9,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class DrugsTableModel extends AbstractTableModel {
-    private static final String[] columns = {"ID", "Имя", "Описание", "Цена", "Производитель", "Хранилище", "Форма"};
+    private static final String[] columns = {"ID", "Имя", "Описание", "Цена", "Производитель", "Хранилище", "Форма", "Класс"};
     private ArrayList<DrugContract> drugs;
 
     public DrugsTableModel(ArrayList<DrugContract> drugs) {
@@ -39,15 +40,14 @@ public class DrugsTableModel extends AbstractTableModel {
                 return row.getDescription();
             case 3:
                 return row.getCost();
-            case 4: {
+            case 4:
                 return row.getManufacturer();
-            }
-            case 5: {
+            case 5:
                 return row.getStorage();
-            }
-            case 6: {
+            case 6:
                 return row.getForm();
-            }
+            case 7:
+                return row.getDrugClass();
         }
 
         return null;
@@ -69,6 +69,8 @@ public class DrugsTableModel extends AbstractTableModel {
                 return Storage.class;
             case 6:
                 return Form.class;
+            case 7:
+                return DrugClass.class;
         }
         return super.getColumnClass(columnIndex);
     }
@@ -81,7 +83,7 @@ public class DrugsTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex > 0 && columnIndex <= 6;
+        return columnIndex != 0;
     }
 
 
@@ -108,6 +110,8 @@ public class DrugsTableModel extends AbstractTableModel {
             case 6:
                 item.setForm((Form) aValue);
                 break;
+            case 7:
+                item.setDrugClass((DrugClass) aValue);
         }
 
         super.setValueAt(aValue, rowIndex, columnIndex);
