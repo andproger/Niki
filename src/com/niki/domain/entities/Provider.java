@@ -9,7 +9,7 @@ public class Provider {
     @IntPrimaryKey("id")
     private int id;
 
-    @Column("name")
+    @Column("provider_name")
     private String name;
 
     @Column("address")
