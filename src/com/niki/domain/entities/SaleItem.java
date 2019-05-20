@@ -6,6 +6,10 @@ public class SaleItem {
     private int quantiy;
     private double cost;
 
+    public SaleItem() {
+
+    }
+
     public SaleItem(int saleId, int drugId, int quantiy, double cost) {
         this.saleId = saleId;
         this.drugId = drugId;

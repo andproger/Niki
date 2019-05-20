@@ -1,21 +1,26 @@
 package com.niki.data.repository;
 
+import com.niki.data.cache.datastores.DrugClassDataStore;
 import com.niki.domain.entities.DrugClass;
 import com.niki.domain.gateways.repositories.ClassRepository;
 
 import java.util.ArrayList;
 
 public class ClassRepositorySql implements ClassRepository {
-    @Override
-    public ArrayList<DrugClass> getClasses() {
-        var classes = new ArrayList<DrugClass>();
-        for (int i = 0; i < 10; i++)
-            classes.add(new DrugClass(i, "TEST"));
-        return classes;
+
+    private final DrugClassDataStore dataStore;
+
+    public ClassRepositorySql(DrugClassDataStore dataStore) {
+        this.dataStore = dataStore;
     }
 
     @Override
-    public void saveClasses(ArrayList<DrugClass> countries) {
+    public ArrayList<DrugClass> getClasses() {
+        return dataStore.getAll();
+    }
 
+    @Override
+    public void saveClasses(ArrayList<DrugClass> drugClasses) {
+        dataStore.save(drugClasses);
     }
 }

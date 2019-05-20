@@ -4,6 +4,9 @@ public class DrugClass {
     private Integer id;
     private String name;
 
+    public DrugClass() {
+    }
+
     public DrugClass(Integer id, String name) {
         this.id = id;
         this.name = name;

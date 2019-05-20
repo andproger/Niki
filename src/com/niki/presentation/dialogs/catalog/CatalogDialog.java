@@ -1,6 +1,6 @@
 package com.niki.presentation.dialogs.catalog;
 
-import com.niki.data.cache.datastores.SqlCountryDataStore;
+import com.niki.data.cache.datastores.*;
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
 import com.niki.domain.interactors.catalog.sale.SaleInteractorImpl;
@@ -84,22 +84,26 @@ public class CatalogDialog extends JDialog implements CatalogView {
     private void setupPresenter(CatalogType type) {
         switch (type) {
             case USERS:
-                presenter = new UsersPresenterImpl(this, new UserInteractorImpl(new UserRepositorySql(), new PositionRepositorySql()));
+                presenter = new UsersPresenterImpl(this,
+                        new UserInteractorImpl(
+                                new UserRepositorySql(new SqlUserDataStore()),
+                                new PositionRepositorySql(new SqlPositionDataStore())
+                        ));
                 break;
 
             case DRUGS:
                 presenter = new DrugsPresenterImpl(this,
                         new DrugInteractorImpl(
-                                new DrugRepositorySql(),
-                                new ClassRepositorySql(),
-                                new FormRepositorySql(),
-                                new StorageRepositorySql(),
-                                new ManufacturerRepositorySql()
+                                new DrugRepositorySql(new SqlDrugDataStore()),
+                                new ClassRepositorySql(new SqlDrugClassDataStore()),
+                                new FormRepositorySql(new SqlFormDataStore()),
+                                new StorageRepositorySql(new SqlStorageDataStore()),
+                                new ManufacturerRepositorySql(new SqlManufacturerDataStore())
                         ));
                 break;
 
             case STORAGES:
-                presenter = new StoragesPresenterImpl(this, new StorageRepositorySql());
+                presenter = new StoragesPresenterImpl(this, new StorageRepositorySql(new SqlStorageDataStore()));
                 break;
 
             case COUNTRIES:
@@ -107,11 +111,18 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case NEW_SALES:
-                presenter = new NewSalesPresenterImpl(this, new SaleInteractorImpl(new DrugRepositorySql(), new SaleItemItemRepositorySql()));
+                presenter = new NewSalesPresenterImpl(this,
+                        new SaleInteractorImpl(
+                                new DrugRepositorySql(new SqlDrugDataStore()),
+                                new SaleItemRepositorySql(new SqlSaleItemDataStore())
+                        ));
                 break;
 
             case POSITIONS:
-                presenter = new PositionsPresenterImpl(this, new PositionRepositorySql());
+                presenter = new PositionsPresenterImpl(this,
+                        new PositionRepositorySql(
+                                new SqlPositionDataStore()
+                        ));
                 break;
 
             case PROVIDERS:
@@ -119,11 +130,11 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case DRUG_CLASSES:
-                presenter = new DrugClassesPresenterImpl(this, new ClassRepositorySql());
+                presenter = new DrugClassesPresenterImpl(this, new ClassRepositorySql(new SqlDrugClassDataStore()));
                 break;
 
             case DRUG_FORMS:
-                presenter = new DrugFormsPresenterImpl(this, new FormRepositorySql());
+                presenter = new DrugFormsPresenterImpl(this, new FormRepositorySql(new SqlFormDataStore()));
                 break;
 
             case NEW_INTAKES:
@@ -132,7 +143,8 @@ public class CatalogDialog extends JDialog implements CatalogView {
 
             case MANUFACTURERS:
                 presenter = new ManufacturesPresenterImpl(this, new ManufacturerInteractorImpl(
-                        new ManufacturerRepositorySql(), new CountryRepositorySql(new SqlCountryDataStore())
+                        new ManufacturerRepositorySql(new SqlManufacturerDataStore()),
+                        new CountryRepositorySql(new SqlCountryDataStore())
                 ));
                 break;
 

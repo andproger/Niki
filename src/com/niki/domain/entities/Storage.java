@@ -4,6 +4,10 @@ public class Storage {
     private int id;
     private String description;
 
+    public Storage() {
+
+    }
+
     public Storage(int id, String description) {
         this.id = id;
         this.description = description;

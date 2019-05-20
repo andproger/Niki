@@ -5,6 +5,10 @@ public class Position {
     private double salary;
     private String name;
 
+    public Position() {
+
+    }
+
     public Position(int id, double salary, String name) {
         this.id = id;
         this.salary = salary;

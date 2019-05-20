@@ -6,6 +6,10 @@ public class Manufacturer {
     private String name;
     private String address;
 
+    public Manufacturer() {
+
+    }
+
     public Manufacturer(int id, int countryId, String name, String address) {
         this.id = id;
         this.countryId = countryId;
