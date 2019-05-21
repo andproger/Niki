@@ -1,9 +1,22 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.IntPrimaryKey;
+import com.niki.data.cache.annotaion.Table;
+
+@Table("manufacturer")
 public class Manufacturer {
+
+    @IntPrimaryKey("id")
     private int id;
+
+    @Column("country_id")
     private int countryId;
+
+    @Column("manufacturer_name")
     private String name;
+
+    @Column("address")
     private String address;
 
     public Manufacturer() {

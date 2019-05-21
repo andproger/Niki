@@ -1,19 +1,31 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.Table;
+
+@Table("sales_map")
 public class SaleItem {
+
+    @Column("sale_id")
     private int saleId;
+
+    @Column("drug_id")
     private int drugId;
-    private int quantiy;
+
+    @Column("quantity")
+    private int quantity;
+
+    @Column("cost")
     private double cost;
 
     public SaleItem() {
 
     }
 
-    public SaleItem(int saleId, int drugId, int quantiy, double cost) {
+    public SaleItem(int saleId, int drugId, int quantity, double cost) {
         this.saleId = saleId;
         this.drugId = drugId;
-        this.quantiy = quantiy;
+        this.quantity = quantity;
         this.cost = cost;
     }
 
@@ -33,12 +45,12 @@ public class SaleItem {
         this.drugId = drugId;
     }
 
-    public int getQuantiy() {
-        return quantiy;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setQuantiy(int quantiy) {
-        this.quantiy = quantiy;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public double getCost() {
@@ -54,7 +66,7 @@ public class SaleItem {
         return "SaleItem{" +
                 "saleId=" + saleId +
                 ", drugId=" + drugId +
-                ", quantiy=" + quantiy +
+                ", quantity=" + quantity +
                 ", cost=" + cost +
                 '}';
     }

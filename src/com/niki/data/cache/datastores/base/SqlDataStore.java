@@ -122,7 +122,6 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         try {
             var statement = this.connection.prepareStatement(sqlQuery);
 
-            System.out.println(sqlQuery);
             for (var item : items) {
                 prepareUpdate(statement, item);
                 statement.execute();

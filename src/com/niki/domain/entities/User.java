@@ -1,11 +1,27 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.IntPrimaryKey;
+import com.niki.data.cache.annotaion.Table;
+
+@Table("user")
 public class User {
+    @IntPrimaryKey("id")
     private int id;
+
+    @Column("position_id")
     private int positionId;
+
+    @Column("login")
     private String login;
+
+    @Column("password")
     private String password;
+
+    @Column("first_name")
     private String firstName;
+
+    @Column("last_name")
     private String lastName;
 
     public User() {

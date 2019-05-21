@@ -28,7 +28,7 @@ public class SaleInteractorImpl implements SaleInteractor {
             var index = Collections.binarySearch(drugs, drug, Comparator.comparingInt(Drug::getId));
             drug = index >= 0 ? drugs.get(index) : null;
 
-            saleContracts.add(new SaleItemContract(s.getSaleId(), s.getQuantiy(), s.getCost(), drug));
+            saleContracts.add(new SaleItemContract(s.getSaleId(), s.getQuantity(), s.getCost(), drug));
         }
 
         return saleContracts;

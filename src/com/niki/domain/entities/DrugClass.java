@@ -1,7 +1,16 @@
 package com.niki.domain.entities;
 
+import com.niki.data.cache.annotaion.Column;
+import com.niki.data.cache.annotaion.IntPrimaryKey;
+import com.niki.data.cache.annotaion.Table;
+
+@Table("drug_class")
 public class DrugClass {
-    private Integer id;
+
+    @IntPrimaryKey("id")
+    private int id;
+
+    @Column("class_name")
     private String name;
 
     public DrugClass() {
@@ -12,11 +21,11 @@ public class DrugClass {
         this.name = name;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
