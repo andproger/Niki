@@ -128,7 +128,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case PROVIDERS:
-                presenter = new ProvidersPresenterImpl(this);
+                presenter = new ProvidersPresenterImpl(this, new ProviderRepositorySql(new SqlProviderDataStore()));
                 break;
 
             case DRUG_CLASSES:
