@@ -23,7 +23,7 @@ public class NewSalesPresenterImpl extends BaseCatalogPresenter {
     }
 
     private void initTableModel() {
-        this.saleItems = saleInteractor.getSaleItems();
+        this.saleItems = new ArrayList<>();//saleInteractor.getSaleItems();
         this.tableModel = new NewSalesTableModel(saleItems);
         view.setTableModel(tableModel);
         view.setTableCellEditor(Drug.class, new CellEditor<>(saleInteractor.getDrugs()));

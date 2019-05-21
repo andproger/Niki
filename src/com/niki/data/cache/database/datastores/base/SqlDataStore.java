@@ -1,22 +1,22 @@
 package com.niki.data.cache.database.datastores.base;
 
 
-import com.niki.data.cache.database.connection.SqlConnector;
 import com.niki.data.cache.database.annotaion.Column;
 import com.niki.data.cache.database.annotaion.IntPrimaryKey;
 import com.niki.data.cache.database.annotaion.Table;
+import com.niki.data.cache.database.connection.SqlConnector;
 import com.niki.data.cache.database.utils.SqlGen;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.*;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.ToIntFunction;
 
-import static com.niki.data.cache.database.utils.Utils.*;
+import static com.niki.data.cache.database.utils.Utils.idsDivided;
 
 public abstract class SqlDataStore<T> implements DataStore<T> {
     private final static String DATABASE = "drugs.dbo";
@@ -101,19 +101,28 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         return items;
     }
 
-    protected void insertItems(ArrayList<T> items, String sqlQuery) {
-        if (items.isEmpty()) return;
+    protected ArrayList<Integer> insertItems(ArrayList<T> items, String sqlQuery) {
+        var result = new ArrayList<Integer>();
+
+        if (items.isEmpty()) return result;
 
         try {
-            var statement = this.connection.prepareStatement(sqlQuery);
+            String[] returnId = {"BATCHID"};
+            var statement = this.connection.prepareStatement(sqlQuery, returnId);
 
             for (var item : items) {
                 prepareInsert(statement, item);
-                statement.execute();
+                statement.executeUpdate();
             }
+            var keys = statement.getGeneratedKeys();
+            while (keys.next()) {
+                result.add(keys.getInt(1));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
     }
 
     protected void updateItems(ArrayList<T> items, String sqlQuery) {
@@ -144,9 +153,10 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         }
     }
 
-    protected int getIndentity(){
+    protected int getIndentity() {
         try {
-            var statement = this.connection.prepareStatement("SELECT SCOPE_IDENTITY() AS ID");
+            var sql = "SELECT IDENT_CURRENT('" + DATABASE + ".[intake_drug]" + "') AS ID";
+            var statement = this.connection.prepareStatement(sql);
             var result = statement.executeQuery();
             return result.getInt("ID");
         } catch (SQLException e) {
@@ -187,7 +197,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         for (int i = 0; i < columnFields.size(); i++) {
             setStatement(statement, i + 1, columnFields.get(i), item);
         }
-        setStatement(statement, columnFields.size()+1, primaryField, item);
+        setStatement(statement, columnFields.size() + 1, primaryField, item);
     }
 
     private void setStatement(PreparedStatement statement, int index, Field field, T item) throws SQLException, IllegalAccessException {
@@ -203,6 +213,8 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
             statement.setLong(index, field.getLong(item));
         } else if (clazz.equals(Boolean.TYPE)) {
             statement.setBoolean(index, field.getBoolean(item));
+        } else if (clazz.equals(Date.class)) {
+            statement.setDate(index, (Date) field.get(item));
         }
     }
 

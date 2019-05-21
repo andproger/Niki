@@ -4,6 +4,8 @@ import com.niki.data.cache.database.annotaion.Column;
 import com.niki.data.cache.database.annotaion.IntPrimaryKey;
 import com.niki.data.cache.database.annotaion.Table;
 
+import java.sql.Date;
+
 @Table("intake_drug")
 public class Intake {
     @IntPrimaryKey("id")
@@ -13,13 +15,13 @@ public class Intake {
     private int providerId;
 
     @Column("date")
-    private int dateTime;
+    private Date dateTime;
 
     public Intake() {
 
     }
 
-    public Intake(int id, int providerId, int dateTime) {
+    public Intake(int id, int providerId, Date dateTime) {
         this.id = id;
         this.providerId = providerId;
         this.dateTime = dateTime;
@@ -41,11 +43,11 @@ public class Intake {
         this.providerId = providerId;
     }
 
-    public int getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(int dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
