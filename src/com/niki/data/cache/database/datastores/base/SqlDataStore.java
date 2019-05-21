@@ -153,18 +153,6 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         }
     }
 
-    protected int getIndentity() {
-        try {
-            var sql = "SELECT IDENT_CURRENT('" + DATABASE + ".[intake_drug]" + "') AS ID";
-            var statement = this.connection.prepareStatement(sql);
-            var result = statement.executeQuery();
-            return result.getInt("ID");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
     private int getPrimaryKeyInt(T item) {
         try {
             return primaryField.getInt(item);
