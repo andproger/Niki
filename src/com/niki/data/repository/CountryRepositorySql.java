@@ -1,6 +1,6 @@
 package com.niki.data.repository;
 
-import com.niki.data.cache.datastores.CountryDataStore;
+import com.niki.data.cache.database.datastores.CountryDataStore;
 import com.niki.domain.entities.Country;
 import com.niki.domain.gateways.repositories.CountryRepository;
 

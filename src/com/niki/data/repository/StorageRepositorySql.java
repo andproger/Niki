@@ -1,6 +1,6 @@
 package com.niki.data.repository;
 
-import com.niki.data.cache.datastores.StorageDataStore;
+import com.niki.data.cache.database.datastores.StorageDataStore;
 import com.niki.domain.entities.Storage;
 import com.niki.domain.gateways.repositories.StorageRepository;
 

@@ -1,6 +1,6 @@
 package com.niki.data.repository;
 
-import com.niki.data.cache.datastores.ManufacturerDataStore;
+import com.niki.data.cache.database.datastores.ManufacturerDataStore;
 import com.niki.domain.entities.Manufacturer;
 import com.niki.domain.gateways.repositories.ManufacturerRepository;
 

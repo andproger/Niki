@@ -1,6 +1,6 @@
 package com.niki.presentation.dialogs.catalog;
 
-import com.niki.data.cache.datastores.*;
+import com.niki.data.cache.database.datastores.*;
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
 import com.niki.domain.interactors.catalog.sale.SaleInteractorImpl;

@@ -1,6 +1,7 @@
 package com.niki.domain.entities;
 
 public class ConnectionSettings {
+
     private String host;
 
     private String database;

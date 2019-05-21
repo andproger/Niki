@@ -1,6 +1,6 @@
 package com.niki.data.repository;
 
-import com.niki.data.cache.datastores.PositionDataStore;
+import com.niki.data.cache.database.datastores.PositionDataStore;
 import com.niki.domain.entities.Position;
 import com.niki.domain.gateways.repositories.PositionRepository;
 

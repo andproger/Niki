@@ -1,6 +1,6 @@
 package com.niki.data.repository;
 
-import com.niki.data.cache.datastores.SaleItemDataStore;
+import com.niki.data.cache.database.datastores.SaleItemDataStore;
 import com.niki.domain.entities.SaleItem;
 import com.niki.domain.gateways.repositories.SaleItemRepository;
 
