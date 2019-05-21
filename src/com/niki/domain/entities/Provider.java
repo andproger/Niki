@@ -15,6 +15,10 @@ public class Provider {
     @Column("address")
     private String address;
 
+    public Provider() {
+
+    }
+
     public Provider(int id, String name, String address) {
         this.id = id;
         this.name = name;

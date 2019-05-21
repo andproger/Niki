@@ -69,7 +69,7 @@ public class LoginDialog extends JDialog implements LoginView {
 
     private void initViews() {
         //TODO onOkClicked params
-        buttonOK.addActionListener(e -> presenter.onOkClicked("VSS", "login-2", "password-3"));
+        buttonOK.addActionListener(e -> presenter.onOkClicked("25.48.169.93", "login-2", "password-3"));
         buttonCancel.addActionListener(e -> onCancel());
     }
 
