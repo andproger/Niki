@@ -1,6 +1,6 @@
 package com.niki.data.repository;
 
-import com.niki.data.cache.datastores.IntakeDataStore;
+import com.niki.data.cache.database.datastores.IntakeDataStore;
 import com.niki.domain.entities.Intake;
 import com.niki.domain.gateways.repositories.IntakeRepository;
 

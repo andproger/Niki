@@ -1,9 +1,9 @@
 package com.niki.presentation.dialogs.catalog;
 
 import com.niki.data.cache.database.datastores.*;
-import com.niki.data.cache.datastores.SqlIntakeDataStore;
-import com.niki.data.cache.datastores.SqlIntakeItemDataStore;
-import com.niki.data.cache.datastores.SqlProviderDataStore;
+import com.niki.data.cache.database.datastores.SqlIntakeDataStore;
+import com.niki.data.cache.database.datastores.SqlIntakeItemDataStore;
+import com.niki.data.cache.database.datastores.SqlProviderDataStore;
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
 import com.niki.domain.interactors.catalog.intake.IntakeItemInteractorImpl;

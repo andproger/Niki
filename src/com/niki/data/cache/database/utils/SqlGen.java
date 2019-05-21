@@ -18,7 +18,11 @@ public class SqlGen {
         this.primaryKey = primaryKey;
 
         this.columns = columns;
-        this.allColumns = copyAddToStart(columns, primaryKey);
+
+        if(primaryKey != null)
+            this.allColumns = copyAddToStart(columns, primaryKey);
+        else
+            this.allColumns = columns;
     }
 
     public String select(String where, String orderBy) {

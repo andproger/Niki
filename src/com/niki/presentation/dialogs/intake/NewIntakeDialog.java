@@ -1,6 +1,6 @@
 package com.niki.presentation.dialogs.intake;
 
-import com.niki.data.cache.datastores.SqlProviderDataStore;
+import com.niki.data.cache.database.datastores.SqlProviderDataStore;
 import com.niki.data.repository.ProviderRepositorySql;
 import com.niki.domain.entities.Provider;
 

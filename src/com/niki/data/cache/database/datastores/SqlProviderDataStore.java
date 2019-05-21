@@ -1,4 +1,4 @@
-package com.niki.data.cache.datastores;
+package com.niki.data.cache.database.datastores;
 
 import com.niki.data.cache.database.datastores.base.SqlDataStore;
 import com.niki.domain.entities.Provider;

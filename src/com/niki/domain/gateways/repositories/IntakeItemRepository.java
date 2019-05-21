@@ -7,5 +7,6 @@ import java.util.ArrayList;
 
 public interface IntakeItemRepository {
     ArrayList<IntakeItem> get();
+    ArrayList<IntakeItem> get(int intakeId);
     void save(ArrayList<IntakeItem> items);
 }

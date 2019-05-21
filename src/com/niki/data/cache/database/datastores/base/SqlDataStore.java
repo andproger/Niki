@@ -177,7 +177,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         return instance;
     }
 
-    private void prepareInsert(PreparedStatement statement, T item) throws SQLException, IllegalAccessException {
+    protected void prepareInsert(PreparedStatement statement, T item) throws SQLException, IllegalAccessException {
         for (int i = 0; i < columnFields.size(); i++) {
             setStatement(statement, i + 1, columnFields.get(i), item);
         }
@@ -256,7 +256,8 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
             }
         }
 
-        throw new IllegalStateException("not found field with primary key annotation in table:" + table + "; entity:" + aClass.getName());
+        return null;
+        //throw new IllegalStateException("not found field with primary key annotation in table:" + table + "; entity:" + aClass.getName());
     }
 
     private List<String> searchColumns() {
