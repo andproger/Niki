@@ -141,6 +141,9 @@ public class CatalogDialog extends JDialog implements CatalogView {
 
             case NEW_INTAKES: {
                 var newIntakeDialog = new NewIntakeDialog();
+                newIntakeDialog.pack();
+                newIntakeDialog.setVisible(true);
+
                 var providerId = newIntakeDialog.getProviderId();
 
                 if (newIntakeDialog.getResultType() == NewIntakeDialog.ResultType.OK) {

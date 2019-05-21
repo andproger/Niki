@@ -18,9 +18,6 @@ public class NewIntakeDialog extends JDialog implements NewIntakeView {
     private int providerId;
 
     public NewIntakeDialog() {
-        pack();
-        setVisible(true);
-
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
