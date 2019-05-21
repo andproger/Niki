@@ -1,7 +1,7 @@
 package com.niki.domain.entities;
 
-import com.niki.data.cache.annotaion.Column;
-import com.niki.data.cache.annotaion.Table;
+import com.niki.data.cache.database.annotaion.Column;
+import com.niki.data.cache.database.annotaion.Table;
 
 @Table("intake_map")
 public class IntakeItem {

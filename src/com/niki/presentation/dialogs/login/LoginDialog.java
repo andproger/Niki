@@ -1,6 +1,7 @@
 package com.niki.presentation.dialogs.login;
 
-import com.niki.data.cache.connection.ConnectionServiceImpl;
+import com.niki.data.services.ConnectionServiceImpl;
+import com.niki.data.repository.ConnectionSettingsJsonFileRepository;
 import com.niki.domain.interactors.login.LoginInteractorImpl;
 
 import javax.swing.*;
@@ -23,7 +24,12 @@ public class LoginDialog extends JDialog implements LoginView {
         setContentPane(contentPane);
         setModal(true);
 
-        presenter = new LoginPresenterImpl(this, new LoginInteractorImpl(new ConnectionServiceImpl()));
+        presenter = new LoginPresenterImpl(this,
+                new LoginInteractorImpl(
+                        new ConnectionServiceImpl(new ConnectionSettingsJsonFileRepository())
+                ),
+                new ConnectionSettingsJsonFileRepository()
+        );
         initViews();
 
         getRootPane().setDefaultButton(buttonOK);
@@ -35,6 +41,13 @@ public class LoginDialog extends JDialog implements LoginView {
         });
 
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        presenter.onViewReady();
+    }
+
+    @Override
+    public void renderServerText(String host) {
+        serverField.setText(host);
     }
 
     @Override
@@ -69,7 +82,7 @@ public class LoginDialog extends JDialog implements LoginView {
 
     private void initViews() {
         //TODO onOkClicked params
-        buttonOK.addActionListener(e -> presenter.onOkClicked("25.48.169.93", "login-2", "password-3"));
+        buttonOK.addActionListener(e -> presenter.onOkClicked(serverField.getText(), "login-2", "password-3"));
         buttonCancel.addActionListener(e -> onCancel());
     }
 

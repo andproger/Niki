@@ -1,6 +1,6 @@
 package com.niki.data.repository;
 
-import com.niki.data.cache.datastores.DrugClassDataStore;
+import com.niki.data.cache.database.datastores.DrugClassDataStore;
 import com.niki.domain.entities.DrugClass;
 import com.niki.domain.gateways.repositories.ClassRepository;
 

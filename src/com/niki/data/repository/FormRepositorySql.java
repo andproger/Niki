@@ -1,6 +1,6 @@
 package com.niki.data.repository;
 
-import com.niki.data.cache.datastores.FormDataStore;
+import com.niki.data.cache.database.datastores.FormDataStore;
 import com.niki.domain.entities.Form;
 import com.niki.domain.gateways.repositories.FormRepository;
 

@@ -1,17 +1,30 @@
 package com.niki.presentation.dialogs.login;
 
+import com.niki.domain.entities.ConnectionSettings;
+import com.niki.domain.gateways.repositories.ConnectionSettingsRepository;
 import com.niki.domain.interactors.login.LoginInteractor;
 
 public class LoginPresenterImpl implements LoginPresenter {
     private final LoginView view;
     private final LoginInteractor loginInteractor;
+    private final ConnectionSettingsRepository connectionSettingsRepository;
 
     LoginPresenterImpl(
             LoginView view,
-            LoginInteractor loginInteractor
-    ) {
+            LoginInteractor loginInteractor,
+            ConnectionSettingsRepository connectionSettingsRepository) {
         this.view = view;
         this.loginInteractor = loginInteractor;
+        this.connectionSettingsRepository = connectionSettingsRepository;
+    }
+
+    @Override
+    public void onViewReady() {
+        ConnectionSettings settings = connectionSettingsRepository.get();
+
+        if (settings != null && settings.getHost() != null) {
+            view.renderServerText(settings.getHost());
+        }
     }
 
     @Override
@@ -25,7 +38,7 @@ public class LoginPresenterImpl implements LoginPresenter {
         LoginInteractor.LoginResult result = loginInteractor.login(server, login, password);
 
         view.showProgress(false);
-        switch (result){
+        switch (result) {
             case SUCCESS_LOGIN:
                 view.onSuccessLogin();
                 break;
