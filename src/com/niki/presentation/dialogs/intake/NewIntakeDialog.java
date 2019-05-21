@@ -18,9 +18,8 @@ public class NewIntakeDialog extends JDialog implements NewIntakeView {
     private int providerId;
 
     public NewIntakeDialog() {
-        NewIntakeDialog dialog = new NewIntakeDialog();
-        dialog.pack();
-        dialog.setVisible(true);
+        pack();
+        setVisible(true);
 
         setContentPane(contentPane);
         setModal(true);
@@ -44,7 +43,6 @@ public class NewIntakeDialog extends JDialog implements NewIntakeView {
 
         for (var provider : providers)
             comboBox1.addItem(provider);
-        comboBox1.setSelectedIndex(0);
     }
 
     private void onOK() {
