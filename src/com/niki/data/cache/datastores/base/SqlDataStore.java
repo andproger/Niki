@@ -31,7 +31,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
     private Field primaryField;
     private List<Field> columnFields;
 
-    private final SqlGen sqlGen;
+    protected final SqlGen sqlGen;
 
     public SqlDataStore(Class aClass) {
         this.aClass = aClass;
@@ -142,6 +142,17 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    protected int getIndentity(){
+        try {
+            var statement = this.connection.prepareStatement("SELECT SCOPE_IDENTITY() AS ID");
+            var result = statement.executeQuery();
+            return result.getInt("ID");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     private int getPrimaryKeyInt(T item) {

@@ -17,6 +17,10 @@ public class IntakeItem {
     @Column("cost")
     private double cost;
 
+    public IntakeItem() {
+
+    }
+
     public IntakeItem(int intakeId, int drugId, int quantity) {
         this.intakeId = intakeId;
         this.drugId = drugId;

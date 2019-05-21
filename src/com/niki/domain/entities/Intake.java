@@ -15,6 +15,10 @@ public class Intake {
     @Column("date")
     private int dateTime;
 
+    public Intake() {
+
+    }
+
     public Intake(int id, int providerId, int dateTime) {
         this.id = id;
         this.providerId = providerId;
