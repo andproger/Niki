@@ -9,11 +9,15 @@ public class Provider {
     @IntPrimaryKey("id")
     private int id;
 
-    @Column("name")
+    @Column("provider_name")
     private String name;
 
     @Column("address")
     private String address;
+
+    public Provider() {
+
+    }
 
     public Provider(int id, String name, String address) {
         this.id = id;
