@@ -1,7 +1,8 @@
 package com.niki.data.cache.datastores;
 
-import com.niki.data.cache.datastores.base.SqlDataStore;
+import com.niki.data.cache.database.datastores.base.SqlDataStore;
 import com.niki.domain.entities.IntakeItem;
+
 
 public class SqlIntakeItemDataStore extends SqlDataStore<IntakeItem> implements IntakeItemDataStore {
 

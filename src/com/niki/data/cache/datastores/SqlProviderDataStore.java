@@ -1,7 +1,6 @@
 package com.niki.data.cache.datastores;
 
-import com.niki.data.cache.datastores.base.SqlDataStore;
-import com.niki.domain.entities.Form;
+import com.niki.data.cache.database.datastores.base.SqlDataStore;
 import com.niki.domain.entities.Provider;
 
 public class SqlProviderDataStore extends SqlDataStore<Provider> implements ProviderDataStore {

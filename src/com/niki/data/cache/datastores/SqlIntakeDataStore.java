@@ -1,8 +1,7 @@
 package com.niki.data.cache.datastores;
 
-import com.niki.data.cache.datastores.base.SqlDataStore;
+import com.niki.data.cache.database.datastores.base.SqlDataStore;
 import com.niki.domain.entities.Intake;
-import com.niki.domain.entities.SaleItem;
 
 import java.util.ArrayList;
 
