@@ -1,8 +1,9 @@
 package com.niki.domain.interactors.catalog.intake;
 
-import com.niki.domain.entities.*;
-import com.niki.domain.gateways.repositories.*;
-import com.niki.domain.interactors.catalog.drug.DrugContract;
+import com.niki.domain.entities.Intake;
+import com.niki.domain.entities.Provider;
+import com.niki.domain.gateways.repositories.IntakeRepository;
+import com.niki.domain.gateways.repositories.ProviderRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,100 +13,42 @@ public class IntakeInteractorImpl implements IntakeInteractor {
     private final ProviderRepository providerRepository;
     private final IntakeRepository intakeRepository;
 
-    public IntakeInteractorImpl(
-            DrugRepository providerRepository,
-            ClassRepository classRepository,
-            FormRepository formRepository,
-            StorageRepository storageRepository,
-            ManufacturerRepository manufacturerRepository
-    ) {
+    public IntakeInteractorImpl(ProviderRepository providerRepository, IntakeRepository intakeRepository) {
         this.providerRepository = providerRepository;
-        this.classRepository = classRepository;
-        this.formRepository = formRepository;
-        this.storageRepository = storageRepository;
-        this.manufacturerRepository = manufacturerRepository;
+        this.intakeRepository = intakeRepository;
     }
 
     @Override
-    public ArrayList<DrugContract> getDrugs() {
-        var drugs = providerRepository.getDrugs();
-        var classes = classRepository.getClasses();
-        var forms = formRepository.getForms();
-        var storages = storageRepository.getStorages();
-        var manufacturers = manufacturerRepository.getManufacturers();
+    public ArrayList<IntakeContract> get() {
+        var items = intakeRepository.get();
+        var providers = providerRepository.get();
+        var contracts = new ArrayList<IntakeContract>();
 
-        var drugsResult = new ArrayList<DrugContract>();
-        for (var drug : drugs) {
+        for (var item : items) {
 
-            var drugClass = new DrugClass(drug.getClassId(), "");
-            var index = Collections.binarySearch(classes, drugClass, Comparator.comparingInt(DrugClass::getId));
-            drugClass = index >= 0 ? classes.get(index) : null;
+            var provider = new Provider(item.getProviderId(), "", "");
+            var index = Collections.binarySearch(providers, provider, Comparator.comparingInt(Provider::getId));
+            provider = index >= 0 ? providers.get(index) : null;
 
-            var storage = new Storage(drug.getStorageId(), "");
-            index = Collections.binarySearch(storages, storage, Comparator.comparingInt(Storage::getId));
-            storage = index >= 0 ? storages.get(index) : null;
-
-            var form = new Form(drug.getFormId(), "");
-            index = Collections.binarySearch(forms, form, Comparator.comparingInt(Form::getId));
-            form = index >= 0 ? forms.get(index) : null;
-
-            var manufacturer = new Manufacturer(drug.getManufacturerId(), 0, "", "");
-            index = Collections.binarySearch(manufacturers, manufacturer, Comparator.comparingInt(Manufacturer::getId));
-            manufacturer = index >= 0 ? manufacturers.get(index) : null;
-
-            drugsResult.add(new DrugContract(
-                    drug.getId(),
-                    drug.getCost(),
-                    drug.getName(),
-                    drug.getDescription(),
-                    drugClass,
-                    manufacturer,
-                    storage,
-                    form)
-            );
+            contracts.add(new IntakeContract(item.getId(), provider, item.getDateTime()));
         }
 
-        return drugsResult;
+        return contracts;
     }
 
     @Override
-    public void saveDrugs(ArrayList<DrugContract> drugs) {
-        var drugsResult = new ArrayList<com.niki.domain.entities.Drug>();
-        for (var drug : drugs) {
-            drugsResult.add(new com.niki.domain.entities.Drug(
-                    drug.getId(),
-                    drug.getCost(),
-                    drug.getDrugClass().getId(),
-                    drug.getManufacturer().getId(),
-                    drug.getStorage().getId(),
-                    drug.getForm().getId(),
+    public ArrayList<Provider> getProvider() {
+        return providerRepository.get();
+    }
 
-                    drug.getName(),
-                    drug.getDescription()
-            ));
+    @Override
+    public void save(ArrayList<IntakeContract> contracts) {
+        var intakes = new ArrayList<Intake>();
+
+        for (var contract : contracts) {
+            intakes.add(new Intake(contract.getId(), contract.getProvider().getId(), contract.getDateTime()));
         }
-        providerRepository.saveDrugs(drugsResult);
+
+        intakeRepository.save(intakes);
     }
-
-    @Override
-    public ArrayList<Form> getForms() {
-        return formRepository.getForms();
-    }
-
-    @Override
-    public ArrayList<Storage> getStorages() {
-        return storageRepository.getStorages();
-    }
-
-    @Override
-    public ArrayList<DrugClass> getClasses() {
-        return classRepository.getClasses();
-    }
-
-    @Override
-    public ArrayList<Manufacturer> getManufacturers() {
-        return manufacturerRepository.getManufacturers();
-    }
-
-
 }

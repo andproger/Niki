@@ -21,10 +21,11 @@ public class IntakeItem {
 
     }
 
-    public IntakeItem(int intakeId, int drugId, int quantity) {
+    public IntakeItem(int intakeId, int drugId, int quantity, double cost) {
         this.intakeId = intakeId;
         this.drugId = drugId;
         this.quantity = quantity;
+        this.cost = cost;
     }
 
     public int getIntakeId() {

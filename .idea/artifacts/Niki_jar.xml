@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Niki:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Niki_jar</output-path>
+    <root id="archive" name="Niki.jar">
+      <element id="module-output" name="Niki" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/microsoft/sqlserver/mssql-jdbc/7.2.2.jre11/mssql-jdbc-7.2.2.jre11.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

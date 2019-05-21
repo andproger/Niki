@@ -1,61 +1,65 @@
 package com.niki.presentation.dialogs.intake;
 
-import javax.swing.*;
-import java.awt.event.*;
+import com.niki.data.cache.datastores.SqlProviderDataStore;
+import com.niki.data.repository.ProviderRepositorySql;
+import com.niki.domain.entities.Provider;
 
-public class NewIntakeDialog extends JDialog {
+import javax.swing.*;
+import java.util.ArrayList;
+
+public class NewIntakeDialog extends JDialog implements NewIntakeView {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JComboBox comboBox1;
 
+    private NewIntakePresenter presenter;
+    private ResultType resultType;
+    private int providerId;
+
     public NewIntakeDialog() {
+        NewIntakeDialog dialog = new NewIntakeDialog();
+        dialog.pack();
+        dialog.setVisible(true);
+
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
+        presenter = new NewIntakePresenterImpl(this, new ProviderRepositorySql(new SqlProviderDataStore()));
+    }
 
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
+    public int getProviderId() {
+        return providerId;
+    }
 
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
+    public ResultType getResultType() {
+        return resultType;
+    }
 
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    @Override
+    public void initViews(ArrayList<Provider> providers) {
+        buttonOK.addActionListener(e -> onOK());
+        buttonCancel.addActionListener(e -> onCancel());
+
+        for (var provider : providers)
+            comboBox1.addItem(provider);
+        comboBox1.setSelectedIndex(0);
     }
 
     private void onOK() {
-        // add your code here
+        resultType = ResultType.OK;
+        providerId = ((Provider) comboBox1.getSelectedItem()).getId();
         dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
+        resultType = ResultType.CANCEL;
         dispose();
     }
 
-    public static void main(String[] args) {
-        NewIntakeDialog dialog = new NewIntakeDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
+    public enum ResultType {
+        OK,
+        CANCEL
     }
 }
