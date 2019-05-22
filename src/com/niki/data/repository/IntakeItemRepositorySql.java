@@ -1,10 +1,10 @@
 package com.niki.data.repository;
 
-import com.niki.data.cache.datastores.IntakeItemDataStore;
+import com.niki.data.cache.database.datastores.IntakeItemDataStore;
 import com.niki.domain.entities.IntakeItem;
 import com.niki.domain.gateways.repositories.IntakeItemRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class IntakeItemRepositorySql implements IntakeItemRepository {
 
@@ -15,12 +15,17 @@ public class IntakeItemRepositorySql implements IntakeItemRepository {
     }
 
     @Override
-    public ArrayList<IntakeItem> get() {
+    public List<IntakeItem> get() {
         return dataStore.getAll();
     }
 
     @Override
-    public void save(ArrayList<IntakeItem> items) {
+    public List<IntakeItem> get(int intakeId) {
+        return dataStore.get(intakeId);
+    }
+
+    @Override
+    public void save(List<IntakeItem> items) {
         dataStore.save(items);
     }
 }

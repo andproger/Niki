@@ -2,11 +2,11 @@ package com.niki.domain.gateways.repositories;
 
 import com.niki.domain.entities.Storage;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface StorageRepository {
 
-    ArrayList<Storage> getStorages();
+    List<Storage> getStorages();
 
-    void saveStorages(ArrayList<Storage> storages);
+    void saveStorages(List<Storage> storages);
 }

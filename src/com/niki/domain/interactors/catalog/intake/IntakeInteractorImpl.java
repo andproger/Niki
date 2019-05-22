@@ -5,9 +5,11 @@ import com.niki.domain.entities.Provider;
 import com.niki.domain.gateways.repositories.IntakeRepository;
 import com.niki.domain.gateways.repositories.ProviderRepository;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class IntakeInteractorImpl implements IntakeInteractor {
     private final ProviderRepository providerRepository;
@@ -19,7 +21,7 @@ public class IntakeInteractorImpl implements IntakeInteractor {
     }
 
     @Override
-    public ArrayList<IntakeContract> get() {
+    public List<IntakeContract> get() {
         var items = intakeRepository.get();
         var providers = providerRepository.get();
         var contracts = new ArrayList<IntakeContract>();
@@ -30,23 +32,23 @@ public class IntakeInteractorImpl implements IntakeInteractor {
             var index = Collections.binarySearch(providers, provider, Comparator.comparingInt(Provider::getId));
             provider = index >= 0 ? providers.get(index) : null;
 
-            contracts.add(new IntakeContract(item.getId(), provider, item.getDateTime()));
+            contracts.add(new IntakeContract(item.getId(), provider, item.getDateTime().getTime()));
         }
 
         return contracts;
     }
 
     @Override
-    public ArrayList<Provider> getProvider() {
+    public List<Provider> getProvider() {
         return providerRepository.get();
     }
 
     @Override
-    public void save(ArrayList<IntakeContract> contracts) {
+    public void save(List<IntakeContract> contracts) {
         var intakes = new ArrayList<Intake>();
 
         for (var contract : contracts) {
-            intakes.add(new Intake(contract.getId(), contract.getProvider().getId(), contract.getDateTime()));
+            intakes.add(new Intake(contract.getId(), contract.getProvider().getId(), new Date(contract.getDateTime())));
         }
 
         intakeRepository.save(intakes);

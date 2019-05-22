@@ -2,8 +2,8 @@ package com.niki.presentation.dialogs.intake;
 
 import com.niki.domain.entities.Provider;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface NewIntakeView {
-    void initViews(ArrayList<Provider> providers);
+    void initViews(List<Provider> providers);
 }

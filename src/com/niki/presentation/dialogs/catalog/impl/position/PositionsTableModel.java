@@ -3,13 +3,13 @@ package com.niki.presentation.dialogs.catalog.impl.position;
 import com.niki.domain.entities.Position;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
+import java.util.List;
 
 public class PositionsTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Должность", "З/П"};
-    private ArrayList<Position> positions;
+    private List<Position> positions;
 
-    public PositionsTableModel(ArrayList<Position> positions) {
+    public PositionsTableModel(List<Position> positions) {
         this.positions = positions;
     }
 

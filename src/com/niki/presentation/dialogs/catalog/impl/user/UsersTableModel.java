@@ -4,13 +4,13 @@ import com.niki.domain.entities.Position;
 import com.niki.domain.interactors.catalog.user.UserContract;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
+import java.util.List;
 
 public class UsersTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Login", "First Name", "Last Name", "Position"};
-    private ArrayList<UserContract> users;
+    private List<UserContract> users;
 
-    public UsersTableModel(ArrayList<UserContract> users) {
+    public UsersTableModel(List<UserContract> users) {
         this.users = users;
     }
 

@@ -4,7 +4,7 @@ import com.niki.data.cache.database.datastores.StorageDataStore;
 import com.niki.domain.entities.Storage;
 import com.niki.domain.gateways.repositories.StorageRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class StorageRepositorySql implements StorageRepository {
 
@@ -15,12 +15,12 @@ public class StorageRepositorySql implements StorageRepository {
     }
 
     @Override
-    public ArrayList<Storage> getStorages() {
+    public List<Storage> getStorages() {
         return dataStore.getAll();
     }
 
     @Override
-    public void saveStorages(ArrayList<Storage> storages) {
+    public void saveStorages(List<Storage> storages) {
         dataStore.save(storages);
     }
 }

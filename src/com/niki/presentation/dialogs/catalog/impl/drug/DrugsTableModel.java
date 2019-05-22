@@ -7,13 +7,13 @@ import com.niki.domain.entities.Storage;
 import com.niki.domain.interactors.catalog.drug.DrugContract;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
+import java.util.List;
 
 public class DrugsTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Имя", "Описание", "Цена", "Производитель", "Хранилище", "Форма", "Класс"};
-    private ArrayList<DrugContract> drugs;
+    private List<DrugContract> drugs;
 
-    public DrugsTableModel(ArrayList<DrugContract> drugs) {
+    public DrugsTableModel(List<DrugContract> drugs) {
         this.drugs = drugs;
     }
 

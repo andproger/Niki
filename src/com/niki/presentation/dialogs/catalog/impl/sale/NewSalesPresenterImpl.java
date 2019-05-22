@@ -1,8 +1,8 @@
 package com.niki.presentation.dialogs.catalog.impl.sale;
 
 import com.niki.domain.entities.Drug;
-import com.niki.domain.interactors.catalog.sale.SaleInteractor;
-import com.niki.domain.interactors.catalog.sale.SaleItemContract;
+import com.niki.domain.gateways.repositories.DrugRepository;
+import com.niki.domain.interactors.catalog.sale.*;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 import com.niki.presentation.dialogs.catalog.CellEditor;
@@ -10,28 +10,51 @@ import com.niki.presentation.dialogs.catalog.CellEditor;
 import java.util.ArrayList;
 
 public class NewSalesPresenterImpl extends BaseCatalogPresenter {
-    private final SaleInteractor saleInteractor;
+    private final DrugRepository drugRepository;
+
+    private final MakeSaleInteractor makeSaleInteractor;
 
     private NewSalesTableModel tableModel;
     private ArrayList<SaleItemContract> saleItems;
 
-    public NewSalesPresenterImpl(CatalogView view, SaleInteractor saleInteractor) {
+    private int saleId;
+
+    public NewSalesPresenterImpl(
+            CatalogView view,
+            MakeSaleInteractor makeSaleInteractor,
+            DrugRepository drugRepository
+    ) {
         super(view);
-        this.saleInteractor = saleInteractor;
+        this.drugRepository = drugRepository;
+        this.makeSaleInteractor = makeSaleInteractor;
 
         initTableModel();
     }
 
     private void initTableModel() {
-        this.saleItems = saleInteractor.getSaleItems();
+        this.saleId = 0;
+        this.saleItems = new ArrayList<>();
         this.tableModel = new NewSalesTableModel(saleItems);
+
+        var drugs = drugRepository.getDrugs();
+
         view.setTableModel(tableModel);
-        view.setTableCellEditor(Drug.class, new CellEditor<>(saleInteractor.getDrugs()));
+        view.setTableCellEditor(Drug.class, new CellEditor<>(drugs));
     }
 
     @Override
     public void onSaveClicked() {
-        saleInteractor.saveSaleItems(saleItems);
+        if (saleId == 0) {
+            if (!saleItems.isEmpty()) {
+                saleId = makeSaleInteractor.add(saleItems);
+            }
+        } else {
+            if (!saleItems.isEmpty()) {
+                makeSaleInteractor.change(saleId, saleItems);
+            } else {
+                makeSaleInteractor.remove(saleId);
+            }
+        }
     }
 
     @Override

@@ -1,22 +1,22 @@
 package com.niki.data.cache.database.datastores.base;
 
 
-import com.niki.data.cache.database.connection.SqlConnector;
 import com.niki.data.cache.database.annotaion.Column;
 import com.niki.data.cache.database.annotaion.IntPrimaryKey;
 import com.niki.data.cache.database.annotaion.Table;
+import com.niki.data.cache.database.connection.SqlConnector;
 import com.niki.data.cache.database.utils.SqlGen;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.*;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.ToIntFunction;
 
-import static com.niki.data.cache.database.utils.Utils.*;
+import static com.niki.data.cache.database.utils.Utils.idsDivided;
 
 public abstract class SqlDataStore<T> implements DataStore<T> {
     private final static String DATABASE = "drugs.dbo";
@@ -46,7 +46,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
     }
 
     @Override
-    public void save(ArrayList<T> items) {
+    public void save(List<T> items) {
         items.sort(Comparator.comparingInt(this::getPrimaryKeyInt));
 
         var itemsToInsert = new ArrayList<T>();
@@ -77,13 +77,13 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
     }
 
     @Override
-    public ArrayList<T> getAll() {
+    public List<T> getAll() {
         var sqlSelect = sqlGen.select(null, "order by " + primaryKey);
 
         return select(sqlSelect);
     }
 
-    protected ArrayList<T> select(String sqlQuery) {
+    protected List<T> select(String sqlQuery) {
         var items = new ArrayList<T>();
 
         try {
@@ -101,22 +101,31 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         return items;
     }
 
-    protected void insertItems(ArrayList<T> items, String sqlQuery) {
-        if (items.isEmpty()) return;
+    protected List<Integer> insertItems(List<T> items, String sqlQuery) {
+        var result = new ArrayList<Integer>();
+
+        if (items.isEmpty()) return result;
 
         try {
-            var statement = this.connection.prepareStatement(sqlQuery);
+            String[] returnId = {"BATCHID"};
+            var statement = this.connection.prepareStatement(sqlQuery, returnId);
 
             for (var item : items) {
                 prepareInsert(statement, item);
-                statement.execute();
+                statement.executeUpdate();
             }
+            var keys = statement.getGeneratedKeys();
+            while (keys.next()) {
+                result.add(keys.getInt(1));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
     }
 
-    protected void updateItems(ArrayList<T> items, String sqlQuery) {
+    protected void updateItems(List<T> items, String sqlQuery) {
         if (items.isEmpty()) return;
 
         try {
@@ -131,7 +140,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         }
     }
 
-    protected void deleteByIds(ArrayList<Integer> ids) {
+    protected void deleteByIds(List<Integer> ids) {
         if (ids.isEmpty()) return;
 
         var sqlQuery = sqlGen.delete("where " + primaryKey + " in (" + idsDivided(ids) + ")");
@@ -142,17 +151,6 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    protected int getIndentity(){
-        try {
-            var statement = this.connection.prepareStatement("SELECT SCOPE_IDENTITY() AS ID");
-            var result = statement.executeQuery();
-            return result.getInt("ID");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
     }
 
     private int getPrimaryKeyInt(T item) {
@@ -177,7 +175,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         return instance;
     }
 
-    private void prepareInsert(PreparedStatement statement, T item) throws SQLException, IllegalAccessException {
+    protected void prepareInsert(PreparedStatement statement, T item) throws SQLException, IllegalAccessException {
         for (int i = 0; i < columnFields.size(); i++) {
             setStatement(statement, i + 1, columnFields.get(i), item);
         }
@@ -187,7 +185,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         for (int i = 0; i < columnFields.size(); i++) {
             setStatement(statement, i + 1, columnFields.get(i), item);
         }
-        setStatement(statement, columnFields.size()+1, primaryField, item);
+        setStatement(statement, columnFields.size() + 1, primaryField, item);
     }
 
     private void setStatement(PreparedStatement statement, int index, Field field, T item) throws SQLException, IllegalAccessException {
@@ -203,6 +201,8 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
             statement.setLong(index, field.getLong(item));
         } else if (clazz.equals(Boolean.TYPE)) {
             statement.setBoolean(index, field.getBoolean(item));
+        } else if (clazz.equals(Date.class)) {
+            statement.setDate(index, (Date) field.get(item));
         }
     }
 
@@ -256,7 +256,8 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
             }
         }
 
-        throw new IllegalStateException("not found field with primary key annotation in table:" + table + "; entity:" + aClass.getName());
+        return null;
+        //throw new IllegalStateException("not found field with primary key annotation in table:" + table + "; entity:" + aClass.getName());
     }
 
     private List<String> searchColumns() {
@@ -282,7 +283,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         return list;
     }
 
-    private boolean search(ArrayList<T> list, T item, ToIntFunction<? super T> keyExtractor) {
+    private boolean search(List<T> list, T item, ToIntFunction<? super T> keyExtractor) {
         return Collections.binarySearch(list, item, Comparator.comparingInt(keyExtractor)) < 0;
     }
 

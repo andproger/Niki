@@ -2,11 +2,11 @@ package com.niki.domain.gateways.repositories;
 
 import com.niki.domain.entities.Position;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface PositionRepository {
 
-    ArrayList<Position> getPositions();
+    List<Position> getPositions();
 
-    void savePositions(ArrayList<Position> positions);
+    void savePositions(List<Position> positions);
 }

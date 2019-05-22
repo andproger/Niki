@@ -2,11 +2,12 @@ package com.niki.domain.gateways.repositories;
 
 import com.niki.domain.entities.Drug;
 
-import java.util.ArrayList;
+import java.util.List;
+
 
 public interface DrugRepository {
 
-    ArrayList<Drug> getDrugs();
+    List<Drug> getDrugs();
 
-    void saveDrugs(ArrayList<Drug> drugs);
+    void saveDrugs(List<Drug> drugs);
 }

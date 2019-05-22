@@ -1,10 +1,10 @@
 package com.niki.data.repository;
 
-import com.niki.data.cache.datastores.ProviderDataStore;
+import com.niki.data.cache.database.datastores.ProviderDataStore;
 import com.niki.domain.entities.Provider;
 import com.niki.domain.gateways.repositories.ProviderRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProviderRepositorySql implements ProviderRepository {
 
@@ -15,12 +15,12 @@ public class ProviderRepositorySql implements ProviderRepository {
     }
 
     @Override
-    public ArrayList<Provider> get() {
+    public List<Provider> get() {
         return dataStore.getAll();
     }
 
     @Override
-    public void save(ArrayList<Provider> items) {
+    public void save(List<Provider> items) {
         dataStore.save(items);
     }
 }

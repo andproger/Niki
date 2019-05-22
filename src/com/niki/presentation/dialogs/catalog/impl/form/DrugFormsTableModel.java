@@ -3,13 +3,13 @@ package com.niki.presentation.dialogs.catalog.impl.form;
 import com.niki.domain.entities.Form;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
+import java.util.List;
 
 public class DrugFormsTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Форма"};
-    private ArrayList<Form> forms;
+    private List<Form> forms;
 
-    public DrugFormsTableModel(ArrayList<Form> forms) {
+    public DrugFormsTableModel(List<Form> forms) {
         this.forms = forms;
     }
 

@@ -1,4 +1,4 @@
-package com.niki.data.cache.datastores;
+package com.niki.data.cache.database.datastores;
 
 import com.niki.data.cache.database.datastores.base.SqlDataStore;
 import com.niki.domain.entities.Intake;
@@ -20,7 +20,7 @@ public class SqlIntakeDataStore extends SqlDataStore<Intake> implements IntakeDa
         var sqlInsert = sqlGen.insert();
         var intakes = new ArrayList<Intake>();
         intakes.add(intake);
-        insertItems(intakes, sqlInsert);
-        return getIndentity();
+        var keys = insertItems(intakes, sqlInsert);
+        return keys.get(0);
     }
 }

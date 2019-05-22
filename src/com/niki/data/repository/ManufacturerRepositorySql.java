@@ -4,7 +4,7 @@ import com.niki.data.cache.database.datastores.ManufacturerDataStore;
 import com.niki.domain.entities.Manufacturer;
 import com.niki.domain.gateways.repositories.ManufacturerRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ManufacturerRepositorySql implements ManufacturerRepository {
 
@@ -15,12 +15,12 @@ public class ManufacturerRepositorySql implements ManufacturerRepository {
     }
 
     @Override
-    public ArrayList<Manufacturer> getManufacturers() {
+    public List<Manufacturer> getManufacturers() {
         return dataStore.getAll();
     }
 
     @Override
-    public void saveManufacturers(ArrayList<Manufacturer> manufacturers) {
+    public void saveManufacturers(List<Manufacturer> manufacturers) {
         dataStore.save(manufacturers);
     }
 }

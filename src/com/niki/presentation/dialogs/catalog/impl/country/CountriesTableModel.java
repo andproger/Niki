@@ -4,13 +4,13 @@ package com.niki.presentation.dialogs.catalog.impl.country;
 import com.niki.domain.entities.Country;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
+import java.util.List;
 
 public class CountriesTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Страна", "Код страны"};
-    private ArrayList<Country> countries;
+    private List<Country> countries;
 
-    public CountriesTableModel(ArrayList<Country> countries) {
+    public CountriesTableModel(List<Country> countries) {
         this.countries = countries;
     }
 

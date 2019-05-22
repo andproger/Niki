@@ -2,11 +2,12 @@ package com.niki.domain.gateways.repositories;
 
 import com.niki.domain.entities.DrugClass;
 
-import java.util.ArrayList;
+import java.util.List;
+
 
 public interface ClassRepository {
 
-    ArrayList<DrugClass> getClasses();
+    List<DrugClass> getClasses();
 
-    void saveClasses(ArrayList<DrugClass> countries);
+    void saveClasses(List<DrugClass> countries);
 }

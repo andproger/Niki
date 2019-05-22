@@ -3,13 +3,13 @@ package com.niki.presentation.dialogs.catalog.impl.storage;
 import com.niki.domain.entities.Storage;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
+import java.util.List;
 
 public class StoragesTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Хранилище"};
-    private ArrayList<Storage> storages;
+    private List<Storage> storages;
 
-    public StoragesTableModel(ArrayList<Storage> storages) {
+    public StoragesTableModel(List<Storage> storages) {
         this.storages = storages;
     }
 

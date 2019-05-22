@@ -72,6 +72,7 @@ public class NewSalesTableModel extends AbstractTableModel {
         switch (columnIndex) {
             case 0:
                 item.setDrug((Drug) aValue);
+                break;
             case 1:
                 item.setCost((Double) aValue);
                 break;

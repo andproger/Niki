@@ -6,15 +6,14 @@ import com.niki.domain.interactors.catalog.user.UserInteractor;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 import com.niki.presentation.dialogs.catalog.CellEditor;
-import com.niki.presentation.dialogs.catalog.impl.position.PositionsTableModel;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class UsersPresenterImpl extends BaseCatalogPresenter {
     private final UserInteractor userInteractor;
 
     private UsersTableModel tableModel;
-    private ArrayList<UserContract> userContracts;
+    private List<UserContract> userContracts;
 
     public UsersPresenterImpl(CatalogView view, UserInteractor userInteractor) {
         super(view);

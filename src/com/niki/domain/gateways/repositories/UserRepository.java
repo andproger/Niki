@@ -2,11 +2,11 @@ package com.niki.domain.gateways.repositories;
 
 import com.niki.domain.entities.User;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface UserRepository {
 
-    ArrayList<User> getUsers();
+    List<User> getUsers();
 
-    void saveUsers(ArrayList<User> users);
+    void saveUsers(List<User> users);
 }

@@ -4,7 +4,7 @@ import com.niki.data.cache.database.datastores.FormDataStore;
 import com.niki.domain.entities.Form;
 import com.niki.domain.gateways.repositories.FormRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class FormRepositorySql implements FormRepository {
 
@@ -15,12 +15,12 @@ public class FormRepositorySql implements FormRepository {
     }
 
     @Override
-    public ArrayList<Form> getForms() {
+    public List<Form> getForms() {
         return dataStore.getAll();
     }
 
     @Override
-    public void saveForms(ArrayList<Form> forms) {
+    public void saveForms(List<Form> forms) {
         dataStore.save(forms);
     }
 }

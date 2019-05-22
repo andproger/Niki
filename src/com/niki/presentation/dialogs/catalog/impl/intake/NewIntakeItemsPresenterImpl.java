@@ -9,6 +9,7 @@ import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 import com.niki.presentation.dialogs.catalog.CellEditor;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class NewIntakeItemsPresenterImpl extends BaseCatalogPresenter {
@@ -38,7 +39,7 @@ public class NewIntakeItemsPresenterImpl extends BaseCatalogPresenter {
 
     @Override
     public void onSaveClicked() {
-        int intakeId = intakeRepositorySql.save(new Intake(0, providerId, ((int) System.currentTimeMillis() / 1000)));
+        int intakeId = intakeRepositorySql.save(new Intake(0, providerId, new Date(System.currentTimeMillis())));
         for (var item : itemContracts) {
             item.setIntakeId(intakeId);
         }

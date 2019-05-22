@@ -1,7 +1,5 @@
 package com.niki.presentation.dialogs.catalog;
 
-import com.niki.domain.entities.Country;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;

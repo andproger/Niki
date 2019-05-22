@@ -5,11 +5,11 @@ import com.niki.domain.gateways.repositories.ClassRepository;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DrugClassesPresenterImpl extends BaseCatalogPresenter {
     private DrugClassesTableModel tableModel;
-    private ArrayList<DrugClass> classes;
+    private List<DrugClass> classes;
     private final ClassRepository repository;
 
     public DrugClassesPresenterImpl(CatalogView view, ClassRepository repository) {

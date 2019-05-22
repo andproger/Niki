@@ -5,18 +5,18 @@ import com.niki.domain.entities.Form;
 import com.niki.domain.entities.Manufacturer;
 import com.niki.domain.entities.Storage;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface DrugInteractor {
-    ArrayList<DrugContract> getDrugs();
+    List<DrugContract> getDrugs();
 
-    void saveDrugs(ArrayList<DrugContract> drugs);
+    void saveDrugs(List<DrugContract> drugs);
 
-    ArrayList<Form> getForms();
+    List<Form> getForms();
 
-    ArrayList<Storage> getStorages();
+    List<Storage> getStorages();
 
-    ArrayList<DrugClass> getClasses();
+    List<DrugClass> getClasses();
 
-    ArrayList<Manufacturer> getManufacturers();
+    List<Manufacturer> getManufacturers();
 }
