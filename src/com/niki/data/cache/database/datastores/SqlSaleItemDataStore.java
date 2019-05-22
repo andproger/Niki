@@ -19,11 +19,18 @@ public class SqlSaleItemDataStore extends SqlDataStore<SaleItem> implements Sale
 
     @Override
     public void save(ArrayList<SaleItem> items) {
+        if (items.size() > 0)
+            save(items.get(0).getSaleId(), items);
+    }
+
+    @Override
+    public void save(int saleId, ArrayList<SaleItem> items) {
         try {
-            connection.prepareStatement(sqlGen.delete(null)).execute();
+            connection.prepareStatement(sqlGen.delete("sale_id = " + saleId)).execute();
             var statement = connection.prepareStatement(sqlGen.insert());
 
             for (var item : items) {
+                item.setSaleId(saleId);
                 prepareInsert(statement, item);
                 statement.execute();
             }

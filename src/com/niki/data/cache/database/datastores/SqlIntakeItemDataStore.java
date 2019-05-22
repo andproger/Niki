@@ -20,20 +20,8 @@ public class SqlIntakeItemDataStore extends SqlDataStore<IntakeItem> implements 
 
     @Override
     public void save(ArrayList<IntakeItem> items) {
-
-        try {
-            connection.prepareStatement(sqlGen.delete(null)).execute();
-            var statement = connection.prepareStatement(sqlGen.insert());
-
-            for (var item : items) {
-                prepareInsert(statement, item);
-                statement.execute();
-            }
-
-            statement.execute();
-        } catch (SQLException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        if (items.size() > 0)
+            save(items.get(0).getIntakeId(), items);
     }
 
     @Override
@@ -48,5 +36,23 @@ public class SqlIntakeItemDataStore extends SqlDataStore<IntakeItem> implements 
         var sqlSelect = sqlGen.select(null, "where intake_id = " + intakeId);
 
         return select(sqlSelect);
+    }
+
+    @Override
+    public void save(int intakeId, ArrayList<IntakeItem> items) {
+        try {
+            connection.prepareStatement(sqlGen.delete("intake_id = " + intakeId)).execute();
+            var statement = connection.prepareStatement(sqlGen.insert());
+
+            for (var item : items) {
+                item.setIntakeId(intakeId);
+                prepareInsert(statement, item);
+                statement.execute();
+            }
+
+            statement.execute();
+        } catch (SQLException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 }
