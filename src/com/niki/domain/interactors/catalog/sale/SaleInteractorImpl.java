@@ -1,50 +1,38 @@
 package com.niki.domain.interactors.catalog.sale;
 
-import com.niki.domain.entities.Drug;
-import com.niki.domain.entities.SaleItem;
-import com.niki.domain.gateways.repositories.DrugRepository;
-import com.niki.domain.gateways.repositories.SaleItemRepository;
+import com.niki.domain.entities.Provider;
+import com.niki.domain.entities.Sale;
+import com.niki.domain.gateways.repositories.IntakeRepository;
+import com.niki.domain.gateways.repositories.ProviderRepository;
+import com.niki.domain.gateways.repositories.SaleRepository;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class SaleInteractorImpl implements SaleInteractor {
-    private final DrugRepository drugRepository;
-    private final SaleItemRepository saleItemRepository;
+    private final SaleRepository repository;
 
-    public SaleInteractorImpl(DrugRepository drugRepository, SaleItemRepository saleItemRepository) {
-        this.drugRepository = drugRepository;
-        this.saleItemRepository = saleItemRepository;
+    public SaleInteractorImpl(SaleRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public ArrayList<SaleItemContract> getSaleItems() {
-        var sales = saleItemRepository.getSaleItems();
-        var drugs = drugRepository.getDrugs();
-        var saleContracts = new ArrayList<SaleItemContract>();
-        for (var s : sales) {
-            var drug = new Drug(s.getSaleId(), 0, 0, 0, 0, 0, "", "");
-            var index = Collections.binarySearch(drugs, drug, Comparator.comparingInt(Drug::getId));
-            drug = index >= 0 ? drugs.get(index) : null;
+    public ArrayList<SaleContract> get() {
+        var items = repository.get();
+        var contracts = new ArrayList<SaleContract>();
 
-            saleContracts.add(new SaleItemContract(s.getSaleId(), s.getQuantity(), s.getCost(), drug));
+        for (var item : items) {
+            contracts.add(new SaleContract(item.getId(), item.getUserId(), item.getDateTime().getTime()));
         }
 
-        return saleContracts;
+        return contracts;
     }
 
     @Override
-    public void saveSaleItems(ArrayList<SaleItemContract> saleItems) {
-        var items = new ArrayList<SaleItem>();
-        for (var contract : saleItems) {
-            items.add(new SaleItem(contract.getSaleId(), contract.getDrug().getId(), contract.getQuantity(), contract.getCost()));
-        }
-        saleItemRepository.saveSaleItem(items);
-    }
-
-    @Override
-    public ArrayList<Drug> getDrugs() {
-        return drugRepository.getDrugs();
+    public int save(SaleContract contract) {
+        var sale = new Sale(contract.getId(), new Date(contract.getDateTime()), contract.getUserId());
+        return repository.save(sale);
     }
 }

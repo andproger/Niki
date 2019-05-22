@@ -39,7 +39,7 @@ public class NewIntakeItemsPresenterImpl extends BaseCatalogPresenter {
 
     @Override
     public void onSaveClicked() {
-        int intakeId = intakeRepositorySql.save(new Intake(0, providerId, new Date(System.currentTimeMillis() / 1000)));
+        int intakeId = intakeRepositorySql.save(new Intake(0, providerId, new Date(System.currentTimeMillis())));
         for (var item : itemContracts) {
             item.setIntakeId(intakeId);
         }
