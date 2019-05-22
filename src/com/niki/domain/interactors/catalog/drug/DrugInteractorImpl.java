@@ -9,6 +9,7 @@ import com.niki.domain.gateways.repositories.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class DrugInteractorImpl implements DrugInteractor {
     private final DrugRepository drugRepository;
@@ -74,7 +75,7 @@ public class DrugInteractorImpl implements DrugInteractor {
     }
 
     @Override
-    public void saveDrugs(ArrayList<DrugContract> drugs) {
+    public void saveDrugs(List<DrugContract> drugs) {
         var drugsResult = new ArrayList<com.niki.domain.entities.Drug>();
         for (var drug : drugs) {
             drugsResult.add(new com.niki.domain.entities.Drug(
@@ -93,22 +94,22 @@ public class DrugInteractorImpl implements DrugInteractor {
     }
 
     @Override
-    public ArrayList<Form> getForms() {
+    public List<Form> getForms() {
         return formRepository.getForms();
     }
 
     @Override
-    public ArrayList<Storage> getStorages() {
+    public List<Storage> getStorages() {
         return storageRepository.getStorages();
     }
 
     @Override
-    public ArrayList<DrugClass> getClasses() {
+    public List<DrugClass> getClasses() {
         return classRepository.getClasses();
     }
 
     @Override
-    public ArrayList<Manufacturer> getManufacturers() {
+    public List<Manufacturer> getManufacturers() {
         return manufacturerRepository.getManufacturers();
     }
 

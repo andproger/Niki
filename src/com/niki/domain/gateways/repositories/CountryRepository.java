@@ -2,11 +2,11 @@ package com.niki.domain.gateways.repositories;
 
 import com.niki.domain.entities.Country;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface CountryRepository {
 
-    ArrayList<Country> getCountries();
+    List<Country> getCountries();
 
-    void saveCountries(ArrayList<Country> countries);
+    void saveCountries(List<Country> countries);
 }

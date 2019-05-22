@@ -5,15 +5,15 @@ import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 
 public class CellEditor<T> extends AbstractCellEditor
         implements TableCellEditor, ActionListener {
 
     private T item;
-    private ArrayList<T> items;
+    private List<T> items;
 
-    public CellEditor(ArrayList<T> items) {
+    public CellEditor(List<T> items) {
         this.items = items;
     }
 

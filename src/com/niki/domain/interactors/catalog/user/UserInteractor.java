@@ -2,12 +2,12 @@ package com.niki.domain.interactors.catalog.user;
 
 import com.niki.domain.entities.Position;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface UserInteractor {
-    ArrayList<UserContract> getUsers();
+    List<UserContract> getUsers();
 
-    void saveUsers(ArrayList<UserContract> userContracts);
+    void saveUsers(List<UserContract> userContracts);
 
-    ArrayList<Position> getPositions();
+    List<Position> getPositions();
 }

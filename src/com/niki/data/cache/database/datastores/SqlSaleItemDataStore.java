@@ -4,7 +4,7 @@ import com.niki.data.cache.database.datastores.base.SqlDataStore;
 import com.niki.domain.entities.SaleItem;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class SqlSaleItemDataStore extends SqlDataStore<SaleItem> implements SaleItemDataStore {
 
@@ -18,24 +18,25 @@ public class SqlSaleItemDataStore extends SqlDataStore<SaleItem> implements Sale
     }
 
     @Override
-    public void save(ArrayList<SaleItem> items) {
-        if (items.size() > 0)
-            save(items.get(0).getSaleId(), items);
+    public void deleteBySaleId(int saleId) {
+        try {
+            connection.prepareStatement(sqlGen.delete("where sale_id = " + saleId))
+                    .execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void save(int saleId, ArrayList<SaleItem> items) {
+    public void save(List<SaleItem> items) {
         try {
-            connection.prepareStatement(sqlGen.delete("sale_id = " + saleId)).execute();
             var statement = connection.prepareStatement(sqlGen.insert());
 
             for (var item : items) {
-                item.setSaleId(saleId);
                 prepareInsert(statement, item);
                 statement.execute();
             }
-
-            statement.execute();
         } catch (SQLException | IllegalAccessException e) {
             e.printStackTrace();
         }

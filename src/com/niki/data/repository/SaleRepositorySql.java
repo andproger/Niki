@@ -1,13 +1,10 @@
 package com.niki.data.repository;
 
-import com.niki.data.cache.database.datastores.IntakeDataStore;
 import com.niki.data.cache.database.datastores.SaleDataStore;
-import com.niki.domain.entities.Intake;
 import com.niki.domain.entities.Sale;
-import com.niki.domain.gateways.repositories.IntakeRepository;
 import com.niki.domain.gateways.repositories.SaleRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SaleRepositorySql implements SaleRepository {
 
@@ -18,13 +15,18 @@ public class SaleRepositorySql implements SaleRepository {
     }
 
     @Override
-    public ArrayList<Sale> get() {
+    public List<Sale> get() {
         return dataStore.getAll();
     }
 
     @Override
     public int save(Sale sale) {
         return dataStore.save(sale);
+    }
+
+    @Override
+    public void deleteById(int saleId) {
+        dataStore.deleteById(saleId);
     }
 
 }

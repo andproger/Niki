@@ -2,11 +2,12 @@ package com.niki.domain.interactors.catalog.intake;
 
 import com.niki.domain.entities.Drug;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IntakeItemInteractor {
-    ArrayList<IntakeItemContract> get();
-    ArrayList<Drug> getDrugs();
+    List<IntakeItemContract> get();
 
-    void save(ArrayList<IntakeItemContract> contracts);
+    List<Drug> getDrugs();
+
+    void save(List<IntakeItemContract> contracts);
 }

@@ -4,13 +4,13 @@ import com.niki.domain.entities.Country;
 import com.niki.domain.interactors.catalog.manufacturer.ManufacturerContract;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
+import java.util.List;
 
 public class ManufacturesTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Имя", "Страна", "Адрес"};
-    private ArrayList<ManufacturerContract> manufacturers;
+    private List<ManufacturerContract> manufacturers;
 
-    public ManufacturesTableModel(ArrayList<ManufacturerContract> manufacturers) {
+    public ManufacturesTableModel(List<ManufacturerContract> manufacturers) {
         this.manufacturers = manufacturers;
     }
 

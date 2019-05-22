@@ -4,7 +4,7 @@ import com.niki.data.cache.database.datastores.DrugClassDataStore;
 import com.niki.domain.entities.DrugClass;
 import com.niki.domain.gateways.repositories.ClassRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ClassRepositorySql implements ClassRepository {
 
@@ -15,12 +15,12 @@ public class ClassRepositorySql implements ClassRepository {
     }
 
     @Override
-    public ArrayList<DrugClass> getClasses() {
+    public List<DrugClass> getClasses() {
         return dataStore.getAll();
     }
 
     @Override
-    public void saveClasses(ArrayList<DrugClass> drugClasses) {
+    public void saveClasses(List<DrugClass> drugClasses) {
         dataStore.save(drugClasses);
     }
 }

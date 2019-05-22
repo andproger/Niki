@@ -4,13 +4,13 @@ package com.niki.presentation.dialogs.catalog.impl.classes;
 import com.niki.domain.entities.DrugClass;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
+import java.util.List;
 
 public class DrugClassesTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Класс"};
-    private ArrayList<DrugClass> classes;
+    private List<DrugClass> classes;
 
-    public DrugClassesTableModel(ArrayList<DrugClass> classes) {
+    public DrugClassesTableModel(List<DrugClass> classes) {
         this.classes = classes;
     }
 

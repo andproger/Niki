@@ -2,11 +2,11 @@ package com.niki.domain.gateways.repositories;
 
 import com.niki.domain.entities.Form;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface FormRepository {
 
-    ArrayList<Form> getForms();
+    List<Form> getForms();
 
-    void saveForms(ArrayList<Form> forms);
+    void saveForms(List<Form> forms);
 }

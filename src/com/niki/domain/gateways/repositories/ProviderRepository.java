@@ -2,11 +2,11 @@ package com.niki.domain.gateways.repositories;
 
 import com.niki.domain.entities.Provider;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ProviderRepository {
 
-    ArrayList<Provider> get();
+    List<Provider> get();
 
-    void save(ArrayList<Provider> items);
+    void save(List<Provider> items);
 }

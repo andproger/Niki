@@ -2,10 +2,12 @@ package com.niki.domain.gateways.repositories;
 
 import com.niki.domain.entities.SaleItem;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface SaleItemRepository {
-    ArrayList<SaleItem> getSaleItems();
+    List<SaleItem> get();
 
-    void saveSaleItem(ArrayList<SaleItem> sales);
+    void save(List<SaleItem> sales);
+
+    void deleteBySaleId(int saleId);
 }

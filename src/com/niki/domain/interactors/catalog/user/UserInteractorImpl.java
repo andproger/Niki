@@ -1,20 +1,16 @@
 package com.niki.domain.interactors.catalog.user;
 
-import com.niki.domain.entities.DrugClass;
-import com.niki.domain.entities.Form;
 import com.niki.domain.entities.Position;
-import com.niki.domain.entities.Storage;
 import com.niki.domain.gateways.repositories.*;
-import com.niki.domain.interactors.catalog.drug.DrugContract;
-import com.niki.domain.interactors.catalog.drug.DrugInteractor;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class UserInteractorImpl implements UserInteractor {
-    UserRepository userRepository;
-    PositionRepository positionRepository;
+    private final UserRepository userRepository;
+    private final PositionRepository positionRepository;
 
     public UserInteractorImpl(UserRepository userRepository, PositionRepository positionRepository) {
         this.userRepository = userRepository;
@@ -22,7 +18,7 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public ArrayList<UserContract> getUsers() {
+    public List<UserContract> getUsers() {
         var users = userRepository.getUsers();
         var positions = positionRepository.getPositions();
 
@@ -38,12 +34,12 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public void saveUsers(ArrayList<UserContract> userContracts) {
+    public void saveUsers(List<UserContract> userContracts) {
 
     }
 
     @Override
-    public ArrayList<Position> getPositions() {
+    public List<Position> getPositions() {
         return positionRepository.getPositions();
     }
 }

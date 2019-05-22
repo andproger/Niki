@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class IntakeInteractorImpl implements IntakeInteractor {
     private final ProviderRepository providerRepository;
@@ -20,7 +21,7 @@ public class IntakeInteractorImpl implements IntakeInteractor {
     }
 
     @Override
-    public ArrayList<IntakeContract> get() {
+    public List<IntakeContract> get() {
         var items = intakeRepository.get();
         var providers = providerRepository.get();
         var contracts = new ArrayList<IntakeContract>();
@@ -38,12 +39,12 @@ public class IntakeInteractorImpl implements IntakeInteractor {
     }
 
     @Override
-    public ArrayList<Provider> getProvider() {
+    public List<Provider> getProvider() {
         return providerRepository.get();
     }
 
     @Override
-    public void save(ArrayList<IntakeContract> contracts) {
+    public void save(List<IntakeContract> contracts) {
         var intakes = new ArrayList<Intake>();
 
         for (var contract : contracts) {

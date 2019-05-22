@@ -3,13 +3,13 @@ package com.niki.presentation.dialogs.catalog.impl.provider;
 import com.niki.domain.entities.Provider;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProvidersTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Поставшик", "Адрес"};
-    private ArrayList<Provider> providers;
+    private List<Provider> providers;
 
-    public ProvidersTableModel(ArrayList<Provider> providers) {
+    public ProvidersTableModel(List<Provider> providers) {
         this.providers = providers;
     }
 

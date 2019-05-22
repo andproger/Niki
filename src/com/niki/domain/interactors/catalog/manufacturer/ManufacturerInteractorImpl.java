@@ -8,6 +8,7 @@ import com.niki.domain.gateways.repositories.ManufacturerRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class ManufacturerInteractorImpl implements ManufacturerInteractor {
     private final ManufacturerRepository manufacturerRepository;
@@ -34,7 +35,7 @@ public class ManufacturerInteractorImpl implements ManufacturerInteractor {
     }
 
     @Override
-    public void saveManufacturers(ArrayList<ManufacturerContract> manufacturerContracts) {
+    public void saveManufacturers(List<ManufacturerContract> manufacturerContracts) {
         var manufacturers = new ArrayList<Manufacturer>();
         for (var contract : manufacturerContracts) {
             manufacturers.add(new Manufacturer(contract.getId(), contract.getCountry().getId(), contract.getName(), contract.getAddress()));
@@ -43,7 +44,7 @@ public class ManufacturerInteractorImpl implements ManufacturerInteractor {
     }
 
     @Override
-    public ArrayList<Country> getCountries() {
+    public List<Country> getCountries() {
         return countryRepository.getCountries();
     }
 }

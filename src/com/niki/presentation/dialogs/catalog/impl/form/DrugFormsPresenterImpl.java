@@ -5,13 +5,13 @@ import com.niki.domain.gateways.repositories.FormRepository;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DrugFormsPresenterImpl extends BaseCatalogPresenter {
     private final FormRepository formRepository;
 
     private DrugFormsTableModel tableModel;
-    private ArrayList<Form> forms;
+    private List<Form> forms;
 
     public DrugFormsPresenterImpl(CatalogView view, FormRepository formRepository) {
         super(view);

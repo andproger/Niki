@@ -46,7 +46,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
     }
 
     @Override
-    public void save(ArrayList<T> items) {
+    public void save(List<T> items) {
         items.sort(Comparator.comparingInt(this::getPrimaryKeyInt));
 
         var itemsToInsert = new ArrayList<T>();
@@ -77,13 +77,13 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
     }
 
     @Override
-    public ArrayList<T> getAll() {
+    public List<T> getAll() {
         var sqlSelect = sqlGen.select(null, "order by " + primaryKey);
 
         return select(sqlSelect);
     }
 
-    protected ArrayList<T> select(String sqlQuery) {
+    protected List<T> select(String sqlQuery) {
         var items = new ArrayList<T>();
 
         try {
@@ -101,7 +101,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         return items;
     }
 
-    protected ArrayList<Integer> insertItems(ArrayList<T> items, String sqlQuery) {
+    protected List<Integer> insertItems(List<T> items, String sqlQuery) {
         var result = new ArrayList<Integer>();
 
         if (items.isEmpty()) return result;
@@ -125,7 +125,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         return result;
     }
 
-    protected void updateItems(ArrayList<T> items, String sqlQuery) {
+    protected void updateItems(List<T> items, String sqlQuery) {
         if (items.isEmpty()) return;
 
         try {
@@ -140,7 +140,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         }
     }
 
-    protected void deleteByIds(ArrayList<Integer> ids) {
+    protected void deleteByIds(List<Integer> ids) {
         if (ids.isEmpty()) return;
 
         var sqlQuery = sqlGen.delete("where " + primaryKey + " in (" + idsDivided(ids) + ")");
@@ -283,7 +283,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         return list;
     }
 
-    private boolean search(ArrayList<T> list, T item, ToIntFunction<? super T> keyExtractor) {
+    private boolean search(List<T> list, T item, ToIntFunction<? super T> keyExtractor) {
         return Collections.binarySearch(list, item, Comparator.comparingInt(keyExtractor)) < 0;
     }
 

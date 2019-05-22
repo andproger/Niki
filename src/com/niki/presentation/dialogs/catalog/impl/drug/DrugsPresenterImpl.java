@@ -7,14 +7,15 @@ import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 import com.niki.presentation.dialogs.catalog.CellEditor;
 
-import java.util.ArrayList;
+import java.util.List;
+
 
 public class DrugsPresenterImpl extends BaseCatalogPresenter {
 
     private final DrugInteractor drugInteractor;
 
     private DrugsTableModel tableModel;
-    private ArrayList<DrugContract> drugs;
+    private List<DrugContract> drugs;
 
     public DrugsPresenterImpl(CatalogView view, DrugInteractor drugInteractor){
         super(view);

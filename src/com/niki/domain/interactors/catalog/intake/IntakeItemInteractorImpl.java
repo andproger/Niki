@@ -8,6 +8,7 @@ import com.niki.domain.gateways.repositories.IntakeItemRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class IntakeItemInteractorImpl implements IntakeItemInteractor {
     private final DrugRepository drugRepository;
@@ -37,12 +38,12 @@ public class IntakeItemInteractorImpl implements IntakeItemInteractor {
     }
 
     @Override
-    public ArrayList<Drug> getDrugs() {
+    public List<Drug> getDrugs() {
         return drugRepository.getDrugs();
     }
 
     @Override
-    public void save(ArrayList<IntakeItemContract> contracts) {
+    public void save(List<IntakeItemContract> contracts) {
         var intakeItems = new ArrayList<IntakeItem>();
 
         for (var contract : contracts) {

@@ -1,10 +1,10 @@
 package com.niki.data.cache.database.datastores;
 
 import com.niki.data.cache.database.datastores.base.SqlDataStore;
-import com.niki.domain.entities.Intake;
 import com.niki.domain.entities.Sale;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SqlSaleDataStore extends SqlDataStore<Sale> implements SaleDataStore {
 
@@ -23,5 +23,13 @@ public class SqlSaleDataStore extends SqlDataStore<Sale> implements SaleDataStor
         sales.add(sale);
         var keys = insertItems(sales, sqlInsert);
         return keys.get(0);
+    }
+
+    @Override
+    public void deleteById(int saleId) {
+        List<Integer> ids = new ArrayList<>();
+        ids.add(saleId);
+
+        deleteByIds(ids);
     }
 }

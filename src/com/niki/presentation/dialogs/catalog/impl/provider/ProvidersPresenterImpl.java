@@ -1,21 +1,17 @@
 package com.niki.presentation.dialogs.catalog.impl.provider;
 
-import com.niki.domain.entities.Country;
 import com.niki.domain.entities.Provider;
 import com.niki.domain.gateways.repositories.ProviderRepository;
-import com.niki.domain.interactors.catalog.manufacturer.ManufacturerContract;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
-import com.niki.presentation.dialogs.catalog.CellEditor;
-import com.niki.presentation.dialogs.catalog.impl.manufacturer.ManufacturesTableModel;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProvidersPresenterImpl extends BaseCatalogPresenter {
     private final ProviderRepository repository;
 
     private ProvidersTableModel tableModel;
-    private ArrayList<Provider> providers;
+    private List<Provider> providers;
 
     public ProvidersPresenterImpl(CatalogView view, ProviderRepository repository) {
         super(view);

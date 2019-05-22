@@ -5,13 +5,13 @@ import com.niki.domain.gateways.repositories.PositionRepository;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PositionsPresenterImpl extends BaseCatalogPresenter {
     private final PositionRepository positionRepository;
 
     private PositionsTableModel tableModel;
-    private ArrayList<Position> positions;
+    private List<Position> positions;
 
     public PositionsPresenterImpl(CatalogView view, PositionRepository positionRepository) {
         super(view);

@@ -1,13 +1,13 @@
 package com.niki.domain.gateways.repositories;
 
 import com.niki.domain.entities.Intake;
-import com.niki.domain.entities.SaleItem;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IntakeRepository {
-    ArrayList<Intake> get();
+    List<Intake> get();
 
     int save(Intake intake);
-    void save(ArrayList<Intake> intakes);
+
+    void save(List<Intake> intakes);
 }

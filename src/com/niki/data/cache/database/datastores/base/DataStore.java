@@ -1,9 +1,9 @@
 package com.niki.data.cache.database.datastores.base;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface DataStore<T> {
-    void save(ArrayList<T> items);
+    void save(List<T> items);
 
-    ArrayList<T> getAll();
+    List<T> getAll();
 }

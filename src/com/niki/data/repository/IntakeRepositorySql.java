@@ -4,7 +4,7 @@ import com.niki.data.cache.database.datastores.IntakeDataStore;
 import com.niki.domain.entities.Intake;
 import com.niki.domain.gateways.repositories.IntakeRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class IntakeRepositorySql implements IntakeRepository {
 
@@ -15,7 +15,7 @@ public class IntakeRepositorySql implements IntakeRepository {
     }
 
     @Override
-    public ArrayList<Intake> get() {
+    public List<Intake> get() {
         return dataStore.getAll();
     }
 
@@ -25,7 +25,7 @@ public class IntakeRepositorySql implements IntakeRepository {
     }
 
     @Override
-    public void save(ArrayList<Intake> intakes) {
+    public void save(List<Intake> intakes) {
         dataStore.save(intakes);
     }
 }

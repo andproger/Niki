@@ -4,7 +4,7 @@ import com.niki.data.cache.database.datastores.SaleItemDataStore;
 import com.niki.domain.entities.SaleItem;
 import com.niki.domain.gateways.repositories.SaleItemRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SaleItemRepositorySql implements SaleItemRepository {
 
@@ -15,12 +15,17 @@ public class SaleItemRepositorySql implements SaleItemRepository {
     }
 
     @Override
-    public ArrayList<SaleItem> getSaleItems() {
+    public List<SaleItem> get() {
         return dataStore.getAll();
     }
 
     @Override
-    public void saveSaleItem(ArrayList<SaleItem> sales) {
+    public void save(List<SaleItem> sales) {
         dataStore.save(sales);
+    }
+
+    @Override
+    public void deleteBySaleId(int saleId) {
+        dataStore.deleteBySaleId(saleId);
     }
 }

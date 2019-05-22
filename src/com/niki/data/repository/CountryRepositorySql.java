@@ -4,7 +4,7 @@ import com.niki.data.cache.database.datastores.CountryDataStore;
 import com.niki.domain.entities.Country;
 import com.niki.domain.gateways.repositories.CountryRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CountryRepositorySql implements CountryRepository {
     private final CountryDataStore dataStore;
@@ -14,12 +14,12 @@ public class CountryRepositorySql implements CountryRepository {
     }
 
     @Override
-    public ArrayList<Country> getCountries() {
+    public List<Country> getCountries() {
         return dataStore.getAll();
     }
 
     @Override
-    public void saveCountries(ArrayList<Country> countries) {
+    public void saveCountries(List<Country> countries) {
         dataStore.save(countries);
     }
 }

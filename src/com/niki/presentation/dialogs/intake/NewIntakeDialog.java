@@ -5,7 +5,7 @@ import com.niki.data.repository.ProviderRepositorySql;
 import com.niki.domain.entities.Provider;
 
 import javax.swing.*;
-import java.util.ArrayList;
+import java.util.List;
 
 public class NewIntakeDialog extends JDialog implements NewIntakeView {
     private JPanel contentPane;
@@ -34,7 +34,7 @@ public class NewIntakeDialog extends JDialog implements NewIntakeView {
     }
 
     @Override
-    public void initViews(ArrayList<Provider> providers) {
+    public void initViews(List<Provider> providers) {
         buttonOK.addActionListener(e -> onOK());
         buttonCancel.addActionListener(e -> onCancel());
 

@@ -5,13 +5,13 @@ import com.niki.domain.gateways.repositories.CountryRepository;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CountriesPresenterImpl extends BaseCatalogPresenter {
     private final CountryRepository countryRepository;
 
     private CountriesTableModel tableModel;
-    private ArrayList<Country> countries;
+    private List<Country> countries;
 
     public CountriesPresenterImpl(CatalogView view, CountryRepository countryRepository){
         super(view);

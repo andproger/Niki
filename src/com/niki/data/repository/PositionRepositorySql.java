@@ -4,7 +4,7 @@ import com.niki.data.cache.database.datastores.PositionDataStore;
 import com.niki.domain.entities.Position;
 import com.niki.domain.gateways.repositories.PositionRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PositionRepositorySql implements PositionRepository {
 
@@ -15,12 +15,12 @@ public class PositionRepositorySql implements PositionRepository {
     }
 
     @Override
-    public ArrayList<Position> getPositions() {
+    public List<Position> getPositions() {
         return dataStore.getAll();
     }
 
     @Override
-    public void savePositions(ArrayList<Position> positions) {
+    public void savePositions(List<Position> positions) {
         dataStore.save(positions);
     }
 }

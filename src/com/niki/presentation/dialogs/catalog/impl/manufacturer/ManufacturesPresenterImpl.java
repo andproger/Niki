@@ -7,13 +7,13 @@ import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 import com.niki.presentation.dialogs.catalog.CellEditor;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ManufacturesPresenterImpl extends BaseCatalogPresenter {
     private final ManufacturerInteractor manufacturerInteractor;
 
     private ManufacturesTableModel tableModel;
-    private ArrayList<ManufacturerContract> manufacturers;
+    private List<ManufacturerContract> manufacturers;
 
     public ManufacturesPresenterImpl(CatalogView view, ManufacturerInteractor manufacturerInteractor) {
         super(view);

@@ -5,11 +5,11 @@ import com.niki.domain.gateways.repositories.StorageRepository;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class StoragesPresenterImpl extends BaseCatalogPresenter {
     private final StorageRepository storageRepository;
-    private ArrayList<Storage> storages;
+    private List<Storage> storages;
     private StoragesTableModel tableModel;
 
     public StoragesPresenterImpl(CatalogView view, StorageRepository storageRepository) {
