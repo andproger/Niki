@@ -1,5 +1,7 @@
 package com.niki.domain.interactors.login;
 
+import com.niki.data.cache.database.datastores.SqlUserDataStore;
+import com.niki.data.repository.UserAuthAuthInMemoryRepository;
 import com.niki.domain.gateways.connection.ConnectionService;
 
 public class LoginInteractorImpl implements LoginInteractor {
@@ -12,8 +14,9 @@ public class LoginInteractorImpl implements LoginInteractor {
 
     @Override
     public LoginResult login(String server, String login, String password) {
-        if (connectionService.checkConnection(server)) {
-            //TODO validate login
+        if (connectionService.checkConnection(server) &&
+                new UserAuthAuthInMemoryRepository(new SqlUserDataStore()).auth(login, password)
+        ) {
             return LoginResult.SUCCESS_LOGIN;
         } else {
             return LoginResult.WRONG_CONNECTION;
