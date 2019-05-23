@@ -20,7 +20,8 @@ public class UserAuthAuthInMemoryRepository implements UserAuthRepository {
     @Override
     public boolean auth(String login, String password) {
         //TODO всё что ты делаешь это плохо
-        for (var user : dataStore.getAll()) {
+        var users = dataStore.getAll();
+        for (var user : users) {
             if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
                 userAuth = new UserAuth(user.getId());
                 return true;
