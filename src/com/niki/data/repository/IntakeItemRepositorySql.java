@@ -20,12 +20,12 @@ public class IntakeItemRepositorySql implements IntakeItemRepository {
     }
 
     @Override
-    public List<IntakeItem> get(int intakeId) {
-        return dataStore.get(intakeId);
+    public void save(List<IntakeItem> items) {
+        dataStore.save(items);
     }
 
     @Override
-    public void save(List<IntakeItem> items) {
-        dataStore.save(items);
+    public void deleteByIntakeId(int id) {
+        dataStore.deleteByIntakeId(id);
     }
 }

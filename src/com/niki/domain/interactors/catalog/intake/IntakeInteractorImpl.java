@@ -1,56 +1,80 @@
 package com.niki.domain.interactors.catalog.intake;
 
 import com.niki.domain.entities.Intake;
+import com.niki.domain.entities.IntakeItem;
 import com.niki.domain.entities.Provider;
+import com.niki.domain.gateways.repositories.IntakeItemRepository;
 import com.niki.domain.gateways.repositories.IntakeRepository;
 import com.niki.domain.gateways.repositories.ProviderRepository;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class IntakeInteractorImpl implements IntakeInteractor {
     private final ProviderRepository providerRepository;
     private final IntakeRepository intakeRepository;
+    private final IntakeItemRepository intakeItemRepository;
 
-    public IntakeInteractorImpl(ProviderRepository providerRepository, IntakeRepository intakeRepository) {
+    public IntakeInteractorImpl(ProviderRepository providerRepository, IntakeRepository intakeRepository, IntakeItemRepository intakeItemRepository) {
         this.providerRepository = providerRepository;
         this.intakeRepository = intakeRepository;
+        this.intakeItemRepository = intakeItemRepository;
+    }
+
+
+    @Override
+    public int add(int providerId, List<IntakeItemContract> contractItems) {
+        int newIntakeId = intakeRepository.save(new Intake(0, providerId, new Date(System.currentTimeMillis())));
+
+        setIntakeIds(newIntakeId, contractItems);
+        intakeItemRepository.save(contractsToItems(contractItems));
+
+        return newIntakeId;
     }
 
     @Override
-    public List<IntakeContract> get() {
-        var items = intakeRepository.get();
-        var providers = providerRepository.get();
-        var contracts = new ArrayList<IntakeContract>();
+    public void change(int intakeId, List<IntakeItemContract> contractItems) {
+        setIntakeIds(intakeId, contractItems);
 
-        for (var item : items) {
+        intakeItemRepository.deleteByIntakeId(intakeId);
+        intakeItemRepository.save(contractsToItems(contractItems));
+    }
 
-            var provider = new Provider(item.getProviderId(), "", "");
-            var index = Collections.binarySearch(providers, provider, Comparator.comparingInt(Provider::getId));
-            provider = index >= 0 ? providers.get(index) : null;
+    @Override
+    public void remove(int intakeId) {
+        intakeItemRepository.deleteByIntakeId(intakeId);
+        intakeRepository.deleteById(intakeId);
+    }
 
-            contracts.add(new IntakeContract(item.getId(), provider, item.getDateTime().getTime()));
+    private void setIntakeIds(int saleId, List<IntakeItemContract> contractItems) {
+        for (var item : contractItems) {
+            item.setIntakeId(saleId);
+        }
+    }
+
+    private List<IntakeItem> contractsToItems(List<IntakeItemContract> contractItems) {
+        var items = new ArrayList<IntakeItem>();
+        for (var contract : contractItems) {
+            items.add(contractToItem(contract));
         }
 
-        return contracts;
+        return items;
     }
+
+    private IntakeItem contractToItem(IntakeItemContract contract) {
+        return new IntakeItem(
+                contract.getIntakeId(),
+                contract.getDrug().getId(),
+                contract.getQuantity(),
+                contract.getCost()
+        );
+    }
+
+
 
     @Override
     public List<Provider> getProvider() {
         return providerRepository.get();
-    }
-
-    @Override
-    public void save(List<IntakeContract> contracts) {
-        var intakes = new ArrayList<Intake>();
-
-        for (var contract : contracts) {
-            intakes.add(new Intake(contract.getId(), contract.getProvider().getId(), new Date(contract.getDateTime())));
-        }
-
-        intakeRepository.save(intakes);
     }
 }

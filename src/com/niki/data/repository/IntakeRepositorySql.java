@@ -25,7 +25,8 @@ public class IntakeRepositorySql implements IntakeRepository {
     }
 
     @Override
-    public void save(List<Intake> intakes) {
-        dataStore.save(intakes);
+    public void deleteById(int id) {
+        dataStore.deleteById(id);
     }
+
 }

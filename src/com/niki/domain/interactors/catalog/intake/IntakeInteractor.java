@@ -5,8 +5,11 @@ import com.niki.domain.entities.Provider;
 import java.util.List;
 
 public interface IntakeInteractor {
-    List<IntakeContract> get();
-    List<Provider> getProvider();
+    int add(int providerId, List<IntakeItemContract> contractItems);
 
-    void save(List<IntakeContract> contracts);
+    void change(int intakeId, List<IntakeItemContract> contractItems);
+
+    void remove(int intakeId);
+
+    List<Provider> getProvider();
 }

@@ -9,5 +9,5 @@ public interface IntakeRepository {
 
     int save(Intake intake);
 
-    void save(List<Intake> intakes);
+    void deleteById(int id);
 }
