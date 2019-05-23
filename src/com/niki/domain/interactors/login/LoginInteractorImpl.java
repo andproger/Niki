@@ -14,9 +14,11 @@ public class LoginInteractorImpl implements LoginInteractor {
 
     @Override
     public LoginResult login(String server, String login, String password) {
-        if (connectionService.checkConnection(server) &&
-                new UserAuthAuthInMemoryRepository(new SqlUserDataStore()).auth(login, password)
-        ) {
+        if (connectionService.checkConnection(server)) {
+
+            if(!new UserAuthAuthInMemoryRepository(new SqlUserDataStore()).auth(login, password))
+                return LoginResult.WRONG_LOGIN;
+
             return LoginResult.SUCCESS_LOGIN;
         } else {
             return LoginResult.WRONG_CONNECTION;
