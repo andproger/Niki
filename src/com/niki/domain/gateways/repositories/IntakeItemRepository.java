@@ -7,7 +7,7 @@ import java.util.List;
 public interface IntakeItemRepository {
     List<IntakeItem> get();
 
-    List<IntakeItem> get(int intakeId);
-
     void save(List<IntakeItem> items);
+
+    void deleteByIntakeId(int id);
 }

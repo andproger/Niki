@@ -19,38 +19,25 @@ public class SqlIntakeItemDataStore extends SqlDataStore<IntakeItem> implements 
     }
 
     @Override
-    public void save(List<IntakeItem> items) {
-        if (items.size() > 0)
-            save(items.get(0).getIntakeId(), items);
-    }
-
-    @Override
-    public List<IntakeItem> getAll() {
-        var sqlSelect = sqlGen.select(null, null);
-
-        return select(sqlSelect);
-    }
-
-    @Override
-    public List<IntakeItem> get(int intakeId) {
-        var sqlSelect = sqlGen.select(null, "where intake_id = " + intakeId);
-
-        return select(sqlSelect);
-    }
-
-    @Override
-    public void save(int intakeId, List<IntakeItem> items) {
+    public void deleteByIntakeId(int intakeId) {
         try {
-            connection.prepareStatement(sqlGen.delete("intake_id = " + intakeId)).execute();
+            connection.prepareStatement(sqlGen.delete("where intake_id = " + intakeId))
+                    .execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void save(List<IntakeItem> items) {
+        try {
             var statement = connection.prepareStatement(sqlGen.insert());
 
             for (var item : items) {
-                item.setIntakeId(intakeId);
                 prepareInsert(statement, item);
                 statement.execute();
             }
-
-            statement.execute();
         } catch (SQLException | IllegalAccessException e) {
             e.printStackTrace();
         }

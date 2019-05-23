@@ -3,7 +3,7 @@ package com.niki.presentation.dialogs.catalog;
 import com.niki.data.cache.database.datastores.*;
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
-import com.niki.domain.interactors.catalog.intake.IntakeItemInteractorImpl;
+import com.niki.domain.interactors.catalog.intake.IntakeInteractorImpl;
 import com.niki.domain.interactors.catalog.manufacturer.ManufacturerInteractorImpl;
 import com.niki.domain.interactors.catalog.sale.MakeSaleInteractorImpl;
 import com.niki.domain.interactors.catalog.user.UserInteractorImpl;
@@ -154,11 +154,12 @@ public class CatalogDialog extends JDialog implements CatalogView {
                     presenter = new NewIntakeItemsPresenterImpl(
                             this,
                             providerId,
-                            new IntakeRepositorySql(new SqlIntakeDataStore()),
-                            new IntakeItemInteractorImpl(
-                                    new DrugRepositorySql(new SqlDrugDataStore()),
-                                    new IntakeItemRepositorySql(new SqlIntakeItemDataStore())));
-
+                            new DrugRepositorySql(new SqlDrugDataStore()),
+                            new IntakeInteractorImpl(
+                                    new ProviderRepositorySql(new SqlProviderDataStore()),
+                                    new IntakeRepositorySql(new SqlIntakeDataStore()),
+                                    new IntakeItemRepositorySql(new SqlIntakeItemDataStore())
+                            ));
                 } else {
                     dispose();
                 }
