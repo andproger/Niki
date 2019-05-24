@@ -6,6 +6,7 @@ import com.niki.domain.entities.IntakeItem;
 import java.util.List;
 
 public interface IntakeItemDataStore extends DataStore<IntakeItem> {
+    List<IntakeItem> get(int intakeId);
     void save(List<IntakeItem> items);
 
     void deleteByIntakeId(int intakeId);

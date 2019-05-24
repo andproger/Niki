@@ -219,6 +219,8 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
             field.setLong(instance, result.getLong(column));
         } else if (clazz.equals(Boolean.TYPE)) {
             field.setBoolean(instance, result.getBoolean(column));
+        } else if (clazz.equals(Date.class)) {
+            field.set(instance, result.getDate(column));
         }
     }
 

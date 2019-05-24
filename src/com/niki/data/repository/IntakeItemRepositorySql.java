@@ -15,8 +15,8 @@ public class IntakeItemRepositorySql implements IntakeItemRepository {
     }
 
     @Override
-    public List<IntakeItem> get() {
-        return dataStore.getAll();
+    public List<IntakeItem> get(int intakeId) {
+        return dataStore.get(intakeId);
     }
 
     @Override

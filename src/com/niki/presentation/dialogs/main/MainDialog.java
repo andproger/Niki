@@ -1,6 +1,7 @@
 package com.niki.presentation.dialogs.main;
 
 import com.niki.presentation.dialogs.catalog.CatalogDialog;
+import com.niki.presentation.dialogs.map.MapDialog;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -22,6 +23,7 @@ public class MainDialog extends JDialog {
     private JButton salesButton;
     private JButton storagesButton;
     private JButton providersButton;
+    private JButton intakesButton;
 
     public MainDialog() {
         setContentPane(contentPane);
@@ -39,7 +41,7 @@ public class MainDialog extends JDialog {
         contentPane.registerKeyboardAction(e -> onExit(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void initViews(){
+    private void initViews() {
         buttonExit.addActionListener(e -> onExit());
 
         usersButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.USERS));
@@ -53,12 +55,19 @@ public class MainDialog extends JDialog {
         salesButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.NEW_SALES));
         storagesButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.STORAGES));
         providersButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.PROVIDERS));
+        intakesButton.addActionListener(actionEvent -> showMapDialog());
     }
 
     private void showCatalogDialog(CatalogDialog.CatalogType catalogType) {
         var catalogDialog = new CatalogDialog(catalogType);
         catalogDialog.pack();
         catalogDialog.setVisible(true);
+    }
+
+    private void showMapDialog() {
+        var mapDialog = new MapDialog();
+        mapDialog.pack();
+        mapDialog.setVisible(true);
     }
 
 
