@@ -1,6 +1,7 @@
 package com.niki.presentation.dialogs.main;
 
 import com.niki.presentation.dialogs.catalog.CatalogDialog;
+import com.niki.presentation.dialogs.catalogs.CatalogsDialog;
 import com.niki.presentation.dialogs.map.MapDialog;
 
 import javax.swing.*;
@@ -12,18 +13,11 @@ public class MainDialog extends JDialog {
     private JPanel contentPane;
 
     private JButton buttonExit;
-    private JButton usersButton;
-    private JButton countriesButton;
-    private JButton positionsButton;
-    private JButton formsButton;
-    private JButton manufacturersButton;
     private JButton intakeButton;
-    private JButton drugsButton;
-    private JButton classesButton;
     private JButton salesButton;
-    private JButton storagesButton;
-    private JButton providersButton;
     private JButton intakesButton;
+    private JButton saleButton;
+    private JButton catalogsButton;
 
     public MainDialog() {
         setContentPane(contentPane);
@@ -44,18 +38,17 @@ public class MainDialog extends JDialog {
     private void initViews() {
         buttonExit.addActionListener(e -> onExit());
 
-        usersButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.USERS));
-        positionsButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.POSITIONS));
-        countriesButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.COUNTRIES));
-        formsButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.DRUG_FORMS));
-        manufacturersButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.MANUFACTURERS));
-        drugsButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.DRUGS));
-        classesButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.DRUG_CLASSES));
         intakeButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.NEW_INTAKES));
         salesButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.NEW_SALES));
-        storagesButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.STORAGES));
-        providersButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.PROVIDERS));
-        intakesButton.addActionListener(actionEvent -> showMapDialog());
+        intakesButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.INTAKE));
+        saleButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.SALE));
+        catalogsButton.addActionListener(actionEvent -> showCatalogsDialog());
+    }
+
+    private void showCatalogsDialog() {
+        var catalogsDialog = new CatalogsDialog();
+        catalogsDialog.pack();
+        catalogsDialog.setVisible(true);
     }
 
     private void showCatalogDialog(CatalogDialog.CatalogType catalogType) {
@@ -64,8 +57,8 @@ public class MainDialog extends JDialog {
         catalogDialog.setVisible(true);
     }
 
-    private void showMapDialog() {
-        var mapDialog = new MapDialog();
+    private void showMapDialog(MapDialog.DialogType type) {
+        var mapDialog = new MapDialog(type);
         mapDialog.pack();
         mapDialog.setVisible(true);
     }

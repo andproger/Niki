@@ -8,6 +8,8 @@ import com.niki.presentation.dialogs.catalog.CatalogView;
 import com.niki.presentation.dialogs.catalog.CellEditor;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class NewSalesPresenterImpl extends BaseCatalogPresenter {
     private final DrugRepository drugRepository;

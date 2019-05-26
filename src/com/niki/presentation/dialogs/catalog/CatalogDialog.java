@@ -11,6 +11,7 @@ import com.niki.presentation.dialogs.catalog.impl.classes.DrugClassesPresenterIm
 import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.form.DrugFormsPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.indication.IndicationPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.intake.NewIntakeItemsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.manufacturer.ManufacturesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.position.PositionsPresenterImpl;
@@ -42,9 +43,6 @@ public class CatalogDialog extends JDialog implements CatalogView {
         setContentPane(contentPane);
         setModal(true);
 
-        setupPresenter(type);
-        initViews();
-
         getRootPane().setDefaultButton(buttonSave);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -52,6 +50,9 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 onCancel();
             }
         });
+
+        setupPresenter(type);
+        initViews();
 
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
@@ -61,10 +62,11 @@ public class CatalogDialog extends JDialog implements CatalogView {
         buttonCancel.addActionListener(e -> onCancel());
         buttonAdd.addActionListener(e -> presenter.onAddClicked());
         buttonDelete.addActionListener(e -> presenter.onDeleteClicked(table1.getSelectedRows()));
+
+        table1.setAutoCreateRowSorter(true);
     }
 
     private void onCancel() {
-        // buttonAdd your code here if necessary
         dispose();
     }
 
@@ -147,9 +149,9 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 newIntakeDialog.pack();
                 newIntakeDialog.setVisible(true);
 
-                var providerId = newIntakeDialog.getProviderId();
-
                 if (newIntakeDialog.getResultType() == NewIntakeDialog.ResultType.OK) {
+
+                    var providerId = newIntakeDialog.getProviderId();
 
                     presenter = new NewIntakeItemsPresenterImpl(
                             this,
@@ -172,6 +174,9 @@ public class CatalogDialog extends JDialog implements CatalogView {
                         new CountryRepositorySql(new SqlCountryDataStore())
                 ));
                 break;
+            case INDICATION:
+                presenter = new IndicationPresenterImpl(this, new IndicationRepositorySql(new SqlIndicationDataStore()));
+                break;
 
             default:
                 throw new IllegalStateException();
@@ -189,6 +194,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
         NEW_SALES,
         NEW_INTAKES,
         STORAGES,
-        PROVIDERS
+        PROVIDERS,
+        INDICATION
     }
 }

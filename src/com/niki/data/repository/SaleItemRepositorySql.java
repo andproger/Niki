@@ -15,8 +15,8 @@ public class SaleItemRepositorySql implements SaleItemRepository {
     }
 
     @Override
-    public List<SaleItem> get() {
-        return dataStore.getAll();
+    public List<SaleItem> get(int id) {
+        return dataStore.get(id);
     }
 
     @Override

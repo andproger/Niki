@@ -1,19 +1,13 @@
 package com.niki.presentation.dialogs.map;
 
-import com.niki.data.cache.database.datastores.SqlDrugDataStore;
-import com.niki.data.cache.database.datastores.SqlIntakeDataStore;
-import com.niki.data.cache.database.datastores.SqlIntakeItemDataStore;
-import com.niki.data.cache.database.datastores.SqlProviderDataStore;
-import com.niki.data.repository.DrugRepositorySql;
-import com.niki.data.repository.IntakeItemRepositorySql;
-import com.niki.data.repository.IntakeRepositorySql;
-import com.niki.data.repository.ProviderRepositorySql;
+import com.niki.data.cache.database.datastores.*;
+import com.niki.data.repository.*;
 import com.niki.domain.interactors.map.intake.IntakeInteractorImpl;
+import com.niki.domain.interactors.map.sale.SaleInteractorImpl;
 import com.niki.presentation.dialogs.map.impl.intake.IntakePresenterImpl;
+import com.niki.presentation.dialogs.map.impl.sale.SalePresenterImpl;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
@@ -27,12 +21,10 @@ public class MapDialog extends JDialog implements MapView {
     private JButton buttonCancel;
     private JTable table1;
     private JTable table2;
-    private JButton deleteButton;
-    private JButton deleteItemButton;
 
-    IntakePresenterImpl presenter;
+    MapPresenter presenter;
 
-    public MapDialog() {
+    public MapDialog(DialogType type) {
         setContentPane(contentPane);
         setModal(true);
 
@@ -48,11 +40,7 @@ public class MapDialog extends JDialog implements MapView {
 
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        presenter = new IntakePresenterImpl(this, new IntakeInteractorImpl(
-                new IntakeRepositorySql(new SqlIntakeDataStore()),
-                new IntakeItemRepositorySql(new SqlIntakeItemDataStore()),
-                new ProviderRepositorySql(new SqlProviderDataStore()),
-                new DrugRepositorySql(new SqlDrugDataStore())));
+        presenter = getPresenter(type);
 
     }
 
@@ -89,5 +77,29 @@ public class MapDialog extends JDialog implements MapView {
     @Override
     public void setTableCellRenderer(Class aClass, DefaultTableCellRenderer cellRenderer) {
 
+    }
+
+    private MapPresenter getPresenter(DialogType type) {
+        switch (type) {
+            case SALE:
+                return new SalePresenterImpl(this, new SaleInteractorImpl(
+                        new SaleRepositorySql(new SqlSaleDataStore()),
+                        new SaleItemRepositorySql(new SqlSaleItemDataStore()),
+                        new UserRepositorySql(new SqlUserDataStore()),
+                        new DrugRepositorySql(new SqlDrugDataStore())
+                ));
+            case INTAKE:
+                return new IntakePresenterImpl(this, new IntakeInteractorImpl(
+                        new IntakeRepositorySql(new SqlIntakeDataStore()),
+                        new IntakeItemRepositorySql(new SqlIntakeItemDataStore()),
+                        new ProviderRepositorySql(new SqlProviderDataStore()),
+                        new DrugRepositorySql(new SqlDrugDataStore())));
+        }
+        return null;
+    }
+
+    public enum DialogType {
+        SALE,
+        INTAKE
     }
 }

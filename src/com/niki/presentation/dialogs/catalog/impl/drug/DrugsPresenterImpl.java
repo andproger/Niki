@@ -7,6 +7,8 @@ import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 import com.niki.presentation.dialogs.catalog.CellEditor;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -26,6 +28,8 @@ public class DrugsPresenterImpl extends BaseCatalogPresenter {
 
     private void initTableModel() {
         this.drugs = drugInteractor.getDrugs();
+        Collections.sort(drugs, Comparator.comparing(DrugContract::getName));
+
         this.tableModel = new DrugsTableModel(drugs);
         view.setTableModel(tableModel);
         view.setTableCellEditor(Storage.class, new CellEditor<>(drugInteractor.getStorages()));
