@@ -120,8 +120,8 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new NewSalesPresenterImpl(this,
                         new MakeSaleInteractorImpl(
                                 new SaleRepositorySql(new SqlSaleDataStore()),
-                                new SaleItemRepositorySql(new SqlSaleItemDataStore())
-                        ),
+                                new SaleItemRepositorySql(new SqlSaleItemDataStore()),
+                                new UserAuthAuthInMemoryRepository(new SqlUserDataStore())),
                         drugsRepository);
                 break;
 

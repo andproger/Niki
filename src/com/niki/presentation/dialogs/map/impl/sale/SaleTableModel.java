@@ -1,12 +1,10 @@
 package com.niki.presentation.dialogs.map.impl.sale;
 
-import com.niki.domain.entities.Provider;
 import com.niki.domain.entities.User;
-import com.niki.domain.interactors.catalog.intake.IntakeContract;
 import com.niki.domain.interactors.catalog.sale.SaleContract;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SaleTableModel extends AbstractTableModel {
@@ -37,8 +35,10 @@ public class SaleTableModel extends AbstractTableModel {
             case 1:
                 return row.getUser();
             case 2:
-                //TODO
-                return "1422";
+            {
+                var date = new Date(row.getDateTime());
+                return date.toString();
+            }
         }
 
         return null;
@@ -79,9 +79,6 @@ public class SaleTableModel extends AbstractTableModel {
                 break;
             case 1:
                 item.setUser((User) aValue);
-                break;
-            case 2:
-                item.setDateTime((long) aValue);
                 break;
         }
 

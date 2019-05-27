@@ -1,13 +1,11 @@
 package com.niki.presentation.dialogs.map.impl.intake;
 
-import com.niki.domain.entities.Drug;
 import com.niki.domain.entities.Provider;
 import com.niki.domain.interactors.catalog.intake.IntakeContract;
-import com.niki.domain.interactors.catalog.intake.IntakeItemContract;
 
 import javax.swing.table.AbstractTableModel;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class IntakeTableModel extends AbstractTableModel {
     private static final String[] columns = {"ID", "Поставщик", "Дата/Время"};
@@ -36,11 +34,12 @@ public class IntakeTableModel extends AbstractTableModel {
                 return row.getId();
             case 1:
                 return row.getProvider();
-            case 2:
-                //TODO
-                return "1422";
-        }
+            case 2: {
+                var date = new Date(row.getDateTime());
+                return date.toString();
+            }
 
+        }
         return null;
     }
 
@@ -80,11 +79,7 @@ public class IntakeTableModel extends AbstractTableModel {
             case 1:
                 item.setProvider((Provider) aValue);
                 break;
-            case 2:
-                item.setDateTime((long) aValue);
-                break;
         }
 
-        super.setValueAt(aValue, rowIndex, columnIndex);
     }
 }

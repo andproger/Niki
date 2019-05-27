@@ -6,4 +6,12 @@ public class UserAuth {
     public UserAuth(int userId) {
         this.userId = userId;
     }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }
