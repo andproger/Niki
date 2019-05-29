@@ -46,11 +46,11 @@ public class SaleInteractorImpl implements SaleInteractor {
 
     @Override
     public List<User> getUsers() {
-        return userRepository.getUsers();
+        return userRepository.get();
     }
 
     private ArrayList<SaleContract> intakesToContracts(List<Sale> sales) {
-        var users = userRepository.getUsers();
+        var users = userRepository.get();
         var contracts = new ArrayList<SaleContract>();
 
         for (var sale : sales) {

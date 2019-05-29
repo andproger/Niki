@@ -19,12 +19,12 @@ public class UserInteractorImpl implements UserInteractor {
 
     @Override
     public List<UserContract> getUsers() {
-        var users = userRepository.getUsers();
-        var positions = positionRepository.getPositions();
+        var users = userRepository.get();
+        var positions = positionRepository.get();
 
         var userContracts = new ArrayList<UserContract>();
         for(var user : users){
-            var position = new Position(user.getPositionId(),0, "");
+            var position = new Position(user.getPositionId(),0, "", false);
             var index = Collections.binarySearch(positions, position, Comparator.comparingInt(Position::getId));
             position = index >= 0 ? positions.get(index) : null;
             userContracts.add(new UserContract(user.getId(), user.getLogin(), user.getPassword(), user.getFirstName(), user.getLastName(), position));
@@ -40,6 +40,6 @@ public class UserInteractorImpl implements UserInteractor {
 
     @Override
     public List<Position> getPositions() {
-        return positionRepository.getPositions();
+        return positionRepository.get();
     }
 }

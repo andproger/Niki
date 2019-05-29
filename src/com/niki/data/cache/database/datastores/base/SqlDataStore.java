@@ -83,6 +83,13 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         return select(sqlSelect);
     }
 
+    @Override
+    public T getItem(int id) {
+        var sqlSelect = sqlGen.select("where " + primaryKey + " = " + id, null);
+        var result = select(sqlSelect);
+        return result.size() > 0 ? result.get(0) : null;
+    }
+
     protected List<T> select(String sqlQuery) {
         var items = new ArrayList<T>();
 

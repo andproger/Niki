@@ -1,5 +1,10 @@
 package com.niki.presentation.dialogs.main;
 
+import com.niki.data.cache.database.datastores.SqlPositionDataStore;
+import com.niki.data.cache.database.datastores.SqlUserDataStore;
+import com.niki.data.repository.PositionRepositorySql;
+import com.niki.data.repository.UserAuthAuthInMemoryRepository;
+import com.niki.data.repository.UserRepositorySql;
 import com.niki.presentation.dialogs.catalog.CatalogDialog;
 import com.niki.presentation.dialogs.catalogs.CatalogsDialog;
 import com.niki.presentation.dialogs.map.MapDialog;
@@ -36,6 +41,12 @@ public class MainDialog extends JDialog {
     }
 
     private void initViews() {
+        var userAuth = new UserAuthAuthInMemoryRepository(new SqlUserDataStore()).getUser();
+        var user = new UserRepositorySql(new SqlUserDataStore()).get(userAuth.getUserId());
+        var position =  new PositionRepositorySql(new SqlPositionDataStore()).get(user.getPositionId());
+
+        catalogsButton.setVisible(position.isAdmin());
+
         buttonExit.addActionListener(e -> onExit());
 
         intakeButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.NEW_INTAKES));

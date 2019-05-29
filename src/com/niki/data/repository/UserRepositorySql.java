@@ -15,12 +15,17 @@ public class UserRepositorySql implements UserRepository {
     }
 
     @Override
-    public List<User> getUsers() {
+    public List<User> get() {
         return dataStore.getAll();
     }
 
     @Override
-    public void saveUsers(List<User> users) {
+    public User get(int userId) {
+        return dataStore.getItem(userId);
+    }
+
+    @Override
+    public void save(List<User> users) {
         dataStore.save(users);
     }
 }

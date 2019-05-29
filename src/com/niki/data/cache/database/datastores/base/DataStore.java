@@ -6,4 +6,6 @@ public interface DataStore<T> {
     void save(List<T> items);
 
     List<T> getAll();
+
+    T getItem(int id);
 }

@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface PositionRepository {
 
-    List<Position> getPositions();
+    List<Position> get();
+
+    Position get(int positionId);
 
     void savePositions(List<Position> positions);
 }

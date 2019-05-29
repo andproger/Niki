@@ -15,8 +15,13 @@ public class PositionRepositorySql implements PositionRepository {
     }
 
     @Override
-    public List<Position> getPositions() {
+    public List<Position> get() {
         return dataStore.getAll();
+    }
+
+    @Override
+    public Position get(int positionId) {
+        return dataStore.getItem(positionId);
     }
 
     @Override

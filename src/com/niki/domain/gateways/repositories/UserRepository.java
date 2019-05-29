@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface UserRepository {
 
-    List<User> getUsers();
+    List<User> get();
 
-    void saveUsers(List<User> users);
+    User get(int userId);
+
+    void save(List<User> users);
 }
