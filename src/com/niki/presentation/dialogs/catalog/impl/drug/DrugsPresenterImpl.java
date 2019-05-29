@@ -9,7 +9,7 @@ import com.niki.domain.interactors.catalog.drug.DrugInteractor;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 import com.niki.presentation.dialogs.catalog.CellEditor;
-import com.niki.presentation.dialogs.drug.NewDrugDialog;
+import com.niki.presentation.dialogs.catalog.impl.drug.create.CreateDrugDialog;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -49,7 +49,7 @@ public class DrugsPresenterImpl extends BaseCatalogPresenter {
 
     @Override
     public void onAddClicked() {
-        var newDrugDialog = new NewDrugDialog();
+        var newDrugDialog = new CreateDrugDialog();
         newDrugDialog.pack();
         newDrugDialog.setVisible(true);
         var drug = newDrugDialog.getDrugContract();

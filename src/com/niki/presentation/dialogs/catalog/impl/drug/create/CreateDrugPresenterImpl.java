@@ -1,17 +1,17 @@
-package com.niki.presentation.dialogs.drug;
+package com.niki.presentation.dialogs.catalog.impl.drug.create;
 
 import com.niki.domain.gateways.repositories.*;
 
-public class NewDrugPresenterImpl implements NewDrugPresenter {
-    private final NewDrugView view;
+public class CreateDrugPresenterImpl implements CreateDrugPresenter {
+    private final CreateDrugView view;
     private final FormRepository formRepository;
     private final ManufacturerRepository manufacturerRepository;
     private final StorageRepository storageRepository;
     private final ClassRepository classRepository;
 
 
-    NewDrugPresenterImpl(
-            NewDrugView view,
+    CreateDrugPresenterImpl(
+            CreateDrugView view,
             FormRepository formRepository,
             ManufacturerRepository manufacturerRepository,
             StorageRepository storageRepository,

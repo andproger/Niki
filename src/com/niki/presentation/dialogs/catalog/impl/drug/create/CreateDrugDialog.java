@@ -1,4 +1,4 @@
-package com.niki.presentation.dialogs.drug;
+package com.niki.presentation.dialogs.catalog.impl.drug.create;
 
 import com.niki.data.cache.database.datastores.SqlDrugClassDataStore;
 import com.niki.data.cache.database.datastores.SqlFormDataStore;
@@ -20,7 +20,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 
-public class NewDrugDialog extends JDialog implements NewDrugView {
+public class CreateDrugDialog extends JDialog implements CreateDrugView {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -34,12 +34,12 @@ public class NewDrugDialog extends JDialog implements NewDrugView {
 
     private DrugContract drugContract;
 
-    private NewDrugPresenter presenter;
+    private CreateDrugPresenter presenter;
 
-    public NewDrugDialog() {
+    public CreateDrugDialog() {
         setContentPane(contentPane);
         setModal(true);
-        presenter = new NewDrugPresenterImpl(
+        presenter = new CreateDrugPresenterImpl(
                 this,
                 new FormRepositorySql(new SqlFormDataStore()),
                 new ManufacturerRepositorySql(new SqlManufacturerDataStore()),
