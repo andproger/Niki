@@ -67,7 +67,7 @@ public class MakeSaleInteractorImpl implements MakeSaleInteractor {
                 contract.getSaleId(),
                 contract.getDrug().getId(),
                 contract.getQuantity(),
-                contract.getCost()
+                contract.getDrug().getCost()
         );
     }
 }

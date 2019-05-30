@@ -57,17 +57,25 @@ public class CreateDrugDialog extends JDialog implements CreateDrugView {
     }
 
     private void onOK() {
-        drugContract = new DrugContract(
-                0,
-                Double.parseDouble(textFieldCost.getText()),
-                textFieldName.getText(),
-                textAreaDescription.getText(),
-                (DrugClass) comboBoxClass.getSelectedItem(),
-                (Manufacturer) comboBoxManufacturer.getSelectedItem(),
-                (Storage) comboBoxStorage.getSelectedItem(),
-                (Form) comboBoxForm.getSelectedItem());
+        if (textFieldName.getText().isEmpty() ||
+                textFieldCost.getText().isEmpty() ||
+                Double.parseDouble(textFieldCost.getText()) <= 0
+        ) {
+            JOptionPane.showMessageDialog(this,
+                    "Не заполненны обязательные поля", "Ошибка", JOptionPane.ERROR_MESSAGE);
+        } else {
+            drugContract = new DrugContract(
+                    0,
+                    Double.parseDouble(textFieldCost.getText()),
+                    textFieldName.getText(),
+                    textAreaDescription.getText(),
+                    (DrugClass) comboBoxClass.getSelectedItem(),
+                    (Manufacturer) comboBoxManufacturer.getSelectedItem(),
+                    (Storage) comboBoxStorage.getSelectedItem(),
+                    (Form) comboBoxForm.getSelectedItem());
 
-        dispose();
+            dispose();
+        }
     }
 
     private void onCancel() {

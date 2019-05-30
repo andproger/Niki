@@ -8,6 +8,7 @@ import com.niki.data.repository.UserRepositorySql;
 import com.niki.presentation.dialogs.catalog.CatalogDialog;
 import com.niki.presentation.dialogs.catalogs.CatalogsDialog;
 import com.niki.presentation.dialogs.map.MapDialog;
+import com.niki.presentation.dialogs.sale.NewSaleDialog;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -43,14 +44,14 @@ public class MainDialog extends JDialog {
     private void initViews() {
         var userAuth = new UserAuthAuthInMemoryRepository(new SqlUserDataStore()).getUser();
         var user = new UserRepositorySql(new SqlUserDataStore()).get(userAuth.getUserId());
-        var position =  new PositionRepositorySql(new SqlPositionDataStore()).get(user.getPositionId());
+        var position = new PositionRepositorySql(new SqlPositionDataStore()).get(user.getPositionId());
 
         catalogsButton.setVisible(position.isAdmin());
 
         buttonExit.addActionListener(e -> onExit());
 
         intakeButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.NEW_INTAKES));
-        salesButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.NEW_SALES));
+        salesButton.addActionListener(actionEvent -> showSaleDialog());
         intakesButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.INTAKE));
         saleButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.SALE));
         catalogsButton.addActionListener(actionEvent -> showCatalogsDialog());
@@ -74,6 +75,11 @@ public class MainDialog extends JDialog {
         mapDialog.setVisible(true);
     }
 
+    private void showSaleDialog() {
+        var saleDialog = new NewSaleDialog();
+        saleDialog.pack();
+        saleDialog.setVisible(true);
+    }
 
     private void onExit() {
         // add your code here if necessary

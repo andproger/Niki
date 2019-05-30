@@ -1,18 +1,13 @@
-package com.niki.presentation.dialogs.catalog.impl.sale;
+package com.niki.presentation.dialogs.sale;
 
-import com.niki.domain.entities.Drug;
-import com.niki.domain.gateways.repositories.DrugRepository;
-import com.niki.domain.interactors.catalog.sale.*;
-import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
-import com.niki.presentation.dialogs.catalog.CatalogView;
-import com.niki.presentation.dialogs.catalog.CellEditor;
+import com.niki.domain.interactors.catalog.sale.MakeSaleInteractor;
+import com.niki.domain.interactors.catalog.sale.SaleItemContract;
+import com.niki.presentation.dialogs.sale.create.CreateSaleDialog;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
-public class NewSalesPresenterImpl extends BaseCatalogPresenter {
-    private final DrugRepository drugRepository;
+public class NewSalesPresenterImpl implements NewSalePresenter {
+    private final NewSaleView view;
 
     private final MakeSaleInteractor makeSaleInteractor;
 
@@ -22,15 +17,14 @@ public class NewSalesPresenterImpl extends BaseCatalogPresenter {
     private int saleId;
 
     public NewSalesPresenterImpl(
-            CatalogView view,
-            MakeSaleInteractor makeSaleInteractor,
-            DrugRepository drugRepository
+            NewSaleView view,
+            MakeSaleInteractor makeSaleInteractor
     ) {
-        super(view);
-        this.drugRepository = drugRepository;
+        this.view = view;
         this.makeSaleInteractor = makeSaleInteractor;
 
         initTableModel();
+        view.initViews();
     }
 
     private void initTableModel() {
@@ -38,14 +32,11 @@ public class NewSalesPresenterImpl extends BaseCatalogPresenter {
         this.saleItems = new ArrayList<>();
         this.tableModel = new NewSalesTableModel(saleItems);
 
-        var drugs = drugRepository.getDrugs();
-
         view.setTableModel(tableModel);
-        view.setTableCellEditor(Drug.class, new CellEditor<>(drugs));
     }
 
     @Override
-    public void onSaveClicked() {
+    public void onOkClicked(int providerId) {
         if (saleId == 0) {
             if (!saleItems.isEmpty()) {
                 saleId = makeSaleInteractor.add(saleItems);
@@ -61,8 +52,16 @@ public class NewSalesPresenterImpl extends BaseCatalogPresenter {
 
     @Override
     public void onAddClicked() {
-        saleItems.add(new SaleItemContract(0, 0, 0, null));
-        tableModel.fireTableDataChanged();
+        var createSale = new CreateSaleDialog();
+        createSale.pack();
+        createSale.setVisible(true);
+        var saleItem = createSale.getContract();
+
+        if (saleItem != null) {
+            saleItems.add(saleItem);
+            tableModel.fireTableDataChanged();
+            updateSum();
+        }
     }
 
     @Override
@@ -71,5 +70,14 @@ public class NewSalesPresenterImpl extends BaseCatalogPresenter {
             this.saleItems.remove(rows[i]);
 
         tableModel.fireTableDataChanged();
+    }
+
+    private void updateSum() {
+        double sum = 0;
+
+        for (var item : saleItems)
+            sum += item.getDrug().getCost() * item.getQuantity();
+
+        view.setSum(String.valueOf(sum));
     }
 }

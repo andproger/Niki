@@ -40,16 +40,21 @@ public class CreateUserDialog extends JDialog implements CreateUserView {
     }
 
     private void onOK() {
-        userContract = new UserContract(
-                0,
-                loginField.getText(),
-                new String(passwordField.getPassword()),
-                firstNameField.getText(),
-                lastNameField.getText(),
-                (Position) positionComboBox.getSelectedItem()
-        );
+        if (loginField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Не заполненны обязательные поля", "Ошибка", JOptionPane.ERROR_MESSAGE);
+        } else {
+            userContract = new UserContract(
+                    0,
+                    loginField.getText(),
+                    new String(passwordField.getPassword()),
+                    firstNameField.getText(),
+                    lastNameField.getText(),
+                    (Position) positionComboBox.getSelectedItem()
+            );
 
-        dispose();
+            dispose();
+        }
     }
 
     private void onCancel() {

@@ -3,7 +3,7 @@ package com.niki.presentation.dialogs.map.impl.sale;
 import com.niki.domain.interactors.catalog.sale.SaleContract;
 import com.niki.domain.interactors.catalog.sale.SaleItemContract;
 import com.niki.domain.interactors.map.sale.SaleInteractor;
-import com.niki.presentation.dialogs.catalog.impl.sale.NewSalesTableModel;
+import com.niki.presentation.dialogs.sale.NewSalesTableModel;
 import com.niki.presentation.dialogs.map.BaseMapPresenter;
 import com.niki.presentation.dialogs.map.MapView;
 

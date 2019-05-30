@@ -5,7 +5,6 @@ import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
 import com.niki.domain.interactors.catalog.intake.IntakeInteractorImpl;
 import com.niki.domain.interactors.catalog.manufacturer.ManufacturerInteractorImpl;
-import com.niki.domain.interactors.catalog.sale.MakeSaleInteractorImpl;
 import com.niki.domain.interactors.catalog.user.UserInteractorImpl;
 import com.niki.presentation.dialogs.catalog.impl.classes.DrugClassesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
@@ -16,7 +15,6 @@ import com.niki.presentation.dialogs.catalog.impl.intake.NewIntakeItemsPresenter
 import com.niki.presentation.dialogs.catalog.impl.manufacturer.ManufacturesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.position.PositionsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.provider.ProvidersPresenterImpl;
-import com.niki.presentation.dialogs.catalog.impl.sale.NewSalesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.storage.StoragesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.user.UsersPresenterImpl;
 import com.niki.presentation.dialogs.intake.NewIntakeDialog;
@@ -114,17 +112,6 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new CountriesPresenterImpl(this, new CountryRepositorySql(new SqlCountryDataStore()));
                 break;
 
-            case NEW_SALES:
-                var drugsRepository = new DrugRepositorySql(new SqlDrugDataStore());
-
-                presenter = new NewSalesPresenterImpl(this,
-                        new MakeSaleInteractorImpl(
-                                new SaleRepositorySql(new SqlSaleDataStore()),
-                                new SaleItemRepositorySql(new SqlSaleItemDataStore()),
-                                new UserAuthAuthInMemoryRepository(new SqlUserDataStore())),
-                        drugsRepository);
-                break;
-
             case POSITIONS:
                 presenter = new PositionsPresenterImpl(this,
                         new PositionRepositorySql(
@@ -191,7 +178,6 @@ public class CatalogDialog extends JDialog implements CatalogView {
         DRUGS,
         DRUG_FORMS,
         DRUG_CLASSES,
-        NEW_SALES,
         NEW_INTAKES,
         STORAGES,
         PROVIDERS,

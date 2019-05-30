@@ -1,4 +1,4 @@
-package com.niki.presentation.dialogs.catalog.impl.sale;
+package com.niki.presentation.dialogs.sale;
 
 import com.niki.domain.entities.Drug;
 import com.niki.domain.interactors.catalog.sale.SaleItemContract;
@@ -30,9 +30,9 @@ public class NewSalesTableModel extends AbstractTableModel {
 
         switch (i1) {
             case 0:
-                return row.getDrug();
+                return row.getDrug().getName();
             case 1:
-                return row.getCost();
+                return row.getDrug().getCost();
             case 2:
                 return row.getQuantity();
         }
@@ -44,7 +44,7 @@ public class NewSalesTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Drug.class;
+                return String.class;
             case 1:
                 return Double.class;
             case 2:
@@ -61,7 +61,7 @@ public class NewSalesTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return true;
+        return columnIndex == 2;
     }
 
 
@@ -69,16 +69,8 @@ public class NewSalesTableModel extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         var item = saleItemContracts.get(rowIndex);
 
-        switch (columnIndex) {
-            case 0:
-                item.setDrug((Drug) aValue);
-                break;
-            case 1:
-                item.setCost((Double) aValue);
-                break;
-            case 2:
-                item.setQuantity((Integer) aValue);
-                break;
+        if (columnIndex == 2) {
+            item.setQuantity((Integer) aValue);
         }
 
         super.setValueAt(aValue, rowIndex, columnIndex);
