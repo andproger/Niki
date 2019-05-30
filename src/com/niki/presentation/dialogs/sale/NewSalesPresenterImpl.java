@@ -36,7 +36,7 @@ public class NewSalesPresenterImpl implements NewSalePresenter {
     }
 
     @Override
-    public void onOkClicked(int providerId) {
+    public void onOkClicked() {
         if (saleId == 0) {
             if (!saleItems.isEmpty()) {
                 saleId = makeSaleInteractor.add(saleItems);

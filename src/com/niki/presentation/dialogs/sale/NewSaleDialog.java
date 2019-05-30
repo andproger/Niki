@@ -61,6 +61,7 @@ public class NewSaleDialog extends JDialog implements NewSaleView {
     }
 
     private void onOK() {
+        presenter.onOkClicked();
         dispose();
     }
 
