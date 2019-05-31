@@ -12,6 +12,7 @@ import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.form.DrugFormsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.indication.IndicationPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.manufacturer.ManufacturesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.operation.OperationsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.position.PositionsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.provider.ProvidersPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.storage.StoragesPresenterImpl;
@@ -163,7 +164,9 @@ public class CatalogDialog extends JDialog implements CatalogView {
             case INDICATION:
                 presenter = new IndicationPresenterImpl(this, new IndicationRepositorySql(new SqlIndicationDataStore()));
                 break;
-
+            case OPERATIONS:
+                presenter = new OperationsPresenterImpl(this, new OperationRepositorySql(new SqlOperationDataStore()));
+                break;
             default:
                 throw new IllegalStateException();
         }
@@ -179,6 +182,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
         DRUG_CLASSES,
         STORAGES,
         PROVIDERS,
-        INDICATION
+        INDICATION,
+        OPERATIONS
     }
 }

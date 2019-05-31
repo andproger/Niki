@@ -25,6 +25,7 @@ public class MainDialog extends JDialog {
     private JButton intakesButton;
     private JButton saleButton;
     private JButton catalogsButton;
+    private JButton operationsButton;
 
     public MainDialog() {
         setContentPane(contentPane);
@@ -50,6 +51,12 @@ public class MainDialog extends JDialog {
         intakesButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.INTAKE));
         saleButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.SALE));
         catalogsButton.addActionListener(actionEvent -> showDialog(new CatalogsDialog()));
+        operationsButton.addActionListener(e -> showCatalogDialog(CatalogDialog.CatalogType.OPERATIONS));
+    }
+
+    private void showCatalogDialog(CatalogDialog.CatalogType type) {
+        var dialog = new CatalogDialog(type);
+        showDialog(dialog);
     }
 
     private void showMapDialog(MapDialog.DialogType type) {
