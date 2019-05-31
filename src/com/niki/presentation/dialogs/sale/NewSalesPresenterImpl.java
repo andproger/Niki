@@ -60,7 +60,6 @@ public class NewSalesPresenterImpl implements NewSalePresenter {
         if (saleItem != null) {
             saleItems.add(saleItem);
             tableModel.fireTableDataChanged();
-            updateSum();
         }
     }
 
@@ -70,6 +69,11 @@ public class NewSalesPresenterImpl implements NewSalePresenter {
             this.saleItems.remove(rows[i]);
 
         tableModel.fireTableDataChanged();
+    }
+
+    @Override
+    public void onTableChanged() {
+        updateSum();
     }
 
     private void updateSum() {

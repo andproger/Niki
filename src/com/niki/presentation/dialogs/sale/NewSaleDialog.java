@@ -43,6 +43,7 @@ public class NewSaleDialog extends JDialog implements NewSaleView {
         buttonCancel.addActionListener(e -> onCancel());
         addDrugButton.addActionListener(e -> presenter.onAddClicked());
         deleteButton.addActionListener(e -> presenter.onDeleteClicked(table1.getSelectedRows()));
+        table1.addPropertyChangeListener("tableCellEditor", evt -> presenter.onTableChanged());
     }
 
     @Override
