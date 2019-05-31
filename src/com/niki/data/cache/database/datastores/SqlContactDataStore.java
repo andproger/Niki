@@ -33,7 +33,7 @@ public class SqlContactDataStore extends SqlDataStore<Contact> implements Contac
     }
 
     private int updateContact(Contact contact) {
-        var sqlUpdate = sqlGen.update(" where " + primaryKey + " = " + contact.getId());
+        var sqlUpdate = sqlGen.update(" where " + primaryKey + " = ?" );
         var contacts = new ArrayList<Contact>();
         contacts.add(contact);
         updateItems(contacts, sqlUpdate);

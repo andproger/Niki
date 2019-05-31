@@ -218,7 +218,9 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
     private void setInstance(T instance, Field field, ResultSet result, String column) throws SQLException, IllegalAccessException {
         Class<?> clazz = field.getType();
 
-        if (clazz.equals(String.class)) {
+        if (clazz.equals(Integer.class)) {
+            field.set(instance, result.getObject(column));
+        } else if (clazz.equals(String.class)) {
             field.set(instance, result.getString(column));
         } else if (clazz.equals(Integer.TYPE)) {
             field.setInt(instance, result.getInt(column));
