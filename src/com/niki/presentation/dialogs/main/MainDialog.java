@@ -7,6 +7,7 @@ import com.niki.data.repository.UserAuthAuthInMemoryRepository;
 import com.niki.data.repository.UserRepositorySql;
 import com.niki.presentation.dialogs.catalog.CatalogDialog;
 import com.niki.presentation.dialogs.catalogs.CatalogsDialog;
+import com.niki.presentation.dialogs.intake.NewIntakeDialog;
 import com.niki.presentation.dialogs.map.MapDialog;
 import com.niki.presentation.dialogs.sale.NewSaleDialog;
 
@@ -28,7 +29,7 @@ public class MainDialog extends JDialog {
     public MainDialog() {
         setContentPane(contentPane);
         setModal(true);
-
+        setTitle("Главное меню");
         initViews();
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -50,39 +51,25 @@ public class MainDialog extends JDialog {
 
         buttonExit.addActionListener(e -> onExit());
 
-        intakeButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.NEW_INTAKES));
-        salesButton.addActionListener(actionEvent -> showSaleDialog());
+        intakeButton.addActionListener(actionEvent -> showDialog(new NewIntakeDialog()));
+        salesButton.addActionListener(actionEvent -> showDialog(new NewSaleDialog()));
         intakesButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.INTAKE));
         saleButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.SALE));
-        catalogsButton.addActionListener(actionEvent -> showCatalogsDialog());
-    }
-
-    private void showCatalogsDialog() {
-        var catalogsDialog = new CatalogsDialog();
-        catalogsDialog.pack();
-        catalogsDialog.setVisible(true);
-    }
-
-    private void showCatalogDialog(CatalogDialog.CatalogType catalogType) {
-        var catalogDialog = new CatalogDialog(catalogType);
-        catalogDialog.pack();
-        catalogDialog.setVisible(true);
+        catalogsButton.addActionListener(actionEvent -> showDialog(new CatalogsDialog()));
     }
 
     private void showMapDialog(MapDialog.DialogType type) {
         var mapDialog = new MapDialog(type);
-        mapDialog.pack();
-        mapDialog.setVisible(true);
+        showDialog(mapDialog);
     }
 
-    private void showSaleDialog() {
-        var saleDialog = new NewSaleDialog();
-        saleDialog.pack();
-        saleDialog.setVisible(true);
+
+    private void showDialog(JDialog dialog){
+        dialog.pack();
+        dialog.setVisible(true);
     }
 
     private void onExit() {
-        // add your code here if necessary
         dispose();
     }
 }

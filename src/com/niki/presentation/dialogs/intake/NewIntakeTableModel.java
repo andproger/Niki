@@ -1,4 +1,4 @@
-package com.niki.presentation.dialogs.catalog.impl.intake;
+package com.niki.presentation.dialogs.intake;
 
 import com.niki.domain.entities.Drug;
 import com.niki.domain.interactors.catalog.intake.IntakeItemContract;
@@ -6,11 +6,11 @@ import com.niki.domain.interactors.catalog.intake.IntakeItemContract;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
-public class NewIntakeItemsTableModel extends AbstractTableModel {
+public class NewIntakeTableModel extends AbstractTableModel {
     private static final String[] columns = {"Медикамент", "Количество", "Стоимость"};
     private ArrayList<IntakeItemContract> contracts;
 
-    public NewIntakeItemsTableModel(ArrayList<IntakeItemContract> contracts) {
+    public NewIntakeTableModel(ArrayList<IntakeItemContract> contracts) {
         this.contracts = contracts;
     }
 

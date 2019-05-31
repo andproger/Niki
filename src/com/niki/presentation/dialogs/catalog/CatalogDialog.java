@@ -3,7 +3,6 @@ package com.niki.presentation.dialogs.catalog;
 import com.niki.data.cache.database.datastores.*;
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
-import com.niki.domain.interactors.catalog.intake.IntakeInteractorImpl;
 import com.niki.domain.interactors.catalog.manufacturer.ManufacturerInteractorImpl;
 import com.niki.domain.interactors.catalog.user.UserInteractorImpl;
 import com.niki.presentation.dialogs.catalog.impl.classes.DrugClassesPresenterImpl;
@@ -11,13 +10,11 @@ import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl
 import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.form.DrugFormsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.indication.IndicationPresenterImpl;
-import com.niki.presentation.dialogs.catalog.impl.intake.NewIntakeItemsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.manufacturer.ManufacturesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.position.PositionsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.provider.ProvidersPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.storage.StoragesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.user.UsersPresenterImpl;
-import com.niki.presentation.dialogs.intake.NewIntakeDialog;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -131,30 +128,6 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new DrugFormsPresenterImpl(this, new FormRepositorySql(new SqlFormDataStore()));
                 break;
 
-            case NEW_INTAKES: {
-                var newIntakeDialog = new NewIntakeDialog();
-                newIntakeDialog.pack();
-                newIntakeDialog.setVisible(true);
-
-                if (newIntakeDialog.getResultType() == NewIntakeDialog.ResultType.OK) {
-
-                    var providerId = newIntakeDialog.getProviderId();
-
-                    presenter = new NewIntakeItemsPresenterImpl(
-                            this,
-                            providerId,
-                            new DrugRepositorySql(new SqlDrugDataStore()),
-                            new IntakeInteractorImpl(
-                                    new ProviderRepositorySql(new SqlProviderDataStore()),
-                                    new IntakeRepositorySql(new SqlIntakeDataStore()),
-                                    new IntakeItemRepositorySql(new SqlIntakeItemDataStore())
-                            ));
-                } else {
-                    dispose();
-                }
-            }
-            break;
-
             case MANUFACTURERS:
                 presenter = new ManufacturesPresenterImpl(this, new ManufacturerInteractorImpl(
                         new ManufacturerRepositorySql(new SqlManufacturerDataStore()),
@@ -178,7 +151,6 @@ public class CatalogDialog extends JDialog implements CatalogView {
         DRUGS,
         DRUG_FORMS,
         DRUG_CLASSES,
-        NEW_INTAKES,
         STORAGES,
         PROVIDERS,
         INDICATION
