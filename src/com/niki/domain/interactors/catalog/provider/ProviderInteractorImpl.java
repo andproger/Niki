@@ -34,7 +34,7 @@ public class ProviderInteractorImpl implements ProviderInteractor {
 
         var contracts = new ArrayList<ProviderContract>();
         for (var provider : providers) {
-            var contact = new Contact(provider.getContactId());
+            var contact = new Contact(provider.getContactId() == null ? 0 : provider.getContactId());
             var index = Collections.binarySearch(contacts, contact, Comparator.comparingInt(Contact::getId));
             contact = index >= 0 ? contacts.get(index) : new Contact(0, "", "", "", "");
 
