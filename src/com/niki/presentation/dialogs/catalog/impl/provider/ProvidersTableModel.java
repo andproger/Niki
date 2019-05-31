@@ -71,16 +71,16 @@ public class ProvidersTableModel extends AbstractTableModel {
         var item = providers.get(rowIndex);
 
         switch (columnIndex) {
-            case 1:
+            case 0:
                 item.setName((String) aValue);
                 break;
-            case 2:
+            case 1:
                 item.getContact().setAddress((String) aValue);
                 break;
-            case 3:
+            case 2:
                 item.getContact().setEmail((String) aValue);
                 break;
-            case 4:
+            case 3:
                 item.getContact().setPhone((String) aValue);
                 break;
 
