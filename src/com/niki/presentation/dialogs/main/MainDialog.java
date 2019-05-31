@@ -43,12 +43,6 @@ public class MainDialog extends JDialog {
     }
 
     private void initViews() {
-        var userAuth = new UserAuthAuthInMemoryRepository(new SqlUserDataStore()).getUser();
-        var user = new UserRepositorySql(new SqlUserDataStore()).get(userAuth.getUserId());
-        var position = new PositionRepositorySql(new SqlPositionDataStore()).get(user.getPositionId());
-
-        catalogsButton.setVisible(position.isAdmin());
-
         buttonExit.addActionListener(e -> onExit());
 
         intakeButton.addActionListener(actionEvent -> showDialog(new NewIntakeDialog()));

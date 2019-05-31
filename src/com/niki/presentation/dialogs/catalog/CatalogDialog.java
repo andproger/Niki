@@ -54,10 +54,27 @@ public class CatalogDialog extends JDialog implements CatalogView {
     }
 
     private void initViews() {
-        buttonSave.addActionListener(e -> presenter.onSaveClicked());
         buttonCancel.addActionListener(e -> onCancel());
+
+        buttonSave.addActionListener(e -> presenter.onSaveClicked());
         buttonAdd.addActionListener(e -> presenter.onAddClicked());
-        buttonDelete.addActionListener(e -> presenter.onDeleteClicked(table1.getSelectedRows()));
+        buttonDelete.addActionListener(e -> {
+            var viewRows = table1.getSelectedRows();
+            var rows = new int[viewRows.length];
+
+            for (int i = 0; i < viewRows.length; i++)
+                rows[i] = table1.convertRowIndexToModel(viewRows[i]);
+
+            presenter.onDeleteClicked(rows);
+        });
+
+        var userAuth = new UserAuthAuthInMemoryRepository(new SqlUserDataStore()).getUser();
+        var user = new UserRepositorySql(new SqlUserDataStore()).get(userAuth.getUserId());
+        var position = new PositionRepositorySql(new SqlPositionDataStore()).get(user.getPositionId());
+
+        buttonSave.setVisible(position.isAdmin());
+        buttonAdd.setVisible(position.isAdmin());
+        buttonDelete.setVisible(position.isAdmin());
 
         table1.setAutoCreateRowSorter(true);
     }

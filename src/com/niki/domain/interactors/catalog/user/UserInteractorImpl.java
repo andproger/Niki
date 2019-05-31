@@ -36,7 +36,7 @@ public class UserInteractorImpl implements UserInteractor {
             var index = Collections.binarySearch(positions, position, Comparator.comparingInt(Position::getId));
             position = index >= 0 ? positions.get(index) : null;
 
-            var contact = new Contact(user.getContactId());
+            var contact = new Contact(user.getContactId() == null? 0 : user.getContactId());
             index = Collections.binarySearch(contacts, contact, Comparator.comparingInt(Contact::getId));
             contact = index >= 0 ? contacts.get(index) : new Contact(0, "", "", "", "");
 
