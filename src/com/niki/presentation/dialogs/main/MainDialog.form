@@ -8,14 +8,6 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="6146b" class="javax.swing.JButton" binding="catalogsButton">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Справочники"/>
-        </properties>
-      </component>
       <component id="5723f" class="javax.swing.JButton" binding="buttonExit">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -24,28 +16,28 @@
           <text value="Закрыть"/>
         </properties>
       </component>
-      <component id="a4eb7" class="javax.swing.JButton" binding="intakeButton">
+      <component id="a9429" class="javax.swing.JButton" binding="intakesButton">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Оформить поступление"/>
+          <text value="Поступления"/>
         </properties>
       </component>
       <component id="3b6d8" class="javax.swing.JButton" binding="salesButton">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Оформить продажу"/>
         </properties>
       </component>
-      <component id="a9429" class="javax.swing.JButton" binding="intakesButton">
+      <component id="a4eb7" class="javax.swing.JButton" binding="intakeButton">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Поставки"/>
+          <text value="Оформить поступление"/>
         </properties>
       </component>
       <component id="cb5b9" class="javax.swing.JButton" binding="saleButton">
@@ -54,6 +46,14 @@
         </constraints>
         <properties>
           <text value="Продажи"/>
+        </properties>
+      </component>
+      <component id="6146b" class="javax.swing.JButton" binding="catalogsButton">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Справочники"/>
         </properties>
       </component>
     </children>

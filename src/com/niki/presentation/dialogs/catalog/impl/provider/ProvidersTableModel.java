@@ -1,15 +1,16 @@
 package com.niki.presentation.dialogs.catalog.impl.provider;
 
 import com.niki.domain.entities.Provider;
+import com.niki.domain.interactors.catalog.provider.ProviderContract;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class ProvidersTableModel extends AbstractTableModel {
     private static final String[] columns = {"Поставшик", "Адрес", "Email", "Телефон"};
-    private List<Provider> providers;
+    private List<ProviderContract> providers;
 
-    public ProvidersTableModel(List<Provider> providers) {
+    ProvidersTableModel(List<ProviderContract> providers) {
         this.providers = providers;
     }
 
@@ -31,11 +32,11 @@ public class ProvidersTableModel extends AbstractTableModel {
             case 0:
                 return row.getName();
             case 1:
-                return row.getAddress();
+                return row.getContact().getAddress();
             case 2:
-                return row.getEmail();
+                return row.getContact().getEmail();
             case 3:
-                return row.getNumber();
+                return row.getContact().getPhone();
         }
 
         return null;
@@ -74,13 +75,13 @@ public class ProvidersTableModel extends AbstractTableModel {
                 item.setName((String) aValue);
                 break;
             case 2:
-                item.setAddress((String) aValue);
+                item.getContact().setAddress((String) aValue);
                 break;
             case 3:
-                item.setEmail((String) aValue);
+                item.getContact().setEmail((String) aValue);
                 break;
             case 4:
-                item.setNumber((String) aValue);
+                item.getContact().setPhone((String) aValue);
                 break;
 
         }

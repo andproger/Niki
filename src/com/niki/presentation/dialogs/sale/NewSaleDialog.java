@@ -23,11 +23,12 @@ public class NewSaleDialog extends JDialog implements NewSaleView {
     private JLabel sumLabel;
     private JButton deleteButton;
 
-    NewSalePresenter presenter;
+    private NewSalePresenter presenter;
 
     public NewSaleDialog() {
         setContentPane(contentPane);
         setModal(true);
+        setTitle("Оформление продажи");
         getRootPane().setDefaultButton(buttonOK);
 
         presenter = new NewSalesPresenterImpl(this, new MakeSaleInteractorImpl(

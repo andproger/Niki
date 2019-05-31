@@ -10,7 +10,7 @@ public class ManufacturesTableModel extends AbstractTableModel {
     private static final String[] columns = {"Имя", "Страна", "Адрес", "Email", "Номер", "Сайт"};
     private List<ManufacturerContract> manufacturers;
 
-    public ManufacturesTableModel(List<ManufacturerContract> manufacturers) {
+    ManufacturesTableModel(List<ManufacturerContract> manufacturers) {
         this.manufacturers = manufacturers;
     }
 
@@ -34,13 +34,13 @@ public class ManufacturesTableModel extends AbstractTableModel {
             case 1:
                 return row.getCountry();
             case 2:
-                return row.getAddress();
+                return row.getContact().getAddress();
             case 3:
-                return row.getEmail();
+                return row.getContact().getEmail();
             case 4:
-                return row.getPhone();
+                return row.getContact().getPhone();
             case 5:
-                return row.getSite();
+                return row.getContact().getSite();
         }
 
         return null;
@@ -85,16 +85,16 @@ public class ManufacturesTableModel extends AbstractTableModel {
                 item.setCountry((Country) aValue);
                 break;
             case 2:
-                item.setAddress((String) aValue);
+                item.getContact().setAddress((String) aValue);
                 break;
             case 3:
-                item.setEmail((String) aValue);
+                item.getContact().setEmail((String) aValue);
                 break;
             case 4:
-                item.setPhone((String) aValue);
+                item.getContact().setPhone((String) aValue);
                 break;
             case 5:
-                item.setSite((String) aValue);
+                item.getContact().setSite((String) aValue);
                 break;
         }
 

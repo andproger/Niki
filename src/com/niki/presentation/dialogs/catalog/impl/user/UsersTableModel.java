@@ -10,7 +10,7 @@ public class UsersTableModel extends AbstractTableModel {
     private static final String[] columns = {"Логин", "Имя", "Фамилия", "Должность", "Email", "Телефон"};
     private List<UserContract> users;
 
-    public UsersTableModel(List<UserContract> users) {
+    UsersTableModel(List<UserContract> users) {
         this.users = users;
     }
 
@@ -38,9 +38,9 @@ public class UsersTableModel extends AbstractTableModel {
             case 3:
                 return row.getPosition();
             case 4:
-                return row.getEmail();
+                return row.getContact().getEmail();
             case 5:
-                return row.getNumber();
+                return row.getContact().getPhone();
         }
 
         return null;
@@ -76,7 +76,6 @@ public class UsersTableModel extends AbstractTableModel {
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         var item = users.get(rowIndex);
-//    xlnt::worksheet ws
 
         switch (columnIndex) {
             case 0:
@@ -91,10 +90,11 @@ public class UsersTableModel extends AbstractTableModel {
                 item.setPosition((Position) aValue);
                 break;
             case 4:
-                item.setEmail((String) aValue);
+                item.getContact().setEmail((String) aValue);
+                break;
             case 5:
-                item.setNumber((String) aValue);
-
+                item.getContact().setPhone((String) aValue);
+                break;
         }
 
         super.setValueAt(aValue, rowIndex, columnIndex);

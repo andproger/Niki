@@ -4,6 +4,7 @@ import com.niki.data.cache.database.datastores.*;
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
 import com.niki.domain.interactors.catalog.manufacturer.ManufacturerInteractorImpl;
+import com.niki.domain.interactors.catalog.provider.ProviderInteractorImpl;
 import com.niki.domain.interactors.catalog.user.UserInteractorImpl;
 import com.niki.presentation.dialogs.catalog.impl.classes.DrugClassesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
@@ -86,6 +87,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new UsersPresenterImpl(this,
                         new UserInteractorImpl(
                                 new UserRepositorySql(new SqlUserDataStore()),
+                                new ContactRepositorySql(new SqlContactDataStore()),
                                 new PositionRepositorySql(new SqlPositionDataStore())
                         ));
                 break;
@@ -117,7 +119,13 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case PROVIDERS:
-                presenter = new ProvidersPresenterImpl(this, new ProviderRepositorySql(new SqlProviderDataStore()));
+                presenter = new ProvidersPresenterImpl(
+                        this,
+                        new ProviderInteractorImpl(
+                                new ProviderRepositorySql(new SqlProviderDataStore()),
+                                new ContactRepositorySql(new SqlContactDataStore())
+                        )
+                );
                 break;
 
             case DRUG_CLASSES:
@@ -131,6 +139,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
             case MANUFACTURERS:
                 presenter = new ManufacturesPresenterImpl(this, new ManufacturerInteractorImpl(
                         new ManufacturerRepositorySql(new SqlManufacturerDataStore()),
+                        new ContactRepositorySql(new SqlContactDataStore()),
                         new CountryRepositorySql(new SqlCountryDataStore())
                 ));
                 break;

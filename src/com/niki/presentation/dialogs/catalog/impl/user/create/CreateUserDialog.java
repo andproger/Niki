@@ -2,6 +2,7 @@ package com.niki.presentation.dialogs.catalog.impl.user.create;
 
 import com.niki.data.cache.database.datastores.SqlPositionDataStore;
 import com.niki.data.repository.PositionRepositorySql;
+import com.niki.domain.entities.Contact;
 import com.niki.domain.entities.Position;
 import com.niki.domain.interactors.catalog.user.UserContract;
 
@@ -42,7 +43,7 @@ public class CreateUserDialog extends JDialog implements CreateUserView {
     }
 
     private void onOK() {
-        if (loginField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+        if (loginField.getText().isEmpty() || passwordField.getPassword().length == 0) {
             JOptionPane.showMessageDialog(this,
                     "Не заполненны обязательные поля", "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -52,9 +53,13 @@ public class CreateUserDialog extends JDialog implements CreateUserView {
                     new String(passwordField.getPassword()),
                     firstNameField.getText(),
                     lastNameField.getText(),
-                    phoneField.getText(),
-                    emailField.getText(),
-                    (Position) positionComboBox.getSelectedItem()
+                    (Position) positionComboBox.getSelectedItem(),
+                    new Contact(0,
+                            phoneField.getText(),
+                            emailField.getText(),
+                            "",
+                            ""
+                    )
             );
 
             dispose();

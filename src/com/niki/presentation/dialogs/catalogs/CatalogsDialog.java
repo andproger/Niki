@@ -24,6 +24,7 @@ public class CatalogsDialog extends JDialog {
     public CatalogsDialog() {
         setContentPane(contentPane);
         setModal(true);
+        setTitle("Каталоги");
 
         initViews();
 

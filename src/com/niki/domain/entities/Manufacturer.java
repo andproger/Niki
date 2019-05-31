@@ -13,33 +13,21 @@ public class Manufacturer {
     @Column("country_id")
     private int countryId;
 
+    @Column("contact_id")
+    private Integer contactId;
+
     @Column("manufacturer_name")
     private String name;
-
-    @Column("address")
-    private String address;
-
-    @Column("email")
-    private String email;
-
-    @Column("phone")
-    private String phone;
-
-    @Column("site")
-    private String site;
 
     public Manufacturer() {
 
     }
 
-    public Manufacturer(int id, int countryId, String name, String address, String email, String phone, String site) {
+    public Manufacturer(int id, int countryId, String name, Integer contactId) {
         this.id = id;
         this.countryId = countryId;
         this.name = name;
-        this.address = address;
-        this.email = email;
-        this.phone = phone;
-        this.site = site;
+        this.contactId = contactId;
     }
 
     public int getId() {
@@ -66,36 +54,12 @@ public class Manufacturer {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public Integer getContactId() {
+        return contactId;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getSite() {
-        return site;
-    }
-
-    public void setSite(String site) {
-        this.site = site;
+    public void setContactId(Integer contactId) {
+        this.contactId = contactId;
     }
 
     @Override

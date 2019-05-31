@@ -12,26 +12,20 @@ public class Provider {
     @Column("provider_name")
     private String name;
 
-    @Column("address")
-    private String address;
+    @Column("contact_id")
+    private Integer contactId;
 
-    @Column("email")
-    private String email;
-
-    @Column("number")
-    private String number;
 
     public Provider() {
 
     }
 
-    public Provider(int id, String name, String address, String email, String number) {
+    public Provider(int id, String name, Integer contactId) {
         this.id = id;
         this.name = name;
-        this.address = address;
-        this.email = email;
-        this.number = number;
+        this.contactId = contactId;
     }
+
 
     public int getId() {
         return id;
@@ -49,28 +43,12 @@ public class Provider {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public Integer getContactId() {
+        return contactId;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
+    public void setContactId(Integer contactId) {
+        this.contactId = contactId;
     }
 
     @Override

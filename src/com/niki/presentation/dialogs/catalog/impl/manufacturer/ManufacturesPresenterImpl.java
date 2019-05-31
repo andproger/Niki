@@ -1,5 +1,6 @@
 package com.niki.presentation.dialogs.catalog.impl.manufacturer;
 
+import com.niki.domain.entities.Contact;
 import com.niki.domain.entities.Country;
 import com.niki.domain.interactors.catalog.manufacturer.ManufacturerContract;
 import com.niki.domain.interactors.catalog.manufacturer.ManufacturerInteractor;
@@ -36,7 +37,7 @@ public class ManufacturesPresenterImpl extends BaseCatalogPresenter {
 
     @Override
     public void onAddClicked() {
-        manufacturers.add(new ManufacturerContract(0, "", "", null, "", "", ""));
+        manufacturers.add(new ManufacturerContract(0, "", null, new Contact(0, "", "", "", "")));
         tableModel.fireTableDataChanged();
     }
 

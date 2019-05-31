@@ -26,7 +26,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
 
     private final String table;
     private final List<String> columns;
-    private final String primaryKey;
+    protected final String primaryKey;
 
     private Field primaryField;
     private List<Field> columnFields;
@@ -90,7 +90,7 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         return result.size() > 0 ? result.get(0) : null;
     }
 
-    protected List<T> select(String sqlQuery) {
+    private List<T> select(String sqlQuery) {
         var items = new ArrayList<T>();
 
         try {
@@ -198,7 +198,9 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
     private void setStatement(PreparedStatement statement, int index, Field field, T item) throws SQLException, IllegalAccessException {
         Class<?> clazz = field.getType();
 
-        if (clazz.equals(String.class)) {
+        if (clazz.equals(Integer.class)) {
+            statement.setObject(index, field.get(item), java.sql.Types.INTEGER);
+        } else if (clazz.equals(String.class)) {
             statement.setString(index, (String) field.get(item));
         } else if (clazz.equals(Integer.TYPE)) {
             statement.setInt(index, field.getInt(item));

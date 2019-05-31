@@ -1,18 +1,15 @@
-package com.niki.domain.interactors.catalog.manufacturer;
+package com.niki.domain.interactors.catalog.provider;
 
 import com.niki.domain.entities.Contact;
-import com.niki.domain.entities.Country;
 
-public class ManufacturerContract {
+public class ProviderContract {
     private int id;
     private String name;
-    private Country country;
     private Contact contact;
 
-    public ManufacturerContract(int id, String name, Country country, Contact contact) {
+    public ProviderContract(int id, String name, Contact contact) {
         this.id = id;
         this.name = name;
-        this.country = country;
         this.contact = contact;
     }
 
@@ -32,24 +29,11 @@ public class ManufacturerContract {
         this.name = name;
     }
 
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
     public Contact getContact() {
         return contact;
     }
 
     public void setContact(Contact contact) {
         this.contact = contact;
-    }
-
-    @Override
-    public String toString() {
-        return getName();
     }
 }
