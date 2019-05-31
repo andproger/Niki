@@ -36,7 +36,7 @@ public class ManufacturesPresenterImpl extends BaseCatalogPresenter {
 
     @Override
     public void onAddClicked() {
-        manufacturers.add(new ManufacturerContract(0, "", "", null));
+        manufacturers.add(new ManufacturerContract(0, "", "", null, "", "", ""));
         tableModel.fireTableDataChanged();
     }
 

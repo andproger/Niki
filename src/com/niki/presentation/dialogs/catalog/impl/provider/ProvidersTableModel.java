@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class ProvidersTableModel extends AbstractTableModel {
-    private static final String[] columns = {"ID", "Поставшик", "Адрес"};
+    private static final String[] columns = {"Поставшик", "Адрес", "Email", "Телефон"};
     private List<Provider> providers;
 
     public ProvidersTableModel(List<Provider> providers) {
@@ -29,11 +29,13 @@ public class ProvidersTableModel extends AbstractTableModel {
 
         switch (i1) {
             case 0:
-                return row.getId();
-            case 1:
                 return row.getName();
-            case 2:
+            case 1:
                 return row.getAddress();
+            case 2:
+                return row.getEmail();
+            case 3:
+                return row.getNumber();
         }
 
         return null;
@@ -43,9 +45,9 @@ public class ProvidersTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Integer.class;
             case 1:
             case 2:
+            case 3:
                 return String.class;
         }
         return super.getColumnClass(columnIndex);
@@ -74,6 +76,13 @@ public class ProvidersTableModel extends AbstractTableModel {
             case 2:
                 item.setAddress((String) aValue);
                 break;
+            case 3:
+                item.setEmail((String) aValue);
+                break;
+            case 4:
+                item.setNumber((String) aValue);
+                break;
+
         }
 
         super.setValueAt(aValue, rowIndex, columnIndex);

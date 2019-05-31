@@ -55,7 +55,7 @@ public class DrugInteractorImpl implements DrugInteractor {
             index = Collections.binarySearch(forms, form, Comparator.comparingInt(Form::getId));
             form = index >= 0 ? forms.get(index) : null;
 
-            var manufacturer = new Manufacturer(drug.getManufacturerId(), 0, "", "");
+            var manufacturer = new Manufacturer(drug.getManufacturerId(), 0, "", "", "", "", "");
             index = Collections.binarySearch(manufacturers, manufacturer, Comparator.comparingInt(Manufacturer::getId));
             manufacturer = index >= 0 ? manufacturers.get(index) : null;
 

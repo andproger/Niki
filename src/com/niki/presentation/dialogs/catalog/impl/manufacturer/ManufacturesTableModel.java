@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class ManufacturesTableModel extends AbstractTableModel {
-    private static final String[] columns = {"ID", "Имя", "Страна", "Адрес"};
+    private static final String[] columns = {"Имя", "Страна", "Адрес", "Email", "Номер", "Сайт"};
     private List<ManufacturerContract> manufacturers;
 
     public ManufacturesTableModel(List<ManufacturerContract> manufacturers) {
@@ -30,13 +30,17 @@ public class ManufacturesTableModel extends AbstractTableModel {
 
         switch (i1) {
             case 0:
-                return row.getId();
-            case 1:
                 return row.getName();
-            case 2:
+            case 1:
                 return row.getCountry();
-            case 3:
+            case 2:
                 return row.getAddress();
+            case 3:
+                return row.getEmail();
+            case 4:
+                return row.getPhone();
+            case 5:
+                return row.getSite();
         }
 
         return null;
@@ -46,11 +50,12 @@ public class ManufacturesTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Integer.class;
-            case 1:
-            case 3:
-                return String.class;
             case 2:
+            case 3:
+            case 4:
+            case 5:
+                return String.class;
+            case 1:
                 return Country.class;
         }
         return super.getColumnClass(columnIndex);
@@ -64,7 +69,7 @@ public class ManufacturesTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex != 0;
+        return true;
     }
 
 
@@ -73,14 +78,23 @@ public class ManufacturesTableModel extends AbstractTableModel {
         var item = manufacturers.get(rowIndex);
 
         switch (columnIndex) {
-            case 1:
+            case 0:
                 item.setName((String) aValue);
                 break;
-            case 2:
+            case 1:
                 item.setCountry((Country) aValue);
                 break;
-            case 3:
+            case 2:
                 item.setAddress((String) aValue);
+                break;
+            case 3:
+                item.setEmail((String) aValue);
+                break;
+            case 4:
+                item.setPhone((String) aValue);
+                break;
+            case 5:
+                item.setSite((String) aValue);
                 break;
         }
 

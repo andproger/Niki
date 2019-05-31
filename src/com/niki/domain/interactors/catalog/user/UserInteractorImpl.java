@@ -29,7 +29,16 @@ public class UserInteractorImpl implements UserInteractor {
             var position = new Position(user.getPositionId(), 0, "", false);
             var index = Collections.binarySearch(positions, position, Comparator.comparingInt(Position::getId));
             position = index >= 0 ? positions.get(index) : null;
-            userContracts.add(new UserContract(user.getId(), user.getLogin(), user.getPassword(), user.getFirstName(), user.getLastName(), position));
+            userContracts.add(new UserContract(
+                    user.getId(),
+                    user.getLogin(),
+                    user.getPassword(),
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getNumber(),
+                    user.getEmail(),
+                    position
+            ));
         }
 
         return userContracts;
@@ -61,7 +70,9 @@ public class UserInteractorImpl implements UserInteractor {
                 contract.getLogin(),
                 contract.getPassword(),
                 contract.getFirstName(),
-                contract.getLastName()
+                contract.getLastName(),
+                contract.getNumber(),
+                contract.getEmail()
         );
     }
 }

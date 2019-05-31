@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public class SaleTableModel extends AbstractTableModel {
-    private static final String[] columns = {"ID", "Пользователь", "Дата/Время"};
+    private static final String[] columns = {"Пользователь", "Дата/Время"};
     private List<SaleContract> contracts;
 
     public SaleTableModel(List<SaleContract> contracts) {
@@ -31,11 +31,8 @@ public class SaleTableModel extends AbstractTableModel {
 
         switch (i1) {
             case 0:
-                return row.getId();
-            case 1:
                 return row.getUser();
-            case 2:
-            {
+            case 1: {
                 var date = new Date(row.getDateTime());
                 return date.toString();
             }
@@ -48,10 +45,8 @@ public class SaleTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Integer.class;
-            case 1:
                 return User.class;
-            case 2:
+            case 1:
                 return String.class;
         }
         return super.getColumnClass(columnIndex);
@@ -73,13 +68,8 @@ public class SaleTableModel extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         var item = contracts.get(rowIndex);
 
-        switch (columnIndex) {
-            case 0:
-                item.setId((Integer) aValue);
-                break;
-            case 1:
-                item.setUser((User) aValue);
-                break;
+        if (columnIndex == 0) {
+            item.setUser((User) aValue);
         }
 
         super.setValueAt(aValue, rowIndex, columnIndex);

@@ -29,7 +29,7 @@ public class ManufacturerInteractorImpl implements ManufacturerInteractor {
             var country = new Country(manufacturer.getId(), "", "");
             var index = Collections.binarySearch(countries, country, Comparator.comparingInt(Country::getId));
             country = index >= 0 ? countries.get(index) : null;
-            contracts.add(new ManufacturerContract(manufacturer.getId(), manufacturer.getName(), manufacturer.getAddress(), country));
+            contracts.add(new ManufacturerContract(manufacturer.getId(), manufacturer.getName(), manufacturer.getAddress(), country, "", "", ""));
         }
         return contracts;
     }
@@ -38,7 +38,15 @@ public class ManufacturerInteractorImpl implements ManufacturerInteractor {
     public void saveManufacturers(List<ManufacturerContract> manufacturerContracts) {
         var manufacturers = new ArrayList<Manufacturer>();
         for (var contract : manufacturerContracts) {
-            manufacturers.add(new Manufacturer(contract.getId(), contract.getCountry().getId(), contract.getName(), contract.getAddress()));
+            manufacturers.add(new Manufacturer(
+                    contract.getId(),
+                    contract.getCountry().getId(),
+                    contract.getName(),
+                    contract.getAddress(),
+                    contract.getEmail(),
+                    contract.getPhone(),
+                    contract.getSite())
+            );
         }
         manufacturerRepository.saveManufacturers(manufacturers);
     }

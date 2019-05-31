@@ -24,17 +24,25 @@ public class User {
     @Column("last_name")
     private String lastName;
 
+    @Column("number")
+    private String number;
+
+    @Column("email")
+    private String email;
+
     public User() {
 
     }
 
-    public User(int id, int positionId, String login, String password, String firstName, String lastName) {
+    public User(int id, int positionId, String login, String password, String firstName, String lastName, String number, String email) {
         this.id = id;
         this.positionId = positionId;
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.number = number;
+        this.email = email;
     }
 
     public int getId() {
@@ -88,5 +96,21 @@ public class User {
     @Override
     public String toString() {
         return login;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -20,6 +20,8 @@ public class CreateUserDialog extends JDialog implements CreateUserView {
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JComboBox positionComboBox;
+    private JTextField phoneField;
+    private JTextField emailField;
 
     private UserContract userContract;
     private CreateUserPresenter presenter;
@@ -50,6 +52,8 @@ public class CreateUserDialog extends JDialog implements CreateUserView {
                     new String(passwordField.getPassword()),
                     firstNameField.getText(),
                     lastNameField.getText(),
+                    phoneField.getText(),
+                    emailField.getText(),
                     (Position) positionComboBox.getSelectedItem()
             );
 

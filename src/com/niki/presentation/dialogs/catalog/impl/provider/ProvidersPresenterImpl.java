@@ -33,7 +33,7 @@ public class ProvidersPresenterImpl extends BaseCatalogPresenter {
 
     @Override
     public void onAddClicked() {
-        providers.add(new Provider(0, "", ""));
+        providers.add(new Provider(0, "", "", "", ""));
         tableModel.fireTableDataChanged();
     }
 

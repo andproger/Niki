@@ -19,15 +19,27 @@ public class Manufacturer {
     @Column("address")
     private String address;
 
+    @Column("email")
+    private String email;
+
+    @Column("phone")
+    private String phone;
+
+    @Column("site")
+    private String site;
+
     public Manufacturer() {
 
     }
 
-    public Manufacturer(int id, int countryId, String name, String address) {
+    public Manufacturer(int id, int countryId, String name, String address, String email, String phone, String site) {
         this.id = id;
         this.countryId = countryId;
         this.name = name;
         this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.site = site;
     }
 
     public int getId() {
@@ -60,6 +72,30 @@ public class Manufacturer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
     }
 
     @Override

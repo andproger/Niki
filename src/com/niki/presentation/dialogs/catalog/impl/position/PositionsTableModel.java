@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class PositionsTableModel extends AbstractTableModel {
-    private static final String[] columns = {"ID", "Должность", "З/П"};
+    private static final String[] columns = {"Должность", "З/П", "Администратор"};
     private List<Position> positions;
 
     public PositionsTableModel(List<Position> positions) {
@@ -29,11 +29,11 @@ public class PositionsTableModel extends AbstractTableModel {
 
         switch (i1) {
             case 0:
-                return row.getId();
-            case 1:
                 return row.getName();
-            case 2:
+            case 1:
                 return row.getSalary();
+            case 2:
+                return row.isAdmin();
         }
 
         return null;
@@ -43,11 +43,11 @@ public class PositionsTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Integer.class;
-            case 1:
                 return String.class;
-            case 2:
+            case 1:
                 return Double.class;
+            case 2:
+                return Boolean.class;
         }
         return super.getColumnClass(columnIndex);
     }
@@ -60,7 +60,7 @@ public class PositionsTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex != 0;
+        return true;
     }
 
 
@@ -69,11 +69,14 @@ public class PositionsTableModel extends AbstractTableModel {
         var item = positions.get(rowIndex);
 
         switch (columnIndex) {
-            case 1:
+            case 0:
                 item.setName((String) aValue);
                 break;
-            case 2:
+            case 1:
                 item.setSalary((Double) aValue);
+                break;
+            case 2:
+                item.setAdmin((Boolean) aValue);
                 break;
         }
 

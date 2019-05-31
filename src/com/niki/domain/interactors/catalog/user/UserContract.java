@@ -8,16 +8,19 @@ public class UserContract {
     private String password;
     private String firstName;
     private String lastName;
+    private String number;
+    private String email;
     private Position position;
 
-
-    public UserContract(int id, String login, String password, String firstName, String lastName, Position position) {
+    public UserContract(int id, String login, String password, String firstName, String lastName, String number, String email, Position position) {
         this.id = id;
-        this.position = position;
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.number = number;
+        this.email = email;
+        this.position = position;
     }
 
     public int getId() {
@@ -66,6 +69,22 @@ public class UserContract {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
