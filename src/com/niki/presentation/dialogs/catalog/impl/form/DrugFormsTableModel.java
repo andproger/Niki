@@ -58,7 +58,7 @@ public class DrugFormsTableModel extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         var item = forms.get(rowIndex);
 
-        if (columnIndex == 1) {
+        if (columnIndex == 0) {
             item.setName((String) aValue);
         }
 
