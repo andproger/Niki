@@ -1,19 +1,27 @@
 package com.niki.presentation.dialogs.sale.create;
 
-import com.niki.domain.gateways.repositories.DrugRepository;
+import com.niki.domain.interactors.catalog.drug.DrugContract;
+import com.niki.domain.interactors.catalog.drug.DrugInteractor;
+
+import java.util.ArrayList;
 
 public class CreateSalePresenterImpl implements CreateSalePresenter {
     private final CreateSaleView view;
-    private final DrugRepository drugRepository;
+    private final DrugInteractor drugInteractor;
 
 
-    CreateSalePresenterImpl(CreateSaleView view, DrugRepository drugRepository) {
+    CreateSalePresenterImpl(CreateSaleView view, DrugInteractor drugInteractor) {
         this.view = view;
-        this.drugRepository = drugRepository;
+        this.drugInteractor = drugInteractor;
         initViews();
     }
 
     private void initViews() {
-        this.view.initViews(drugRepository.getDrugs());
+        var drugsOnStorage = new ArrayList<DrugContract>();
+        for (var contract : drugInteractor.getDrugs())
+            if (contract.getDrugCount().get() > 0)
+                drugsOnStorage.add(contract);
+
+        this.view.initViews(drugsOnStorage);
     }
 }

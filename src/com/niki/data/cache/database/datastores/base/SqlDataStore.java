@@ -19,7 +19,7 @@ import java.util.function.ToIntFunction;
 import static com.niki.data.cache.database.utils.Utils.idsDivided;
 
 public abstract class SqlDataStore<T> implements DataStore<T> {
-    private final static String DATABASE = "drugs.dbo";
+    protected final static String DATABASE = "drugs.dbo";
     protected Connection connection;
 
     private final Class aClass;
@@ -270,7 +270,6 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         }
 
         return null;
-        //throw new IllegalStateException("not found field with primary key annotation in table:" + table + "; entity:" + aClass.getName());
     }
 
     private List<String> searchColumns() {

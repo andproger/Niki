@@ -117,8 +117,8 @@ public class CatalogDialog extends JDialog implements CatalogView {
                                 new ClassRepositorySql(new SqlDrugClassDataStore()),
                                 new FormRepositorySql(new SqlFormDataStore()),
                                 new StorageRepositorySql(new SqlStorageDataStore()),
-                                new ManufacturerRepositorySql(new SqlManufacturerDataStore())
-                        ));
+                                new ManufacturerRepositorySql(new SqlManufacturerDataStore()),
+                                new DrugCountRepositorySql(new SqlDrugCountDataStore())));
                 break;
 
             case STORAGES:

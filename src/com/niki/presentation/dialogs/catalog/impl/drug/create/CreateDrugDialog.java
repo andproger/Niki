@@ -8,10 +8,7 @@ import com.niki.data.repository.ClassRepositorySql;
 import com.niki.data.repository.FormRepositorySql;
 import com.niki.data.repository.ManufacturerRepositorySql;
 import com.niki.data.repository.StorageRepositorySql;
-import com.niki.domain.entities.DrugClass;
-import com.niki.domain.entities.Form;
-import com.niki.domain.entities.Manufacturer;
-import com.niki.domain.entities.Storage;
+import com.niki.domain.entities.*;
 import com.niki.domain.interactors.catalog.drug.DrugContract;
 
 import javax.swing.*;
@@ -72,7 +69,8 @@ public class CreateDrugDialog extends JDialog implements CreateDrugView {
                     (DrugClass) comboBoxClass.getSelectedItem(),
                     (Manufacturer) comboBoxManufacturer.getSelectedItem(),
                     (Storage) comboBoxStorage.getSelectedItem(),
-                    (Form) comboBoxForm.getSelectedItem());
+                    (Form) comboBoxForm.getSelectedItem(),
+                    new DrugCount(0));
 
             dispose();
         }

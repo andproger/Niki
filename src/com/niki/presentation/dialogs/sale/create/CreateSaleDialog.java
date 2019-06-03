@@ -1,8 +1,10 @@
 package com.niki.presentation.dialogs.sale.create;
 
-import com.niki.data.cache.database.datastores.SqlDrugDataStore;
-import com.niki.data.repository.DrugRepositorySql;
+import com.niki.data.cache.database.datastores.*;
+import com.niki.data.repository.*;
 import com.niki.domain.entities.Drug;
+import com.niki.domain.interactors.catalog.drug.DrugContract;
+import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
 import com.niki.domain.interactors.catalog.sale.SaleItemContract;
 
 import javax.swing.*;
@@ -24,7 +26,14 @@ public class CreateSaleDialog extends JDialog implements CreateSaleView {
     public CreateSaleDialog() {
         setContentPane(contentPane);
         setModal(true);
-        presenter = new CreateSalePresenterImpl(this, new DrugRepositorySql(new SqlDrugDataStore()));
+        presenter = new CreateSalePresenterImpl(this, new DrugInteractorImpl(
+                new DrugRepositorySql(new SqlDrugDataStore()),
+                new ClassRepositorySql(new SqlDrugClassDataStore()),
+                new FormRepositorySql(new SqlFormDataStore()),
+                new StorageRepositorySql(new SqlStorageDataStore()),
+                new ManufacturerRepositorySql(new SqlManufacturerDataStore()),
+                new DrugCountRepositorySql(new SqlDrugCountDataStore())
+        ));
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -43,11 +52,25 @@ public class CreateSaleDialog extends JDialog implements CreateSaleView {
         if (count <= 0) {
             JOptionPane.showMessageDialog(this,
                     "Не правильно заданно количество медикаментов", "Ошибка", JOptionPane.ERROR_MESSAGE);
+        } else if (count > ((DrugContract) drugComboBox.getSelectedItem()).getDrugCount().get()) {
+            JOptionPane.showMessageDialog(this,
+                    "Не правильно заданно количество медикаментов. Нельзя продать больше, чем есть на складе",
+                    "Ошибка", JOptionPane.ERROR_MESSAGE);
         } else {
+            var drugContract = (DrugContract) drugComboBox.getSelectedItem();
+            var drug = new Drug(drugContract.getId(),
+                    drugContract.getCost(),
+                    drugContract.getDrugClass().getId(),
+                    drugContract.getManufacturer().getId(),
+                    drugContract.getStorage().getId(),
+                    drugContract.getForm().getId(),
+                    drugContract.getName(),
+                    drugContract.getDescription());
+
             contract = new SaleItemContract(
                     0,
                     count,
-                    (Drug) drugComboBox.getSelectedItem()
+                    drug
             );
 
             dispose();
@@ -63,7 +86,7 @@ public class CreateSaleDialog extends JDialog implements CreateSaleView {
     }
 
     @Override
-    public void initViews(List<Drug> drugs) {
+    public void initViews(List<DrugContract> drugs) {
         buttonOK.addActionListener(e -> onOK());
         buttonCancel.addActionListener(e -> onCancel());
 
