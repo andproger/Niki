@@ -16,6 +16,9 @@ public class Indication {
         this.description = description;
     }
 
+    public Indication() {
+    }
+
     public int getId() {
         return id;
     }

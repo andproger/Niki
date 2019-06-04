@@ -79,7 +79,6 @@ public class LoginDialog extends JDialog implements LoginView {
     }
 
     private void initViews() {
-        //TODO onOkClicked params
         buttonOK.addActionListener(e -> presenter.onOkClicked(serverField.getText(), loginField.getText(), new String(passwordField.getPassword())));
         buttonCancel.addActionListener(e -> onCancel());
     }

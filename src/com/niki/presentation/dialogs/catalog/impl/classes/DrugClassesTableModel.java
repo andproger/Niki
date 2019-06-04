@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class DrugClassesTableModel extends AbstractTableModel {
-    private static final String[] columns = {"ID", "Класс"};
+    private static final String[] columns = {"Класс"};
     private List<DrugClass> classes;
 
     public DrugClassesTableModel(List<DrugClass> classes) {
@@ -28,11 +28,8 @@ public class DrugClassesTableModel extends AbstractTableModel {
     public Object getValueAt(int i, int i1) {
         var row = classes.get(i);
 
-        switch (i1) {
-            case 0:
-                return row.getId();
-            case 1:
-                return row.getName();
+        if (i1 == 0) {
+            return row.getName();
         }
 
         return null;
@@ -40,11 +37,8 @@ public class DrugClassesTableModel extends AbstractTableModel {
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        switch (columnIndex) {
-            case 0:
-                return Integer.class;
-            case 1:
-                return String.class;
+        if (columnIndex == 0) {
+            return String.class;
         }
         return super.getColumnClass(columnIndex);
     }
@@ -57,7 +51,7 @@ public class DrugClassesTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 1;
+        return true;
     }
 
 
@@ -65,7 +59,7 @@ public class DrugClassesTableModel extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         var item = classes.get(rowIndex);
 
-        if (columnIndex == 1) {
+        if (columnIndex == 0) {
             item.setName((String) aValue);
         }
 

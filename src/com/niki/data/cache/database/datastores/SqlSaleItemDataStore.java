@@ -1,9 +1,11 @@
 package com.niki.data.cache.database.datastores;
 
 import com.niki.data.cache.database.datastores.base.SqlDataStore;
+import com.niki.domain.entities.IntakeItem;
 import com.niki.domain.entities.SaleItem;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SqlSaleItemDataStore extends SqlDataStore<SaleItem> implements SaleItemDataStore {
@@ -26,6 +28,30 @@ public class SqlSaleItemDataStore extends SqlDataStore<SaleItem> implements Sale
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<SaleItem> get(int saleId) {
+        var saleItems = new ArrayList<SaleItem>();
+
+        try {
+            var statement = connection.prepareStatement(sqlGen.select("where sale_id = " + saleId, null));
+            var resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                saleItems.add(new SaleItem(
+                        resultSet.getInt("sale_id"),
+                        resultSet.getInt("drug_id"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getDouble("cost")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return saleItems;
     }
 
     @Override

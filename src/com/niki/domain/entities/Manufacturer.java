@@ -13,21 +13,21 @@ public class Manufacturer {
     @Column("country_id")
     private int countryId;
 
+    @Column("contact_id")
+    private Integer contactId;
+
     @Column("manufacturer_name")
     private String name;
-
-    @Column("address")
-    private String address;
 
     public Manufacturer() {
 
     }
 
-    public Manufacturer(int id, int countryId, String name, String address) {
+    public Manufacturer(int id, int countryId, String name, Integer contactId) {
         this.id = id;
         this.countryId = countryId;
         this.name = name;
-        this.address = address;
+        this.contactId = contactId;
     }
 
     public int getId() {
@@ -54,12 +54,12 @@ public class Manufacturer {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public Integer getContactId() {
+        return contactId;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setContactId(Integer contactId) {
+        this.contactId = contactId;
     }
 
     @Override

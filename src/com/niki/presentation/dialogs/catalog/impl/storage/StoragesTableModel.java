@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class StoragesTableModel extends AbstractTableModel {
-    private static final String[] columns = {"ID", "Хранилище"};
+    private static final String[] columns = {"Хранилище"};
     private List<Storage> storages;
 
     public StoragesTableModel(List<Storage> storages) {
@@ -27,11 +27,8 @@ public class StoragesTableModel extends AbstractTableModel {
     public Object getValueAt(int i, int i1) {
         var row = storages.get(i);
 
-        switch (i1) {
-            case 0:
-                return row.getId();
-            case 1:
-                return row.getDescription();
+        if (i1 == 0) {
+            return row.getDescription();
         }
 
         return null;
@@ -39,11 +36,8 @@ public class StoragesTableModel extends AbstractTableModel {
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        switch (columnIndex) {
-            case 0:
-                return Integer.class;
-            case 1:
-                return String.class;
+        if (columnIndex == 0) {
+            return String.class;
         }
         return super.getColumnClass(columnIndex);
     }
@@ -56,7 +50,7 @@ public class StoragesTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 1;
+        return true;
     }
 
 
@@ -64,10 +58,8 @@ public class StoragesTableModel extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         var item = storages.get(rowIndex);
 
-        switch (columnIndex) {
-            case 1:
-                item.setDescription((String) aValue);
-                break;
+        if (columnIndex == 0) {
+            item.setDescription((String) aValue);
         }
 
         super.setValueAt(aValue, rowIndex, columnIndex);

@@ -19,14 +19,14 @@ import java.util.function.ToIntFunction;
 import static com.niki.data.cache.database.utils.Utils.idsDivided;
 
 public abstract class SqlDataStore<T> implements DataStore<T> {
-    private final static String DATABASE = "drugs.dbo";
+    protected final static String DATABASE = "drugs.dbo";
     protected Connection connection;
 
     private final Class aClass;
 
     private final String table;
     private final List<String> columns;
-    private final String primaryKey;
+    protected final String primaryKey;
 
     private Field primaryField;
     private List<Field> columnFields;
@@ -83,7 +83,14 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         return select(sqlSelect);
     }
 
-    protected List<T> select(String sqlQuery) {
+    @Override
+    public T getItem(int id) {
+        var sqlSelect = sqlGen.select("where " + primaryKey + " = " + id, null);
+        var result = select(sqlSelect);
+        return result.size() > 0 ? result.get(0) : null;
+    }
+
+    private List<T> select(String sqlQuery) {
         var items = new ArrayList<T>();
 
         try {
@@ -191,7 +198,9 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
     private void setStatement(PreparedStatement statement, int index, Field field, T item) throws SQLException, IllegalAccessException {
         Class<?> clazz = field.getType();
 
-        if (clazz.equals(String.class)) {
+        if (clazz.equals(Integer.class)) {
+            statement.setObject(index, field.get(item), java.sql.Types.INTEGER);
+        } else if (clazz.equals(String.class)) {
             statement.setString(index, (String) field.get(item));
         } else if (clazz.equals(Integer.TYPE)) {
             statement.setInt(index, field.getInt(item));
@@ -209,7 +218,9 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
     private void setInstance(T instance, Field field, ResultSet result, String column) throws SQLException, IllegalAccessException {
         Class<?> clazz = field.getType();
 
-        if (clazz.equals(String.class)) {
+        if (clazz.equals(Integer.class)) {
+            field.set(instance, result.getObject(column));
+        } else if (clazz.equals(String.class)) {
             field.set(instance, result.getString(column));
         } else if (clazz.equals(Integer.TYPE)) {
             field.setInt(instance, result.getInt(column));
@@ -219,6 +230,8 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
             field.setLong(instance, result.getLong(column));
         } else if (clazz.equals(Boolean.TYPE)) {
             field.setBoolean(instance, result.getBoolean(column));
+        } else if (clazz.equals(Date.class)) {
+            field.set(instance, result.getDate(column));
         }
     }
 
@@ -257,7 +270,6 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         }
 
         return null;
-        //throw new IllegalStateException("not found field with primary key annotation in table:" + table + "; entity:" + aClass.getName());
     }
 
     private List<String> searchColumns() {

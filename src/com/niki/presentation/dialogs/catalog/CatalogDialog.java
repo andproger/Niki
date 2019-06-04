@@ -3,22 +3,20 @@ package com.niki.presentation.dialogs.catalog;
 import com.niki.data.cache.database.datastores.*;
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
-import com.niki.domain.interactors.catalog.intake.IntakeInteractorImpl;
 import com.niki.domain.interactors.catalog.manufacturer.ManufacturerInteractorImpl;
-import com.niki.domain.interactors.catalog.sale.MakeSaleInteractorImpl;
+import com.niki.domain.interactors.catalog.provider.ProviderInteractorImpl;
 import com.niki.domain.interactors.catalog.user.UserInteractorImpl;
 import com.niki.presentation.dialogs.catalog.impl.classes.DrugClassesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.country.CountriesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.drug.DrugsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.form.DrugFormsPresenterImpl;
-import com.niki.presentation.dialogs.catalog.impl.intake.NewIntakeItemsPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.indication.IndicationPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.manufacturer.ManufacturesPresenterImpl;
+import com.niki.presentation.dialogs.catalog.impl.operation.OperationsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.position.PositionsPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.provider.ProvidersPresenterImpl;
-import com.niki.presentation.dialogs.catalog.impl.sale.NewSalesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.storage.StoragesPresenterImpl;
 import com.niki.presentation.dialogs.catalog.impl.user.UsersPresenterImpl;
-import com.niki.presentation.dialogs.intake.NewIntakeDialog;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -42,9 +40,6 @@ public class CatalogDialog extends JDialog implements CatalogView {
         setContentPane(contentPane);
         setModal(true);
 
-        setupPresenter(type);
-        initViews();
-
         getRootPane().setDefaultButton(buttonSave);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -53,18 +48,39 @@ public class CatalogDialog extends JDialog implements CatalogView {
             }
         });
 
+        setupPresenter(type);
+        initViews();
+
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     private void initViews() {
-        buttonSave.addActionListener(e -> presenter.onSaveClicked());
         buttonCancel.addActionListener(e -> onCancel());
+
+        buttonSave.addActionListener(e -> presenter.onSaveClicked());
         buttonAdd.addActionListener(e -> presenter.onAddClicked());
-        buttonDelete.addActionListener(e -> presenter.onDeleteClicked(table1.getSelectedRows()));
+        buttonDelete.addActionListener(e -> {
+            var viewRows = table1.getSelectedRows();
+            var rows = new int[viewRows.length];
+
+            for (int i = 0; i < viewRows.length; i++)
+                rows[i] = table1.convertRowIndexToModel(viewRows[i]);
+
+            presenter.onDeleteClicked(rows);
+        });
+
+        var userAuth = new UserAuthAuthInMemoryRepository(new SqlUserDataStore()).getUser();
+        var user = new UserRepositorySql(new SqlUserDataStore()).get(userAuth.getUserId());
+        var position = new PositionRepositorySql(new SqlPositionDataStore()).get(user.getPositionId());
+
+        buttonSave.setVisible(position.isAdmin());
+        buttonAdd.setVisible(position.isAdmin());
+        buttonDelete.setVisible(position.isAdmin());
+
+        table1.setAutoCreateRowSorter(true);
     }
 
     private void onCancel() {
-        // buttonAdd your code here if necessary
         dispose();
     }
 
@@ -89,6 +105,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new UsersPresenterImpl(this,
                         new UserInteractorImpl(
                                 new UserRepositorySql(new SqlUserDataStore()),
+                                new ContactRepositorySql(new SqlContactDataStore()),
                                 new PositionRepositorySql(new SqlPositionDataStore())
                         ));
                 break;
@@ -100,8 +117,8 @@ public class CatalogDialog extends JDialog implements CatalogView {
                                 new ClassRepositorySql(new SqlDrugClassDataStore()),
                                 new FormRepositorySql(new SqlFormDataStore()),
                                 new StorageRepositorySql(new SqlStorageDataStore()),
-                                new ManufacturerRepositorySql(new SqlManufacturerDataStore())
-                        ));
+                                new ManufacturerRepositorySql(new SqlManufacturerDataStore()),
+                                new DrugCountRepositorySql(new SqlDrugCountDataStore())));
                 break;
 
             case STORAGES:
@@ -112,17 +129,6 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new CountriesPresenterImpl(this, new CountryRepositorySql(new SqlCountryDataStore()));
                 break;
 
-            case NEW_SALES:
-                var drugsRepository = new DrugRepositorySql(new SqlDrugDataStore());
-
-                presenter = new NewSalesPresenterImpl(this,
-                        new MakeSaleInteractorImpl(
-                                new SaleRepositorySql(new SqlSaleDataStore()),
-                                new SaleItemRepositorySql(new SqlSaleItemDataStore())
-                        ),
-                        drugsRepository);
-                break;
-
             case POSITIONS:
                 presenter = new PositionsPresenterImpl(this,
                         new PositionRepositorySql(
@@ -131,7 +137,13 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 break;
 
             case PROVIDERS:
-                presenter = new ProvidersPresenterImpl(this, new ProviderRepositorySql(new SqlProviderDataStore()));
+                presenter = new ProvidersPresenterImpl(
+                        this,
+                        new ProviderInteractorImpl(
+                                new ProviderRepositorySql(new SqlProviderDataStore()),
+                                new ContactRepositorySql(new SqlContactDataStore())
+                        )
+                );
                 break;
 
             case DRUG_CLASSES:
@@ -142,37 +154,19 @@ public class CatalogDialog extends JDialog implements CatalogView {
                 presenter = new DrugFormsPresenterImpl(this, new FormRepositorySql(new SqlFormDataStore()));
                 break;
 
-            case NEW_INTAKES: {
-                var newIntakeDialog = new NewIntakeDialog();
-                newIntakeDialog.pack();
-                newIntakeDialog.setVisible(true);
-
-                var providerId = newIntakeDialog.getProviderId();
-
-                if (newIntakeDialog.getResultType() == NewIntakeDialog.ResultType.OK) {
-
-                    presenter = new NewIntakeItemsPresenterImpl(
-                            this,
-                            providerId,
-                            new DrugRepositorySql(new SqlDrugDataStore()),
-                            new IntakeInteractorImpl(
-                                    new ProviderRepositorySql(new SqlProviderDataStore()),
-                                    new IntakeRepositorySql(new SqlIntakeDataStore()),
-                                    new IntakeItemRepositorySql(new SqlIntakeItemDataStore())
-                            ));
-                } else {
-                    dispose();
-                }
-            }
-            break;
-
             case MANUFACTURERS:
                 presenter = new ManufacturesPresenterImpl(this, new ManufacturerInteractorImpl(
                         new ManufacturerRepositorySql(new SqlManufacturerDataStore()),
+                        new ContactRepositorySql(new SqlContactDataStore()),
                         new CountryRepositorySql(new SqlCountryDataStore())
                 ));
                 break;
-
+            case INDICATION:
+                presenter = new IndicationPresenterImpl(this, new IndicationRepositorySql(new SqlIndicationDataStore()));
+                break;
+            case OPERATIONS:
+                presenter = new OperationsPresenterImpl(this, new OperationRepositorySql(new SqlOperationDataStore()));
+                break;
             default:
                 throw new IllegalStateException();
         }
@@ -186,9 +180,9 @@ public class CatalogDialog extends JDialog implements CatalogView {
         DRUGS,
         DRUG_FORMS,
         DRUG_CLASSES,
-        NEW_SALES,
-        NEW_INTAKES,
         STORAGES,
-        PROVIDERS
+        PROVIDERS,
+        INDICATION,
+        OPERATIONS
     }
 }

@@ -5,13 +5,11 @@ import com.niki.domain.entities.Drug;
 public class SaleItemContract {
     private int saleId;
     private int quantity;
-    private double cost;
     private Drug drug;
 
-    public SaleItemContract(int saleId, int quantity, double cost, Drug drug) {
+    public SaleItemContract(int saleId, int quantity, Drug drug) {
         this.saleId = saleId;
         this.quantity = quantity;
-        this.cost = cost;
         this.drug = drug;
     }
 
@@ -32,13 +30,6 @@ public class SaleItemContract {
         this.quantity = quantity;
     }
 
-    public double getCost() {
-        return cost;
-    }
-
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
 
     public Drug getDrug() {
         return drug;

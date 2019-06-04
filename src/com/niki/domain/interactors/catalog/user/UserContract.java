@@ -1,5 +1,6 @@
 package com.niki.domain.interactors.catalog.user;
 
+import com.niki.domain.entities.Contact;
 import com.niki.domain.entities.Position;
 
 public class UserContract {
@@ -9,15 +10,16 @@ public class UserContract {
     private String firstName;
     private String lastName;
     private Position position;
+    private Contact contact;
 
-
-    public UserContract(int id, String login, String password, String firstName, String lastName, Position position) {
+    public UserContract(int id, String login, String password, String firstName, String lastName, Position position, Contact contact) {
         this.id = id;
-        this.position = position;
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.position = position;
+        this.contact = contact;
     }
 
     public int getId() {
@@ -66,6 +68,14 @@ public class UserContract {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
     @Override

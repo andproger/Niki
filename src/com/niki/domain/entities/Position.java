@@ -16,14 +16,18 @@ public class Position {
     @Column("name")
     private String name;
 
+    @Column("is_admin")
+    private boolean admin;
+
     public Position() {
 
     }
 
-    public Position(int id, double salary, String name) {
+    public Position(int id, double salary, String name, boolean admin) {
         this.id = id;
         this.salary = salary;
         this.name = name;
+        this.admin = admin;
     }
 
     public int getId() {
@@ -48,6 +52,14 @@ public class Position {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     @Override

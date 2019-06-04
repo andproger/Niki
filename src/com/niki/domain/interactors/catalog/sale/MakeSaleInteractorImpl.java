@@ -4,6 +4,7 @@ import com.niki.domain.entities.Sale;
 import com.niki.domain.entities.SaleItem;
 import com.niki.domain.gateways.repositories.SaleItemRepository;
 import com.niki.domain.gateways.repositories.SaleRepository;
+import com.niki.domain.gateways.repositories.UserAuthRepository;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -13,16 +14,17 @@ public class MakeSaleInteractorImpl implements MakeSaleInteractor {
 
     private final SaleRepository saleRepository;
     private final SaleItemRepository saleItemRepository;
+    private final UserAuthRepository userAuthRepository;
 
-    public MakeSaleInteractorImpl(SaleRepository saleRepository, SaleItemRepository saleItemRepository) {
+    public MakeSaleInteractorImpl(SaleRepository saleRepository, SaleItemRepository saleItemRepository, UserAuthRepository userAuthRepository) {
         this.saleRepository = saleRepository;
         this.saleItemRepository = saleItemRepository;
+        this.userAuthRepository = userAuthRepository;
     }
 
     @Override
     public int add(List<SaleItemContract> contractItems) {
-        //TODO implement real user id
-        int userId = 1;
+        int userId = userAuthRepository.getUser().getUserId();
         int newSaleId = saleRepository.save(new Sale(0, new Date(System.currentTimeMillis()), userId));
 
         setSaleIds(newSaleId, contractItems);
@@ -65,7 +67,7 @@ public class MakeSaleInteractorImpl implements MakeSaleInteractor {
                 contract.getSaleId(),
                 contract.getDrug().getId(),
                 contract.getQuantity(),
-                contract.getCost()
+                contract.getDrug().getCost()
         );
     }
 }

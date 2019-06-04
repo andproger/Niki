@@ -2,9 +2,12 @@ package com.niki.presentation.dialogs.catalog.impl.country;
 
 import com.niki.domain.entities.Country;
 import com.niki.domain.gateways.repositories.CountryRepository;
+import com.niki.domain.interactors.catalog.drug.DrugContract;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class CountriesPresenterImpl extends BaseCatalogPresenter {
@@ -22,6 +25,8 @@ public class CountriesPresenterImpl extends BaseCatalogPresenter {
 
     private void initTableModel() {
         this.countries = countryRepository.getCountries();
+        Collections.sort(countries, Comparator.comparing(Country::getName));
+
         this.tableModel = new CountriesTableModel(countries);
         view.setTableModel(tableModel);
     }

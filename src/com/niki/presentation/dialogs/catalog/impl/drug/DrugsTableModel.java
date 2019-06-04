@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class DrugsTableModel extends AbstractTableModel {
-    private static final String[] columns = {"ID", "Имя", "Описание", "Цена", "Производитель", "Хранилище", "Форма", "Класс"};
+    private static final String[] columns = {"Имя", "Описание", "Цена", "Производитель", "Хранилище", "Форма", "Класс", "Количество"};
     private List<DrugContract> drugs;
 
     public DrugsTableModel(List<DrugContract> drugs) {
@@ -33,21 +33,21 @@ public class DrugsTableModel extends AbstractTableModel {
 
         switch (i1) {
             case 0:
-                return row.getId();
-            case 1:
                 return row.getName();
-            case 2:
+            case 1:
                 return row.getDescription();
-            case 3:
+            case 2:
                 return row.getCost();
-            case 4:
+            case 3:
                 return row.getManufacturer();
-            case 5:
+            case 4:
                 return row.getStorage();
-            case 6:
+            case 5:
                 return row.getForm();
-            case 7:
+            case 6:
                 return row.getDrugClass();
+            case 7:
+                return row.getDrugCount().get();
         }
 
         return null;
@@ -57,20 +57,20 @@ public class DrugsTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Integer.class;
             case 1:
-            case 2:
                 return String.class;
-            case 3:
+            case 2:
                 return Double.class;
-            case 4:
+            case 3:
                 return Manufacturer.class;
-            case 5:
+            case 4:
                 return Storage.class;
-            case 6:
+            case 5:
                 return Form.class;
-            case 7:
+            case 6:
                 return DrugClass.class;
+            case 7:
+                return Integer.class;
         }
         return super.getColumnClass(columnIndex);
     }
@@ -92,26 +92,29 @@ public class DrugsTableModel extends AbstractTableModel {
         var item = drugs.get(rowIndex);
 
         switch (columnIndex) {
-            case 1:
+            case 0:
                 item.setName((String) aValue);
                 break;
-            case 2:
+            case 1:
                 item.setDescription((String) aValue);
                 break;
-            case 3:
+            case 2:
                 item.setCost((Double) aValue);
                 break;
-            case 4:
+            case 3:
                 item.setManufacturer((Manufacturer) aValue);
                 break;
-            case 5:
+            case 4:
                 item.setStorage((Storage) aValue);
                 break;
-            case 6:
+            case 5:
                 item.setForm((Form) aValue);
                 break;
-            case 7:
+            case 6:
                 item.setDrugClass((DrugClass) aValue);
+                break;
+            case 7:
+                break;
         }
 
         super.setValueAt(aValue, rowIndex, columnIndex);

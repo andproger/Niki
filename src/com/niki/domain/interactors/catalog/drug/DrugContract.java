@@ -1,9 +1,6 @@
 package com.niki.domain.interactors.catalog.drug;
 
-import com.niki.domain.entities.DrugClass;
-import com.niki.domain.entities.Form;
-import com.niki.domain.entities.Manufacturer;
-import com.niki.domain.entities.Storage;
+import com.niki.domain.entities.*;
 
 public class DrugContract {
     private int id;
@@ -14,8 +11,19 @@ public class DrugContract {
     private Manufacturer manufacturer;
     private Storage storage;
     private Form form;
+    private DrugCount drugCount;
 
-    public DrugContract(int id, double cost, String name, String description, DrugClass drugClass, Manufacturer manufacturer, Storage storage, Form form) {
+    public DrugContract(
+            int id,
+            double cost,
+            String name,
+            String description,
+            DrugClass drugClass,
+            Manufacturer manufacturer,
+            Storage storage,
+            Form form,
+            DrugCount drugCount
+    ) {
         this.id = id;
         this.cost = cost;
         this.name = name;
@@ -24,6 +32,7 @@ public class DrugContract {
         this.manufacturer = manufacturer;
         this.storage = storage;
         this.form = form;
+        this.drugCount = drugCount;
     }
 
     public int getId() {
@@ -88,5 +97,18 @@ public class DrugContract {
 
     public void setForm(Form form) {
         this.form = form;
+    }
+
+    public DrugCount getDrugCount() {
+        return drugCount;
+    }
+
+    public void setDrugCount(DrugCount drugCount) {
+        this.drugCount = drugCount;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

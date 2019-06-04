@@ -6,6 +6,7 @@ import com.niki.domain.interactors.catalog.user.UserInteractor;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 import com.niki.presentation.dialogs.catalog.CellEditor;
+import com.niki.presentation.dialogs.catalog.impl.user.create.CreateUserDialog;
 
 import java.util.List;
 
@@ -36,8 +37,15 @@ public class UsersPresenterImpl extends BaseCatalogPresenter {
 
     @Override
     public void onAddClicked() {
-        userContracts.add(new UserContract(0, "", "", "", "", null));
-        tableModel.fireTableDataChanged();
+        var createUserDialog = new CreateUserDialog();
+        createUserDialog.pack();
+        createUserDialog.setVisible(true);
+        var userContract = createUserDialog.getUserContract();
+
+        if (userContract != null) {
+            userContracts.add(userContract);
+            tableModel.fireTableDataChanged();
+        }
     }
 
     @Override

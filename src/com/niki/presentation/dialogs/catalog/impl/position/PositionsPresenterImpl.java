@@ -21,7 +21,7 @@ public class PositionsPresenterImpl extends BaseCatalogPresenter {
     }
 
     private void initTableModel() {
-        this.positions = positionRepository.getPositions();
+        this.positions = positionRepository.get();
         this.tableModel = new PositionsTableModel(positions);
         view.setTableModel(tableModel);
     }
@@ -33,7 +33,7 @@ public class PositionsPresenterImpl extends BaseCatalogPresenter {
 
     @Override
     public void onAddClicked() {
-        positions.add(new Position(0, 0, ""));
+        positions.add(new Position(0, 0, "", false));
         tableModel.fireTableDataChanged();
     }
 

@@ -1,15 +1,16 @@
 package com.niki.presentation.dialogs.catalog.impl.provider;
 
 import com.niki.domain.entities.Provider;
+import com.niki.domain.interactors.catalog.provider.ProviderContract;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class ProvidersTableModel extends AbstractTableModel {
-    private static final String[] columns = {"ID", "Поставшик", "Адрес"};
-    private List<Provider> providers;
+    private static final String[] columns = {"Поставшик", "Адрес", "Email", "Телефон"};
+    private List<ProviderContract> providers;
 
-    public ProvidersTableModel(List<Provider> providers) {
+    ProvidersTableModel(List<ProviderContract> providers) {
         this.providers = providers;
     }
 
@@ -29,11 +30,13 @@ public class ProvidersTableModel extends AbstractTableModel {
 
         switch (i1) {
             case 0:
-                return row.getId();
-            case 1:
                 return row.getName();
+            case 1:
+                return row.getContact().getAddress();
             case 2:
-                return row.getAddress();
+                return row.getContact().getEmail();
+            case 3:
+                return row.getContact().getPhone();
         }
 
         return null;
@@ -43,9 +46,9 @@ public class ProvidersTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Integer.class;
             case 1:
             case 2:
+            case 3:
                 return String.class;
         }
         return super.getColumnClass(columnIndex);
@@ -59,7 +62,7 @@ public class ProvidersTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex != 0;
+        return true;
     }
 
 
@@ -68,12 +71,19 @@ public class ProvidersTableModel extends AbstractTableModel {
         var item = providers.get(rowIndex);
 
         switch (columnIndex) {
-            case 1:
+            case 0:
                 item.setName((String) aValue);
                 break;
-            case 2:
-                item.setAddress((String) aValue);
+            case 1:
+                item.getContact().setAddress((String) aValue);
                 break;
+            case 2:
+                item.getContact().setEmail((String) aValue);
+                break;
+            case 3:
+                item.getContact().setPhone((String) aValue);
+                break;
+
         }
 
         super.setValueAt(aValue, rowIndex, columnIndex);

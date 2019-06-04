@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class CountriesTableModel extends AbstractTableModel {
-    private static final String[] columns = {"ID", "Страна", "Код страны"};
+    private static final String[] columns = {"Страна", "Код страны"};
     private List<Country> countries;
 
     public CountriesTableModel(List<Country> countries) {
@@ -30,10 +30,8 @@ public class CountriesTableModel extends AbstractTableModel {
 
         switch (i1) {
             case 0:
-                return row.getId();
-            case 1:
                 return row.getName();
-            case 2:
+            case 1:
                 return row.getCode();
         }
 
@@ -44,9 +42,7 @@ public class CountriesTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Integer.class;
             case 1:
-            case 2:
                 return String.class;
         }
         return super.getColumnClass(columnIndex);
@@ -60,7 +56,7 @@ public class CountriesTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex != 0;
+        return true;
     }
 
 
@@ -69,10 +65,10 @@ public class CountriesTableModel extends AbstractTableModel {
         var item = countries.get(rowIndex);
 
         switch (columnIndex) {
-            case 1:
+            case 0:
                 item.setName((String) aValue);
                 break;
-            case 2:
+            case 1:
                 item.setCode((String) aValue);
                 break;
         }

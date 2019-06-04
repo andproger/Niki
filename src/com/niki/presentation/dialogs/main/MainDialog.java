@@ -1,6 +1,15 @@
 package com.niki.presentation.dialogs.main;
 
+import com.niki.data.cache.database.datastores.SqlPositionDataStore;
+import com.niki.data.cache.database.datastores.SqlUserDataStore;
+import com.niki.data.repository.PositionRepositorySql;
+import com.niki.data.repository.UserAuthAuthInMemoryRepository;
+import com.niki.data.repository.UserRepositorySql;
 import com.niki.presentation.dialogs.catalog.CatalogDialog;
+import com.niki.presentation.dialogs.catalogs.CatalogsDialog;
+import com.niki.presentation.dialogs.intake.NewIntakeDialog;
+import com.niki.presentation.dialogs.map.MapDialog;
+import com.niki.presentation.dialogs.sale.NewSaleDialog;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -11,22 +20,17 @@ public class MainDialog extends JDialog {
     private JPanel contentPane;
 
     private JButton buttonExit;
-    private JButton usersButton;
-    private JButton countriesButton;
-    private JButton positionsButton;
-    private JButton formsButton;
-    private JButton manufacturersButton;
     private JButton intakeButton;
-    private JButton drugsButton;
-    private JButton classesButton;
     private JButton salesButton;
-    private JButton storagesButton;
-    private JButton providersButton;
+    private JButton intakesButton;
+    private JButton saleButton;
+    private JButton catalogsButton;
+    private JButton operationsButton;
 
     public MainDialog() {
         setContentPane(contentPane);
         setModal(true);
-
+        setTitle("Главное меню");
         initViews();
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -39,31 +43,34 @@ public class MainDialog extends JDialog {
         contentPane.registerKeyboardAction(e -> onExit(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void initViews(){
+    private void initViews() {
         buttonExit.addActionListener(e -> onExit());
 
-        usersButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.USERS));
-        positionsButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.POSITIONS));
-        countriesButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.COUNTRIES));
-        formsButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.DRUG_FORMS));
-        manufacturersButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.MANUFACTURERS));
-        drugsButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.DRUGS));
-        classesButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.DRUG_CLASSES));
-        intakeButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.NEW_INTAKES));
-        salesButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.NEW_SALES));
-        storagesButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.STORAGES));
-        providersButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.PROVIDERS));
+        intakeButton.addActionListener(actionEvent -> showDialog(new NewIntakeDialog()));
+        salesButton.addActionListener(actionEvent -> showDialog(new NewSaleDialog()));
+        intakesButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.INTAKE));
+        saleButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.SALE));
+        catalogsButton.addActionListener(actionEvent -> showDialog(new CatalogsDialog()));
+        operationsButton.addActionListener(e -> showCatalogDialog(CatalogDialog.CatalogType.OPERATIONS));
     }
 
-    private void showCatalogDialog(CatalogDialog.CatalogType catalogType) {
-        var catalogDialog = new CatalogDialog(catalogType);
-        catalogDialog.pack();
-        catalogDialog.setVisible(true);
+    private void showCatalogDialog(CatalogDialog.CatalogType type) {
+        var dialog = new CatalogDialog(type);
+        showDialog(dialog);
     }
 
+    private void showMapDialog(MapDialog.DialogType type) {
+        var mapDialog = new MapDialog(type);
+        showDialog(mapDialog);
+    }
+
+
+    private void showDialog(JDialog dialog){
+        dialog.pack();
+        dialog.setVisible(true);
+    }
 
     private void onExit() {
-        // add your code here if necessary
         dispose();
     }
 }

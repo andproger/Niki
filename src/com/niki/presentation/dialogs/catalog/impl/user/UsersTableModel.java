@@ -7,10 +7,10 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class UsersTableModel extends AbstractTableModel {
-    private static final String[] columns = {"ID", "Login", "First Name", "Last Name", "Position"};
+    private static final String[] columns = {"Логин", "Имя", "Фамилия", "Должность", "Email", "Телефон"};
     private List<UserContract> users;
 
-    public UsersTableModel(List<UserContract> users) {
+    UsersTableModel(List<UserContract> users) {
         this.users = users;
     }
 
@@ -30,15 +30,17 @@ public class UsersTableModel extends AbstractTableModel {
 
         switch (i1) {
             case 0:
-                return row.getId();
-            case 1:
                 return row.getLogin();
-            case 2:
+            case 1:
                 return row.getFirstName();
-            case 3:
+            case 2:
                 return row.getLastName();
-            case 4:
+            case 3:
                 return row.getPosition();
+            case 4:
+                return row.getContact().getEmail();
+            case 5:
+                return row.getContact().getPhone();
         }
 
         return null;
@@ -48,12 +50,12 @@ public class UsersTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Integer.class;
             case 1:
             case 2:
-            case 3:
-                return String.class;
             case 4:
+            case 5:
+                return String.class;
+            case 3:
                 return Position.class;
         }
         return super.getColumnClass(columnIndex);
@@ -67,16 +69,17 @@ public class UsersTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex != 0;
+        return true;
     }
 
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         var item = users.get(rowIndex);
-//    xlnt::worksheet ws
 
         switch (columnIndex) {
+            case 0:
+                item.setLogin((String) aValue);
             case 1:
                 item.setFirstName((String) aValue);
                 break;
@@ -85,6 +88,12 @@ public class UsersTableModel extends AbstractTableModel {
                 break;
             case 3:
                 item.setPosition((Position) aValue);
+                break;
+            case 4:
+                item.getContact().setEmail((String) aValue);
+                break;
+            case 5:
+                item.getContact().setPhone((String) aValue);
                 break;
         }
 

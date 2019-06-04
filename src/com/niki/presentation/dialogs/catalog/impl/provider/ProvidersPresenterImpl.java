@@ -1,39 +1,40 @@
 package com.niki.presentation.dialogs.catalog.impl.provider;
 
-import com.niki.domain.entities.Provider;
-import com.niki.domain.gateways.repositories.ProviderRepository;
+import com.niki.domain.entities.Contact;
+import com.niki.domain.interactors.catalog.provider.ProviderContract;
+import com.niki.domain.interactors.catalog.provider.ProviderInteractor;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 
 import java.util.List;
 
 public class ProvidersPresenterImpl extends BaseCatalogPresenter {
-    private final ProviderRepository repository;
+    private final ProviderInteractor interactor;
 
     private ProvidersTableModel tableModel;
-    private List<Provider> providers;
+    private List<ProviderContract> providers;
 
-    public ProvidersPresenterImpl(CatalogView view, ProviderRepository repository) {
+    public ProvidersPresenterImpl(CatalogView view, ProviderInteractor interactor) {
         super(view);
-        this.repository = repository;
+        this.interactor = interactor;
 
         initTableModel();
     }
 
     private void initTableModel() {
-        this.providers = repository.get();
+        this.providers = interactor.get();
         this.tableModel = new ProvidersTableModel(providers);
         view.setTableModel(tableModel);
     }
 
     @Override
     public void onSaveClicked() {
-        repository.save(providers);
+        interactor.save(providers);
     }
 
     @Override
     public void onAddClicked() {
-        providers.add(new Provider(0, "", ""));
+        providers.add(new ProviderContract(0, "", new Contact(0, "", "", "", "")));
         tableModel.fireTableDataChanged();
     }
 

@@ -1,12 +1,18 @@
 package com.niki.presentation.dialogs.catalog.impl.drug;
 
-import com.niki.domain.entities.*;
+import com.niki.domain.entities.DrugClass;
+import com.niki.domain.entities.Form;
+import com.niki.domain.entities.Manufacturer;
+import com.niki.domain.entities.Storage;
 import com.niki.domain.interactors.catalog.drug.DrugContract;
 import com.niki.domain.interactors.catalog.drug.DrugInteractor;
 import com.niki.presentation.dialogs.catalog.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.catalog.CatalogView;
 import com.niki.presentation.dialogs.catalog.CellEditor;
+import com.niki.presentation.dialogs.catalog.impl.drug.create.CreateDrugDialog;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -17,7 +23,7 @@ public class DrugsPresenterImpl extends BaseCatalogPresenter {
     private DrugsTableModel tableModel;
     private List<DrugContract> drugs;
 
-    public DrugsPresenterImpl(CatalogView view, DrugInteractor drugInteractor){
+    public DrugsPresenterImpl(CatalogView view, DrugInteractor drugInteractor) {
         super(view);
         this.drugInteractor = drugInteractor;
 
@@ -41,13 +47,20 @@ public class DrugsPresenterImpl extends BaseCatalogPresenter {
 
     @Override
     public void onAddClicked() {
-        drugs.add(new DrugContract(0, 0,"", "", null, null, null, null));
-        tableModel.fireTableDataChanged();
+        var newDrugDialog = new CreateDrugDialog();
+        newDrugDialog.pack();
+        newDrugDialog.setVisible(true);
+        var drug = newDrugDialog.getDrugContract();
+
+        if (drug != null) {
+            drugs.add(drug);
+            tableModel.fireTableDataChanged();
+        }
     }
 
     @Override
     public void onDeleteClicked(int[] rows) {
-        for(int i = rows.length - 1; i >= 0; i--)
+        for (int i = rows.length - 1; i >= 0; i--)
             this.drugs.remove(rows[i]);
 
         tableModel.fireTableDataChanged();

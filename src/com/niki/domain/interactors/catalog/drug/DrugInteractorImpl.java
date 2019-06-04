@@ -17,19 +17,21 @@ public class DrugInteractorImpl implements DrugInteractor {
     private final FormRepository formRepository;
     private final StorageRepository storageRepository;
     private final ManufacturerRepository manufacturerRepository;
+    private final DrugCountRepository drugCountRepository;
 
     public DrugInteractorImpl(
             DrugRepository drugRepository,
             ClassRepository classRepository,
             FormRepository formRepository,
             StorageRepository storageRepository,
-            ManufacturerRepository manufacturerRepository
-    ) {
+            ManufacturerRepository manufacturerRepository,
+            DrugCountRepository drugCountRepository) {
         this.drugRepository = drugRepository;
         this.classRepository = classRepository;
         this.formRepository = formRepository;
         this.storageRepository = storageRepository;
         this.manufacturerRepository = manufacturerRepository;
+        this.drugCountRepository = drugCountRepository;
     }
 
     @Override
@@ -55,9 +57,11 @@ public class DrugInteractorImpl implements DrugInteractor {
             index = Collections.binarySearch(forms, form, Comparator.comparingInt(Form::getId));
             form = index >= 0 ? forms.get(index) : null;
 
-            var manufacturer = new Manufacturer(drug.getManufacturerId(), 0, "", "");
+            var manufacturer = new Manufacturer(drug.getManufacturerId(), 0, "", 0);
             index = Collections.binarySearch(manufacturers, manufacturer, Comparator.comparingInt(Manufacturer::getId));
             manufacturer = index >= 0 ? manufacturers.get(index) : null;
+
+            var drugCount = drugCountRepository.get(drug.getId());
 
             drugsResult.add(new DrugContract(
                     drug.getId(),
@@ -67,7 +71,8 @@ public class DrugInteractorImpl implements DrugInteractor {
                     drugClass,
                     manufacturer,
                     storage,
-                    form)
+                    form,
+                    drugCount)
             );
         }
 
