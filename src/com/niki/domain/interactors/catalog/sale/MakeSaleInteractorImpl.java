@@ -7,6 +7,7 @@ import com.niki.domain.gateways.repositories.SaleRepository;
 import com.niki.domain.gateways.repositories.UserAuthRepository;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class MakeSaleInteractorImpl implements MakeSaleInteractor {
     @Override
     public int add(List<SaleItemContract> contractItems) {
         int userId = userAuthRepository.getUser().getUserId();
-        int newSaleId = saleRepository.save(new Sale(0, new Date(System.currentTimeMillis()), userId));
+        int newSaleId = saleRepository.save(new Sale(0, new Timestamp(System.currentTimeMillis()), userId));
 
         setSaleIds(newSaleId, contractItems);
         saleItemRepository.save(contractsToItems(contractItems));

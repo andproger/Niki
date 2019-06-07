@@ -8,6 +8,7 @@ import com.niki.domain.gateways.repositories.IntakeRepository;
 import com.niki.domain.gateways.repositories.ProviderRepository;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class IntakeInteractorImpl implements IntakeInteractor {
 
     @Override
     public int add(int providerId, List<IntakeItemContract> contractItems) {
-        int newIntakeId = intakeRepository.save(new Intake(0, providerId, new Date(System.currentTimeMillis())));
+        int newIntakeId = intakeRepository.save(new Intake(0, providerId, new Timestamp(System.currentTimeMillis())));
 
         setIntakeIds(newIntakeId, contractItems);
         intakeItemRepository.save(contractsToItems(contractItems));

@@ -212,6 +212,8 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
             statement.setBoolean(index, field.getBoolean(item));
         } else if (clazz.equals(Date.class)) {
             statement.setDate(index, (Date) field.get(item));
+        } else if (clazz.equals(Timestamp.class)) {
+            statement.setTimestamp(index, (Timestamp) field.get(item));
         }
     }
 
@@ -232,6 +234,8 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
             field.setBoolean(instance, result.getBoolean(column));
         } else if (clazz.equals(Date.class)) {
             field.set(instance, result.getDate(column));
+        } else if (clazz.equals(Timestamp.class)) {
+            field.set(instance, result.getTimestamp(column));
         }
     }
 

@@ -5,6 +5,7 @@ import com.niki.data.cache.database.annotaion.IntPrimaryKey;
 import com.niki.data.cache.database.annotaion.Table;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Table("intake_drug")
 public class Intake {
@@ -15,13 +16,13 @@ public class Intake {
     private int providerId;
 
     @Column("date")
-    private Date dateTime;
+    private Timestamp dateTime;
 
     public Intake() {
 
     }
 
-    public Intake(int id, int providerId, Date dateTime) {
+    public Intake(int id, int providerId, Timestamp dateTime) {
         this.id = id;
         this.providerId = providerId;
         this.dateTime = dateTime;
@@ -43,11 +44,11 @@ public class Intake {
         this.providerId = providerId;
     }
 
-    public Date getDateTime() {
+    public Timestamp getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(Timestamp dateTime) {
         this.dateTime = dateTime;
     }
 

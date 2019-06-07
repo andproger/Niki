@@ -4,7 +4,7 @@ import com.niki.data.cache.database.annotaion.Column;
 import com.niki.data.cache.database.annotaion.IntPrimaryKey;
 import com.niki.data.cache.database.annotaion.Table;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Table("sales")
 public class Sale {
@@ -12,12 +12,12 @@ public class Sale {
     private int id;
 
     @Column("time")
-    private Date dateTime;
+    private Timestamp dateTime;
 
     @Column("user_id")
     private int userId;
 
-    public Sale(int id, Date dateTime, int userId) {
+    public Sale(int id, Timestamp dateTime, int userId) {
         this.id = id;
         this.dateTime = dateTime;
         this.userId = userId;
@@ -35,11 +35,11 @@ public class Sale {
         this.id = id;
     }
 
-    public Date getDateTime() {
+    public Timestamp getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(Timestamp dateTime) {
         this.dateTime = dateTime;
     }
 
