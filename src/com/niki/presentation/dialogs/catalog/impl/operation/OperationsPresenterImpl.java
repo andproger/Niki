@@ -18,6 +18,7 @@ public class OperationsPresenterImpl extends BaseCatalogPresenter {
         this.operationRepository = operationRepository;
 
         initTableModel();
+        view.setControlsVisible(false);
     }
 
     private void initTableModel() {

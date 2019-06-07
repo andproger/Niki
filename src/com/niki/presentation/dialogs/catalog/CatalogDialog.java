@@ -48,6 +48,12 @@ public class CatalogDialog extends JDialog implements CatalogView {
             }
         });
 
+        var userAuth = new UserAuthAuthInMemoryRepository(new SqlUserDataStore()).getUser();
+        var user = new UserRepositorySql(new SqlUserDataStore()).get(userAuth.getUserId());
+        var position = new PositionRepositorySql(new SqlPositionDataStore()).get(user.getPositionId());
+
+        setControlsVisible(position.isAdmin());
+
         setupPresenter(type);
         initViews();
 
@@ -69,14 +75,6 @@ public class CatalogDialog extends JDialog implements CatalogView {
             presenter.onDeleteClicked(rows);
         });
 
-        var userAuth = new UserAuthAuthInMemoryRepository(new SqlUserDataStore()).getUser();
-        var user = new UserRepositorySql(new SqlUserDataStore()).get(userAuth.getUserId());
-        var position = new PositionRepositorySql(new SqlPositionDataStore()).get(user.getPositionId());
-
-        buttonSave.setVisible(position.isAdmin());
-        buttonAdd.setVisible(position.isAdmin());
-        buttonDelete.setVisible(position.isAdmin());
-
         table1.setAutoCreateRowSorter(true);
     }
 
@@ -97,6 +95,13 @@ public class CatalogDialog extends JDialog implements CatalogView {
     @Override
     public void setTableCellRenderer(Class aClass, DefaultTableCellRenderer cellRenderer) {
         table1.setDefaultRenderer(aClass, cellRenderer);
+    }
+
+    @Override
+    public void setControlsVisible(boolean isVisible) {
+        buttonSave.setVisible(isVisible);
+        buttonAdd.setVisible(isVisible);
+        buttonDelete.setVisible(isVisible);
     }
 
     private void setupPresenter(CatalogType type) {

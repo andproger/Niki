@@ -8,4 +8,5 @@ public interface CatalogView {
     void setTableModel(AbstractTableModel tableModel);
     void setTableCellEditor(Class aClass, TableCellEditor cellEditor);
     void setTableCellRenderer(Class aClass, DefaultTableCellRenderer cellRenderer);
+    void setControlsVisible(boolean isVisible);
 }
