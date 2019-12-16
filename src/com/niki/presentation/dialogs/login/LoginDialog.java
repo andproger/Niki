@@ -1,6 +1,5 @@
 package com.niki.presentation.dialogs.login;
 
-import com.niki.data.repository.ConnectionSettingsJsonFileRepository;
 import com.niki.data.services.ConnectionServiceImpl;
 import com.niki.domain.interactors.login.LoginInteractorImpl;
 

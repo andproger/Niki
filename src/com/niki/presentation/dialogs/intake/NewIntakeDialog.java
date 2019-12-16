@@ -1,15 +1,6 @@
 package com.niki.presentation.dialogs.intake;
 
-import com.niki.data.cache.database.datastores.SqlDrugDataStore;
-import com.niki.data.cache.database.datastores.SqlIntakeDataStore;
-import com.niki.data.cache.database.datastores.SqlIntakeItemDataStore;
-import com.niki.data.cache.database.datastores.SqlProviderDataStore;
-import com.niki.data.repository.DrugRepositorySql;
-import com.niki.data.repository.IntakeItemRepositorySql;
-import com.niki.data.repository.IntakeRepositorySql;
-import com.niki.data.repository.ProviderRepositorySql;
-import com.niki.domain.entities.Provider;
-import com.niki.domain.interactors.catalog.intake.IntakeInteractorImpl;
+import com.niki.domain.interactors.simpleView.intake.IntakeInteractorImpl;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;

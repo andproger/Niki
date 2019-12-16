@@ -1,15 +1,8 @@
 package com.niki.domain.interactors.map.sale;
 
-import com.niki.domain.entities.Drug;
-import com.niki.domain.entities.Sale;
-import com.niki.domain.entities.SaleItem;
-import com.niki.domain.entities.User;
-import com.niki.domain.gateways.repositories.DrugRepository;
-import com.niki.domain.gateways.repositories.SaleItemRepository;
-import com.niki.domain.gateways.repositories.SaleRepository;
-import com.niki.domain.gateways.repositories.UserRepository;
-import com.niki.domain.interactors.catalog.sale.SaleContract;
-import com.niki.domain.interactors.catalog.sale.SaleItemContract;
+import com.niki.domain.gateways.repositories.AdminRepository;
+import com.niki.domain.interactors.simpleView.sale.SaleContract;
+import com.niki.domain.interactors.simpleView.sale.SaleItemContract;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,13 +12,13 @@ import java.util.List;
 public class SaleInteractorImpl implements SaleInteractor {
     private final SaleRepository saleRepository;
     private final SaleItemRepository saleItemRepository;
-    private final UserRepository userRepository;
+    private final AdminRepository adminRepository;
     private final DrugRepository drugRepository;
 
-    public SaleInteractorImpl(SaleRepository saleRepository, SaleItemRepository saleItemRepository, UserRepository userRepository, DrugRepository drugRepository) {
+    public SaleInteractorImpl(SaleRepository saleRepository, SaleItemRepository saleItemRepository, AdminRepository adminRepository, DrugRepository drugRepository) {
         this.saleRepository = saleRepository;
         this.saleItemRepository = saleItemRepository;
-        this.userRepository = userRepository;
+        this.adminRepository = adminRepository;
         this.drugRepository = drugRepository;
     }
 
@@ -46,11 +39,11 @@ public class SaleInteractorImpl implements SaleInteractor {
 
     @Override
     public List<User> getUsers() {
-        return userRepository.get();
+        return adminRepository.get();
     }
 
     private ArrayList<SaleContract> intakesToContracts(List<Sale> sales) {
-        var users = userRepository.get();
+        var users = adminRepository.get();
         var contracts = new ArrayList<SaleContract>();
 
         for (var sale : sales) {

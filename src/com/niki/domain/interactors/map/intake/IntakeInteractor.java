@@ -1,7 +1,7 @@
 package com.niki.domain.interactors.map.intake;
 
-import com.niki.domain.interactors.catalog.intake.IntakeContract;
-import com.niki.domain.interactors.catalog.intake.IntakeItemContract;
+import com.niki.domain.interactors.simpleView.intake.IntakeContract;
+import com.niki.domain.interactors.simpleView.intake.IntakeItemContract;
 
 import java.util.ArrayList;
 

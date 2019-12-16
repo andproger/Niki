@@ -1,29 +1,29 @@
 package com.niki.data.repository;
 
-import com.niki.data.cache.database.datastores.UserDataStore;
-import com.niki.domain.entities.UserAuth;
-import com.niki.domain.gateways.repositories.UserAuthRepository;
+import com.niki.data.cache.database.datastores.AdminDataStore;
+import com.niki.domain.entities.Admin;
 
 public class UserAuthAuthInMemoryRepository implements UserAuthRepository {
-    private static UserAuth userAuth;
-    private final UserDataStore dataStore;
+    private static Admin currentUser;
+    private final AdminDataStore dataStore;
 
-    public UserAuthAuthInMemoryRepository(UserDataStore dataStore) {
+    public UserAuthAuthInMemoryRepository(AdminDataStore dataStore) {
         this.dataStore = dataStore;
     }
 
     @Override
-    public UserAuth getUser() {
-        return userAuth;
+    public Admin getCurrentUser() {
+        return currentUser;
     }
 
     @Override
     public boolean auth(String login, String password) {
         //TODO всё что ты делаешь это плохо
         var users = dataStore.getAll();
+
         for (var user : users) {
             if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
-                userAuth = new UserAuth(user.getId());
+                currentUser = user;
                 return true;
             }
         }

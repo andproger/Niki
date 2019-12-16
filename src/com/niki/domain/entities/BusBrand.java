@@ -1,0 +1,41 @@
+package com.niki.domain.entities;
+
+import com.niki.data.cache.database.annotaion.Column;
+import com.niki.data.cache.database.annotaion.IntPrimaryKey;
+import com.niki.data.cache.database.annotaion.Table;
+
+@Table("bus_brand")
+public class BusBrand {
+    @IntPrimaryKey("id")
+    int id;
+    @Column("name")
+    String name;
+
+    public BusBrand() {
+    }
+
+    public BusBrand(int id) {
+        this.id = id;
+    }
+
+    public BusBrand(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}

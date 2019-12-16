@@ -1,15 +1,7 @@
 package com.niki.domain.interactors.map.intake;
 
-import com.niki.domain.entities.Drug;
-import com.niki.domain.entities.Intake;
-import com.niki.domain.entities.IntakeItem;
-import com.niki.domain.entities.Provider;
-import com.niki.domain.gateways.repositories.DrugRepository;
-import com.niki.domain.gateways.repositories.IntakeItemRepository;
-import com.niki.domain.gateways.repositories.IntakeRepository;
-import com.niki.domain.gateways.repositories.ProviderRepository;
-import com.niki.domain.interactors.catalog.intake.IntakeContract;
-import com.niki.domain.interactors.catalog.intake.IntakeItemContract;
+import com.niki.domain.interactors.simpleView.intake.IntakeContract;
+import com.niki.domain.interactors.simpleView.intake.IntakeItemContract;
 
 import java.util.ArrayList;
 import java.util.Collections;

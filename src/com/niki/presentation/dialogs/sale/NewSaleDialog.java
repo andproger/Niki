@@ -1,18 +1,12 @@
 package com.niki.presentation.dialogs.sale;
 
-import com.niki.data.cache.database.datastores.SqlSaleDataStore;
-import com.niki.data.cache.database.datastores.SqlSaleItemDataStore;
-import com.niki.data.cache.database.datastores.SqlUserDataStore;
-import com.niki.data.repository.SaleItemRepositorySql;
-import com.niki.data.repository.SaleRepositorySql;
+import com.niki.data.cache.database.datastores.SqlAdminDataStore;
 import com.niki.data.repository.UserAuthAuthInMemoryRepository;
-import com.niki.domain.entities.Provider;
-import com.niki.domain.interactors.catalog.sale.MakeSaleInteractorImpl;
+import com.niki.domain.interactors.simpleView.sale.MakeSaleInteractorImpl;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellEditor;
-import java.util.List;
 
 public class NewSaleDialog extends JDialog implements NewSaleView {
     private JPanel contentPane;
@@ -34,7 +28,7 @@ public class NewSaleDialog extends JDialog implements NewSaleView {
         presenter = new NewSalesPresenterImpl(this, new MakeSaleInteractorImpl(
                 new SaleRepositorySql(new SqlSaleDataStore()),
                 new SaleItemRepositorySql(new SqlSaleItemDataStore()),
-                new UserAuthAuthInMemoryRepository(new SqlUserDataStore()))
+                new UserAuthAuthInMemoryRepository(new SqlAdminDataStore()))
         );
     }
 

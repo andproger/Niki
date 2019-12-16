@@ -1,9 +1,7 @@
 package com.niki.data.services;
 
 import com.niki.data.cache.database.connection.SqlConnector;
-import com.niki.domain.entities.ConnectionSettings;
 import com.niki.domain.gateways.connection.ConnectionService;
-import com.niki.domain.gateways.repositories.ConnectionSettingsRepository;
 
 public class ConnectionServiceImpl implements ConnectionService {
 

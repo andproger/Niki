@@ -1,9 +1,6 @@
 package com.niki.presentation.dialogs.intake.create;
 
-import com.niki.data.cache.database.datastores.SqlDrugDataStore;
-import com.niki.data.repository.DrugRepositorySql;
-import com.niki.domain.entities.Drug;
-import com.niki.domain.interactors.catalog.intake.IntakeItemContract;
+import com.niki.domain.interactors.simpleView.intake.IntakeItemContract;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

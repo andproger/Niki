@@ -1,14 +1,9 @@
 package com.niki.presentation.dialogs.main;
 
-import com.niki.data.cache.database.datastores.SqlPositionDataStore;
-import com.niki.data.cache.database.datastores.SqlUserDataStore;
-import com.niki.data.repository.PositionRepositorySql;
-import com.niki.data.repository.UserAuthAuthInMemoryRepository;
-import com.niki.data.repository.UserRepositorySql;
-import com.niki.presentation.dialogs.catalog.CatalogDialog;
+import com.niki.presentation.dialogs.simpleView.CatalogDialog;
 import com.niki.presentation.dialogs.catalogs.CatalogsDialog;
 import com.niki.presentation.dialogs.intake.NewIntakeDialog;
-import com.niki.presentation.dialogs.map.MapDialog;
+import com.niki.presentation.dialogs.mapView.MapDialog;
 import com.niki.presentation.dialogs.sale.NewSaleDialog;
 
 import javax.swing.*;

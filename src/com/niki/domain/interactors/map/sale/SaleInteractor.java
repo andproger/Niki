@@ -1,9 +1,7 @@
 package com.niki.domain.interactors.map.sale;
 
-import com.niki.domain.entities.Drug;
-import com.niki.domain.entities.User;
-import com.niki.domain.interactors.catalog.sale.SaleContract;
-import com.niki.domain.interactors.catalog.sale.SaleItemContract;
+import com.niki.domain.interactors.simpleView.sale.SaleContract;
+import com.niki.domain.interactors.simpleView.sale.SaleItemContract;
 
 import java.util.ArrayList;
 import java.util.List;

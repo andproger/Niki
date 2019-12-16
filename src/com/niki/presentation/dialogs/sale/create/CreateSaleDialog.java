@@ -2,10 +2,9 @@ package com.niki.presentation.dialogs.sale.create;
 
 import com.niki.data.cache.database.datastores.*;
 import com.niki.data.repository.*;
-import com.niki.domain.entities.Drug;
-import com.niki.domain.interactors.catalog.drug.DrugContract;
-import com.niki.domain.interactors.catalog.drug.DrugInteractorImpl;
-import com.niki.domain.interactors.catalog.sale.SaleItemContract;
+import com.niki.domain.interactors.simpleView.drug.DrugContract;
+import com.niki.domain.interactors.simpleView.drug.DrugInteractorImpl;
+import com.niki.domain.interactors.simpleView.sale.SaleItemContract;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

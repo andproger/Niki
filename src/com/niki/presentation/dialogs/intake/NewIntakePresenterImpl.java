@@ -1,10 +1,8 @@
 package com.niki.presentation.dialogs.intake;
 
-import com.niki.domain.entities.Drug;
-import com.niki.domain.gateways.repositories.DrugRepository;
-import com.niki.domain.interactors.catalog.intake.IntakeInteractor;
-import com.niki.domain.interactors.catalog.intake.IntakeItemContract;
-import com.niki.presentation.dialogs.catalog.CellEditor;
+import com.niki.domain.interactors.simpleView.intake.IntakeInteractor;
+import com.niki.domain.interactors.simpleView.intake.IntakeItemContract;
+import com.niki.presentation.dialogs.simpleView.CellEditor;
 import com.niki.presentation.dialogs.intake.create.CreateIntakeDialog;
 
 import java.util.ArrayList;

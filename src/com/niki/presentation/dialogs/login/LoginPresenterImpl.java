@@ -1,7 +1,5 @@
 package com.niki.presentation.dialogs.login;
 
-import com.niki.domain.entities.ConnectionSettings;
-import com.niki.domain.gateways.repositories.ConnectionSettingsRepository;
 import com.niki.domain.interactors.login.LoginInteractor;
 
 public class LoginPresenterImpl implements LoginPresenter {

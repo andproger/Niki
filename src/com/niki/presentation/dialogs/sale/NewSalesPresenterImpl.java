@@ -1,7 +1,7 @@
 package com.niki.presentation.dialogs.sale;
 
-import com.niki.domain.interactors.catalog.sale.MakeSaleInteractor;
-import com.niki.domain.interactors.catalog.sale.SaleItemContract;
+import com.niki.domain.interactors.simpleView.sale.MakeSaleInteractor;
+import com.niki.domain.interactors.simpleView.sale.SaleItemContract;
 import com.niki.presentation.dialogs.sale.create.CreateSaleDialog;
 
 import java.util.ArrayList;

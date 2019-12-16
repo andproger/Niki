@@ -1,7 +1,6 @@
 package com.niki.presentation.dialogs.sale;
 
-import com.niki.domain.entities.Drug;
-import com.niki.domain.interactors.catalog.sale.SaleItemContract;
+import com.niki.domain.interactors.simpleView.sale.SaleItemContract;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;

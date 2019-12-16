@@ -1,6 +1,6 @@
 package com.niki.presentation.dialogs.catalogs;
 
-import com.niki.presentation.dialogs.catalog.CatalogDialog;
+import com.niki.presentation.dialogs.simpleView.CatalogDialog;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
