@@ -2,6 +2,7 @@ package com.niki.data.repository;
 
 import com.niki.data.cache.database.datastores.AdminDataStore;
 import com.niki.domain.entities.Admin;
+import com.niki.domain.gateways.repositories.UserAuthRepository;
 
 public class UserAuthAuthInMemoryRepository implements UserAuthRepository {
     private static Admin currentUser;
@@ -12,7 +13,7 @@ public class UserAuthAuthInMemoryRepository implements UserAuthRepository {
     }
 
     @Override
-    public Admin getCurrentUser() {
+    public Admin getUser() {
         return currentUser;
     }
 

@@ -41,7 +41,7 @@
           </grid>
         </children>
       </grid>
-      <grid id="e3588" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="e3588" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -49,84 +49,36 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="3c94" class="javax.swing.JButton" binding="usersButton">
+          <component id="3c94" class="javax.swing.JButton" binding="adminButton">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Пользователи"/>
+              <text value="Администраторы"/>
             </properties>
           </component>
-          <component id="d07a0" class="javax.swing.JButton" binding="positionButton">
+          <component id="d07a0" class="javax.swing.JButton" binding="brandButton">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Должности"/>
+              <text value="Бренды"/>
             </properties>
           </component>
-          <component id="5fdc4" class="javax.swing.JButton" binding="countryButton">
+          <component id="5fdc4" class="javax.swing.JButton" binding="busButton">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Страны"/>
+              <text value="Автобусы"/>
             </properties>
           </component>
-          <component id="55887" class="javax.swing.JButton" binding="manufacturerButton">
+          <component id="d92f8" class="javax.swing.JButton" binding="personsButton">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Производители"/>
-            </properties>
-          </component>
-          <component id="3be10" class="javax.swing.JButton" binding="providerButton">
-            <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Поставщики"/>
-            </properties>
-          </component>
-          <component id="e2d23" class="javax.swing.JButton" binding="storageButton">
-            <constraints>
-              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Хранилища"/>
-            </properties>
-          </component>
-          <component id="bec84" class="javax.swing.JButton" binding="drugButton">
-            <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Медикаменты"/>
-            </properties>
-          </component>
-          <component id="9a5ca" class="javax.swing.JButton" binding="formButton">
-            <constraints>
-              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Формы"/>
-            </properties>
-          </component>
-          <component id="df132" class="javax.swing.JButton" binding="drugClassButton">
-            <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Классы"/>
-            </properties>
-          </component>
-          <component id="ab07d" class="javax.swing.JButton" binding="indicationButton">
-            <constraints>
-              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Показания"/>
+              <text value="Персоны"/>
             </properties>
           </component>
         </children>

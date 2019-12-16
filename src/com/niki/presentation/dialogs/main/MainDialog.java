@@ -2,9 +2,6 @@ package com.niki.presentation.dialogs.main;
 
 import com.niki.presentation.dialogs.simpleView.CatalogDialog;
 import com.niki.presentation.dialogs.catalogs.CatalogsDialog;
-import com.niki.presentation.dialogs.intake.NewIntakeDialog;
-import com.niki.presentation.dialogs.mapView.MapDialog;
-import com.niki.presentation.dialogs.sale.NewSaleDialog;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -41,12 +38,12 @@ public class MainDialog extends JDialog {
     private void initViews() {
         buttonExit.addActionListener(e -> onExit());
 
-        intakeButton.addActionListener(actionEvent -> showDialog(new NewIntakeDialog()));
-        salesButton.addActionListener(actionEvent -> showDialog(new NewSaleDialog()));
-        intakesButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.INTAKE));
-        saleButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.SALE));
+//        intakeButton.addActionListener(actionEvent -> showDialog(new NewIntakeDialog()));
+//        salesButton.addActionListener(actionEvent -> showDialog(new NewSaleDialog()));
+//        intakesButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.INTAKE));
+//        saleButton.addActionListener(actionEvent -> showMapDialog(MapDialog.DialogType.SALE));
         catalogsButton.addActionListener(actionEvent -> showDialog(new CatalogsDialog()));
-        operationsButton.addActionListener(e -> showCatalogDialog(CatalogDialog.CatalogType.OPERATIONS));
+       // operationsButton.addActionListener(e -> showCatalogDialog(CatalogDialog.CatalogType.OPERATIONS));
     }
 
     private void showCatalogDialog(CatalogDialog.CatalogType type) {
@@ -54,10 +51,10 @@ public class MainDialog extends JDialog {
         showDialog(dialog);
     }
 
-    private void showMapDialog(MapDialog.DialogType type) {
-        var mapDialog = new MapDialog(type);
-        showDialog(mapDialog);
-    }
+//    private void showMapDialog(MapDialog.DialogType type) {
+//        var mapDialog = new MapDialog(type);
+//        showDialog(mapDialog);
+//    }
 
 
     private void showDialog(JDialog dialog){

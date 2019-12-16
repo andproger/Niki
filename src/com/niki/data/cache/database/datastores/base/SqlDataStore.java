@@ -19,7 +19,7 @@ import java.util.function.ToIntFunction;
 import static com.niki.data.cache.database.utils.Utils.idsDivided;
 
 public abstract class SqlDataStore<T> implements DataStore<T> {
-    protected final static String DATABASE = "drugs.dbo";
+    protected final static String DATABASE = "auto.dbo";
     protected Connection connection;
 
     private final Class aClass;

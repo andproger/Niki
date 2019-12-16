@@ -10,16 +10,10 @@ import java.awt.event.WindowEvent;
 public class CatalogsDialog extends JDialog {
     private JPanel contentPane;
     private JButton cancelButton;
-    private JButton usersButton;
-    private JButton positionButton;
-    private JButton countryButton;
-    private JButton manufacturerButton;
-    private JButton providerButton;
-    private JButton storageButton;
-    private JButton drugButton;
-    private JButton formButton;
-    private JButton drugClassButton;
-    private JButton indicationButton;
+    private JButton adminButton;
+    private JButton brandButton;
+    private JButton busButton;
+    private JButton personsButton;
 
     public CatalogsDialog() {
         setContentPane(contentPane);
@@ -41,16 +35,10 @@ public class CatalogsDialog extends JDialog {
     private void initViews() {
         cancelButton.addActionListener(e -> onCancel());
 
-        usersButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.USERS));
-        positionButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.POSITIONS));
-        countryButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.COUNTRIES));
-        formButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.DRUG_FORMS));
-        manufacturerButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.MANUFACTURERS));
-        drugButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.DRUGS));
-        drugClassButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.DRUG_CLASSES));
-        storageButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.STORAGES));
-        providerButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.PROVIDERS));
-        indicationButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.INDICATION));
+        adminButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.ADMIN));
+        brandButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.BRAND));
+        busButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.BUS));
+        personsButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.PERSON));
     }
 
 
