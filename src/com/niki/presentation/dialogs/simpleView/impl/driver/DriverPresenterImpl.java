@@ -5,7 +5,7 @@ import com.niki.domain.interactors.simpleView.driver.DriverContract;
 import com.niki.domain.interactors.simpleView.driver.DriverInteractor;
 import com.niki.presentation.dialogs.simpleView.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.simpleView.CatalogView;
-import com.niki.presentation.dialogs.simpleView.CellEditor;
+import com.niki.presentation.dialogs.simpleView.ComboboxCellEditor;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class DriverPresenterImpl extends BaseCatalogPresenter {
         this.driverContracts = driverInteractor.get();
         this.tableModel = new DriverTableModel(driverContracts);
         view.setTableModel(tableModel);
-        view.setTableCellEditor(Person.class, new CellEditor<>(driverInteractor.getPersons()));
+        view.setTableCellEditor(Person.class, new ComboboxCellEditor<>(driverInteractor.getPersons()));
     }
 
     @Override

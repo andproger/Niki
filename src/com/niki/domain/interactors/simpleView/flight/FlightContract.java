@@ -4,6 +4,7 @@ import com.niki.domain.entities.Bus;
 import com.niki.domain.entities.Driver;
 import com.niki.domain.entities.Route;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,10 +14,10 @@ public class FlightContract {
     Route route;
     double cost;
     ArrayList<Driver> drivers;
-    Date arrivalTime;
-    Date departureTime;
+    LocalDateTime arrivalTime;
+    LocalDateTime departureTime;
 
-    public FlightContract(int id, Bus bus, Route route, double cost, ArrayList<Driver> drivers, Date arrivalTime, Date departureTime) {
+    public FlightContract(int id, Bus bus, Route route, double cost, ArrayList<Driver> drivers, LocalDateTime arrivalTime, LocalDateTime departureTime) {
         this.id = id;
         this.bus = bus;
         this.route = route;
@@ -66,19 +67,19 @@ public class FlightContract {
         this.drivers = drivers;
     }
 
-    public Date getArrivalTime() {
+    public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(Date arrivalTime) {
+    public void setArrivalTime(LocalDateTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    public Date getDepartureTime() {
+    public LocalDateTime getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(Date departureTime) {
+    public void setDepartureTime(LocalDateTime departureTime) {
         this.departureTime = departureTime;
     }
 

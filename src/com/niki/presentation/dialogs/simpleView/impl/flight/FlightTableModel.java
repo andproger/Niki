@@ -1,18 +1,17 @@
 package com.niki.presentation.dialogs.simpleView.impl.flight;
 
-import com.niki.domain.entities.Driver;
-import com.niki.domain.entities.Flight;
-import com.niki.domain.entities.Route;
-import com.niki.domain.entities.Station;
+import com.niki.domain.entities.*;
 import com.niki.domain.interactors.simpleView.flight.FlightContract;
 import com.niki.domain.interactors.simpleView.route.RouteContract;
 
 import javax.swing.table.AbstractTableModel;
 import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class FlightTableModel extends AbstractTableModel {
-    private static final String[] columns = {"Маршрут",  "Время отправления", "Время прибытия", "Дистанция"};
+    private static final String[] columns = {"Маршрут", "Автобус", "Время отправления", "Время прибытия", "Дистанция", "Водители"};
     private List<FlightContract> items;
 
     FlightTableModel(List<FlightContract> items) {
@@ -37,13 +36,15 @@ public class FlightTableModel extends AbstractTableModel {
             case 0:
                 return row.getRoute();
             case 1:
-                return row.getDepartureTime();
+                return row.getBus();
             case 2:
-                return row.getArrivalTime();
+                return row.getDepartureTime();
             case 3:
-                return row.getRoute().getDistance();
+                return row.getArrivalTime();
             case 4:
-                return Arrays.toString(row.getDrivers().toArray());
+                return row.getRoute() != null? row.getRoute().getDistance() : 0;
+            case 5:
+                return row.getDrivers();
         }
 
         return null;
@@ -53,12 +54,15 @@ public class FlightTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return String.class;
+                return Route.class;
             case 1:
+                return Bus.class;
             case 2:
-                return Date.class;
-            case 4:
+            case 3:
+                return LocalDateTime.class;
+            case 5:
                 return ArrayList.class;
+
         }
         return super.getColumnClass(columnIndex);
     }
@@ -70,7 +74,7 @@ public class FlightTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex != 3 && columnIndex != 4;
+        return columnIndex != 4;
     }
 
     @Override
@@ -82,12 +86,15 @@ public class FlightTableModel extends AbstractTableModel {
                 item.setRoute((Route) aValue);
                 break;
             case 1:
-                item.setDepartureTime((Date) aValue);
+                item.setBus((Bus) aValue);
                 break;
             case 2:
-                item.setArrivalTime((Date) aValue);
+                item.setDepartureTime((LocalDateTime) aValue);
                 break;
-            case 4:
+            case 3:
+                item.setArrivalTime((LocalDateTime) aValue);
+                break;
+            case 5:
                 item.setDrivers((ArrayList<Driver>) aValue);
                 break;
         }

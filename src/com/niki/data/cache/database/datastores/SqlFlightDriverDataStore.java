@@ -6,6 +6,7 @@ import com.niki.domain.entities.FlightDriver;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class SqlFlightDriverDataStore extends SqlDataStore<FlightDriver> implements FlightDriverDataStore {
@@ -17,6 +18,28 @@ public class SqlFlightDriverDataStore extends SqlDataStore<FlightDriver> impleme
     @Override
     protected FlightDriver newItemInstance() {
         return new FlightDriver();
+    }
+
+    @Override
+    public List<FlightDriver> getAll() {
+        var flightDrivers = new ArrayList<FlightDriver>();
+
+        try {
+            var statement = connection.prepareStatement(sqlGen.select(null, null));
+            var resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                flightDrivers.add(new FlightDriver(
+                        resultSet.getInt("flight_id"),
+                        resultSet.getInt("driver_id")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return flightDrivers;
     }
 
     @Override
@@ -40,5 +63,15 @@ public class SqlFlightDriverDataStore extends SqlDataStore<FlightDriver> impleme
 
         return flightDrivers;
     }
+
+    @Override
+    public void save(List<FlightDriver> items) {
+        var sqlDelete = sqlGen.delete(null);
+        run(sqlDelete);
+
+        var sqlInsert = sqlGen.insert();
+        insertItems(items, sqlInsert);
+    }
+
 }
 

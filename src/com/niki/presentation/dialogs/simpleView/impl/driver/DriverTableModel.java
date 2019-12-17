@@ -10,7 +10,7 @@ public class DriverTableModel extends AbstractTableModel {
     private static final String[] columns = {"Сотрудник", "Номер прав"};
     private List<DriverContract> users;
 
-    DriverTableModel(List<DriverContract> users) {
+    public DriverTableModel(List<DriverContract> users) {
         this.users = users;
     }
 
@@ -32,7 +32,7 @@ public class DriverTableModel extends AbstractTableModel {
             case 0:
                 return row.getPerson();
             case 1:
-                return row.getId();
+                return row.getCard();
         }
 
         return null;

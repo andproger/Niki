@@ -3,6 +3,9 @@ package com.niki.domain.interactors.simpleView.flight;
 import com.niki.domain.entities.*;
 import com.niki.domain.gateways.repositories.*;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 public class FlightInteractorImpl implements FlightInteractor {
@@ -54,9 +57,11 @@ public class FlightInteractorImpl implements FlightInteractor {
                     route,
                     item.getCost(),
                     drivers1,
-                    new Date(item.getArrivalTime()),
-                    new Date(item.getDepartureTime())
-            ));
+                    LocalDateTime.ofInstant(Instant.ofEpochSecond(item.getArrivalTime()),
+                            TimeZone.getDefault().toZoneId()),
+                    LocalDateTime.ofInstant(Instant.ofEpochSecond(item.getDepartureTime()),
+                            TimeZone.getDefault().toZoneId()))
+            );
         }
 
         return flightContracts;
@@ -72,13 +77,15 @@ public class FlightInteractorImpl implements FlightInteractor {
             for (var driver : contract.drivers)
                 flightDrivers.add(new FlightDriver(contract.id, driver.getId()));
 
+            ZoneId zoneId = TimeZone.getDefault().toZoneId();
+
             flights.add(new Flight(
                     contract.getId(),
-                    contract.bus.getId(),
-                    contract.route.getId(),
+                    contract.bus != null? contract.bus.getId() : 0,
+                    contract.route != null? contract.route.getId() : 0,
                     contract.cost,
-                    contract.arrivalTime.getTime(),
-                    contract.departureTime.getTime()
+                    contract.departureTime.atZone(zoneId).toEpochSecond(),
+                    contract.arrivalTime.atZone(zoneId).toEpochSecond()
             ));
         }
 
@@ -88,12 +95,22 @@ public class FlightInteractorImpl implements FlightInteractor {
 
     @Override
     public List<Route> getRoutes() {
-        return null;
+        return routeRepository.get();
+    }
+
+    @Override
+    public List<Bus> getBuses() {
+        return busRepository.get();
     }
 
     @Override
     public List<FlightDriver> getFlightDrivers() {
-        return null;
+        return flightDriverRepository.get();
+    }
+
+    @Override
+    public List<Driver> getDrivers() {
+        return driverRepository.get();
     }
 
 

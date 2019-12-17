@@ -1,5 +1,6 @@
 package com.niki.presentation.app;
 
+import com.niki.presentation.dialogs.catalogs.CatalogsDialog;
 import com.niki.presentation.dialogs.login.LoginDialog;
 import com.niki.presentation.dialogs.main.MainDialog;
 
@@ -16,7 +17,7 @@ public class Main {
     }
 
     private static void openMainDialog() {
-        var dialog = new MainDialog();
+        var dialog = new CatalogsDialog();
         dialog.pack();
         dialog.setVisible(true);
     }

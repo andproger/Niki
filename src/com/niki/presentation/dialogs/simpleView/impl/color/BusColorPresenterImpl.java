@@ -1,9 +1,7 @@
 package com.niki.presentation.dialogs.simpleView.impl.color;
 
 import com.niki.domain.entities.BusColor;
-import com.niki.domain.entities.Person;
-import com.niki.domain.interactors.simpleView.busColor.BusColorInteractor;
-import com.niki.domain.interactors.simpleView.person.PersonInteractor;
+import com.niki.domain.interactors.simpleView.color.BusColorInteractor;
 import com.niki.presentation.dialogs.simpleView.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.simpleView.CatalogView;
 

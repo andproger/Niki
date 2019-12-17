@@ -90,6 +90,16 @@ public abstract class SqlDataStore<T> implements DataStore<T> {
         return result.size() > 0 ? result.get(0) : null;
     }
 
+    protected ResultSet run(String sqlQuery) {
+        try {
+            var statement = this.connection.prepareStatement(sqlQuery);
+            return statement.executeQuery();
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
     private List<T> select(String sqlQuery) {
         var items = new ArrayList<T>();
 

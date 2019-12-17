@@ -19,6 +19,7 @@ public class CatalogsDialog extends JDialog {
     private JButton driverButton;
     private JButton stationButton;
     private JButton routeButton;
+    private JButton flightButton;
 
     public CatalogsDialog() {
         setContentPane(contentPane);
@@ -49,6 +50,7 @@ public class CatalogsDialog extends JDialog {
         driverButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.DRIVER));
         stationButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.STATION));
         routeButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.ROUTE));
+        flightButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.FLIGHT));
     }
 
 

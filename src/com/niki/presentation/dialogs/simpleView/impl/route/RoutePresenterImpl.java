@@ -1,14 +1,11 @@
 package com.niki.presentation.dialogs.simpleView.impl.route;
 
-import com.niki.domain.entities.BusBrand;
 import com.niki.domain.entities.Station;
-import com.niki.domain.interactors.simpleView.model.BusModelContract;
-import com.niki.domain.interactors.simpleView.model.BusModelInteractor;
 import com.niki.domain.interactors.simpleView.route.RouteContract;
 import com.niki.domain.interactors.simpleView.route.RouteInteractor;
 import com.niki.presentation.dialogs.simpleView.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.simpleView.CatalogView;
-import com.niki.presentation.dialogs.simpleView.CellEditor;
+import com.niki.presentation.dialogs.simpleView.ComboboxCellEditor;
 
 import java.util.List;
 
@@ -29,7 +26,7 @@ public class RoutePresenterImpl extends BaseCatalogPresenter {
         this.items = routeInteractor.get();
         this.tableModel = new RouteTableModel(items);
         view.setTableModel(tableModel);
-        view.setTableCellEditor(Station.class, new CellEditor<>(routeInteractor.getStations()));
+        view.setTableCellEditor(Station.class, new ComboboxCellEditor<>(routeInteractor.getStations()));
     }
 
     @Override

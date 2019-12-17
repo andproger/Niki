@@ -49,4 +49,9 @@ public class Driver {
     public void setIdCard(String idCard) {
         this.idCard = idCard;
     }
+
+    @Override
+    public String toString() {
+        return idCard;
+    }
 }

@@ -1,7 +1,7 @@
 package com.niki.presentation.dialogs.simpleView.impl.brand;
 
 import com.niki.domain.entities.BusBrand;
-import com.niki.domain.interactors.simpleView.busBrand.BusBrandInteractor;
+import com.niki.domain.interactors.simpleView.brand.BusBrandInteractor;
 import com.niki.presentation.dialogs.simpleView.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.simpleView.CatalogView;
 

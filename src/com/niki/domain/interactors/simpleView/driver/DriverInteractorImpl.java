@@ -45,7 +45,7 @@ public class DriverInteractorImpl implements DriverInteractor {
     public void save(List<DriverContract> driverContracts) {
         var drivers = new ArrayList<Driver>();
         for (var contract : driverContracts) {
-            drivers.add(new Driver(contract.getId(), contract.getCard()));
+            drivers.add(new Driver(contract.getId(), contract.getPerson().getId(), contract.getCard()));
         }
 
         driverRepository.save(drivers);

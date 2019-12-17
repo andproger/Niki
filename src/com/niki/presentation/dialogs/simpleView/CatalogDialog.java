@@ -3,10 +3,11 @@ package com.niki.presentation.dialogs.simpleView;
 import com.niki.data.cache.database.datastores.*;
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.simpleView.admin.AdminInteractorImpl;
+import com.niki.domain.interactors.simpleView.brand.BusBrandInteractorImpl;
 import com.niki.domain.interactors.simpleView.bus.BusInteractorImpl;
-import com.niki.domain.interactors.simpleView.busBrand.BusBrandInteractorImpl;
-import com.niki.domain.interactors.simpleView.busColor.BusColorInteractorImpl;
+import com.niki.domain.interactors.simpleView.color.BusColorInteractorImpl;
 import com.niki.domain.interactors.simpleView.driver.DriverInteractorImpl;
+import com.niki.domain.interactors.simpleView.flight.FlightInteractorImpl;
 import com.niki.domain.interactors.simpleView.model.BusModelModelInteractorImpl;
 import com.niki.domain.interactors.simpleView.person.PersonInteractorImpl;
 import com.niki.domain.interactors.simpleView.route.RouteInteractorImpl;
@@ -16,6 +17,7 @@ import com.niki.presentation.dialogs.simpleView.impl.brand.BusBrandPresenterImpl
 import com.niki.presentation.dialogs.simpleView.impl.bus.BusPresenterImpl;
 import com.niki.presentation.dialogs.simpleView.impl.color.BusColorPresenterImpl;
 import com.niki.presentation.dialogs.simpleView.impl.driver.DriverPresenterImpl;
+import com.niki.presentation.dialogs.simpleView.impl.flight.FlightPresenterImpl;
 import com.niki.presentation.dialogs.simpleView.impl.model.BusModelPresenterImpl;
 import com.niki.presentation.dialogs.simpleView.impl.person.PersonPresenterImpl;
 import com.niki.presentation.dialogs.simpleView.impl.route.RoutePresenterImpl;
@@ -23,8 +25,8 @@ import com.niki.presentation.dialogs.simpleView.impl.station.StationPresenterImp
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -90,7 +92,7 @@ public class CatalogDialog extends JDialog implements CatalogView {
     }
 
     @Override
-    public void setTableCellRenderer(Class aClass, DefaultTableCellRenderer cellRenderer) {
+    public void setTableCellRenderer(Class aClass, TableCellRenderer cellRenderer) {
         table1.setDefaultRenderer(aClass, cellRenderer);
     }
 
@@ -154,8 +156,15 @@ public class CatalogDialog extends JDialog implements CatalogView {
                         new StationRepositorySql(new SqlStationDataStore())
                 ));
                 break;
-            case FLIGHTS:
-                presenter = new Fligh
+            case FLIGHT:
+                presenter = new FlightPresenterImpl(this, new FlightInteractorImpl(
+                        new FlightRepositorySql(new SqlFlightDataStore()),
+                        new RouteRepositorySql(new SqlRouteDataStore()),
+                        new FlightDriverRepositorySql(new SqlFlightDriverDataStore()),
+                        new DriverRepositorySql(new SqlDriverDataStore()),
+                        new BusRepositorySql(new SqlBusDataStore())
+                ));
+                break;
 
 
             default:
@@ -173,6 +182,6 @@ public class CatalogDialog extends JDialog implements CatalogView {
         DRIVER,
         STATION,
         ROUTE,
-        FLIGHTS,
+        FLIGHT,
     }
 }
