@@ -6,7 +6,7 @@ import com.niki.domain.interactors.simpleView.bus.BusContract;
 import com.niki.domain.interactors.simpleView.bus.BusInteractor;
 import com.niki.presentation.dialogs.simpleView.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.simpleView.CatalogView;
-import com.niki.presentation.dialogs.simpleView.CellEditor;
+import com.niki.presentation.dialogs.simpleView.ComboboxCellEditor;
 
 import java.util.List;
 
@@ -27,8 +27,8 @@ public class BusPresenterImpl extends BaseCatalogPresenter {
         this.items = busInteractor.get();
         this.tableModel = new BusTableModel(items);
         view.setTableModel(tableModel);
-        view.setTableCellEditor(BusColor.class, new CellEditor<>(busInteractor.getColors()));
-        view.setTableCellEditor(BusModel.class, new CellEditor<>(busInteractor.getModels()));
+        view.setTableCellEditor(BusColor.class, new ComboboxCellEditor<>(busInteractor.getColors()));
+        view.setTableCellEditor(BusModel.class, new ComboboxCellEditor<>(busInteractor.getModels()));
     }
 
     @Override
