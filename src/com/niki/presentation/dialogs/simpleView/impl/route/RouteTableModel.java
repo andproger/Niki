@@ -1,16 +1,19 @@
-package com.niki.presentation.dialogs.simpleView.impl.person;
+package com.niki.presentation.dialogs.simpleView.impl.route;
 
-import com.niki.domain.entities.Person;
+import com.niki.domain.entities.BusBrand;
+import com.niki.domain.entities.Station;
+import com.niki.domain.interactors.simpleView.model.BusModelContract;
+import com.niki.domain.interactors.simpleView.route.RouteContract;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
-public class PersonTableModel extends AbstractTableModel {
-    private static final String[] columns = {"Имя", "Фамили", "Адрес", "Номер"};
-    private List<Person> items;
+public class RouteTableModel extends AbstractTableModel {
+    private static final String[] columns = {"Название", "Пункт отправления", "Пункт прибытия", "Дистанция"};
+    private List<RouteContract> items;
 
-    PersonTableModel(List<Person> users) {
-        this.items = users;
+    RouteTableModel(List<RouteContract> items) {
+        this.items = items;
     }
 
     @Override
@@ -29,13 +32,13 @@ public class PersonTableModel extends AbstractTableModel {
 
         switch (i1) {
             case 0:
-                return row.getFirstName();
+                return row.getName();
             case 1:
-                return row.getLastName();
+                return row.getFromStation();
             case 2:
-                return row.getHomeAddress();
+                return row.getToStation();
             case 3:
-                return row.getNumber();
+                return row.getDistance();
         }
 
         return null;
@@ -45,10 +48,10 @@ public class PersonTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
+                return String.class;
             case 1:
             case 2:
-            case 3:
-                return String.class;
+                return Station.class;
         }
         return super.getColumnClass(columnIndex);
     }
@@ -70,16 +73,16 @@ public class PersonTableModel extends AbstractTableModel {
 
         switch (columnIndex) {
             case 0:
-                item.setFirstName((String) aValue);
+                item.setName((String) aValue);
                 break;
             case 1:
-                item.setLastName((String) aValue);
+                item.setFromStation((Station) aValue);
                 break;
             case 2:
-                item.setHomeAddress((String) aValue);
+                item.setToStation((Station) aValue);
                 break;
             case 3:
-                item.setNumber((String) aValue);
+                item.setDistance(Integer.parseInt((String)aValue));
                 break;
         }
 

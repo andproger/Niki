@@ -71,4 +71,9 @@ public class BusModel {
     public void setSeats(int seats) {
         this.seats = seats;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

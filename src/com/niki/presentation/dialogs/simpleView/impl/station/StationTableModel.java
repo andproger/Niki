@@ -1,22 +1,21 @@
-package com.niki.presentation.dialogs.simpleView.impl.brand;
+package com.niki.presentation.dialogs.simpleView.impl.station;
 
-import com.niki.domain.entities.BusBrand;
-import com.niki.domain.entities.BusColor;
+import com.niki.domain.entities.Station;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
-public class BusModelTableModel extends AbstractTableModel {
-    private static final String[] columns = {"Бренд"};
-    private List<BusBrand> items;
+public class StationTableModel extends AbstractTableModel {
+    private static final String[] columns = {"Название"};
+    private List<Station> stations;
 
-    BusModelTableModel(List<BusBrand> items) {
-        this.items = items;
+    StationTableModel(List<Station> stations) {
+        this.stations = stations;
     }
 
     @Override
     public int getRowCount() {
-        return items.size();
+        return stations.size();
     }
 
     @Override
@@ -26,7 +25,7 @@ public class BusModelTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int i, int i1) {
-        var row = items.get(i);
+        var row = stations.get(i);
 
         switch (i1) {
             case 0:
@@ -38,8 +37,9 @@ public class BusModelTableModel extends AbstractTableModel {
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        if (columnIndex == 0) {
-            return String.class;
+        switch (columnIndex) {
+            case 0:
+                return String.class;
         }
         return super.getColumnClass(columnIndex);
     }
@@ -54,13 +54,14 @@ public class BusModelTableModel extends AbstractTableModel {
         return true;
     }
 
-
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        var item = items.get(rowIndex);
+        var item = stations.get(rowIndex);
 
-        if (columnIndex == 0) {
-            item.setName((String) aValue);
+        switch (columnIndex) {
+            case 0:
+                item.setName((String) aValue);
+                break;
         }
 
         super.setValueAt(aValue, rowIndex, columnIndex);

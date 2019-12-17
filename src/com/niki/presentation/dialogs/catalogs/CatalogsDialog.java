@@ -14,6 +14,11 @@ public class CatalogsDialog extends JDialog {
     private JButton brandButton;
     private JButton busButton;
     private JButton personsButton;
+    private JButton colorButton;
+    private JButton modelButton;
+    private JButton driverButton;
+    private JButton stationButton;
+    private JButton routeButton;
 
     public CatalogsDialog() {
         setContentPane(contentPane);
@@ -39,6 +44,11 @@ public class CatalogsDialog extends JDialog {
         brandButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.BRAND));
         busButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.BUS));
         personsButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.PERSON));
+        modelButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.MODEL));
+        colorButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.COLOR));
+        driverButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.DRIVER));
+        stationButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.STATION));
+        routeButton.addActionListener(actionEvent -> showCatalogDialog(CatalogDialog.CatalogType.ROUTE));
     }
 
 

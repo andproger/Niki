@@ -67,6 +67,7 @@ public class AdminTableModel extends AbstractTableModel {
         switch (columnIndex) {
             case 0:
                 item.setLogin((String) aValue);
+                break;
             case 1:
                 item.setPerson((Person) aValue);
                 break;

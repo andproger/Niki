@@ -16,7 +16,12 @@ public class Driver {
     public Driver() {
     }
 
-    public Driver(int personId, String idCard) {
+    public Driver(int id) {
+        this.id = id;
+    }
+
+    public Driver(int id, int personId, String idCard) {
+        this.id = id;
         this.personId = personId;
         this.idCard = idCard;
     }

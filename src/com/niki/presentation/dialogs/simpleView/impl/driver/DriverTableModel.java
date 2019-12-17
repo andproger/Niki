@@ -1,21 +1,22 @@
-package com.niki.presentation.dialogs.simpleView.impl.person;
+package com.niki.presentation.dialogs.simpleView.impl.driver;
 
 import com.niki.domain.entities.Person;
+import com.niki.domain.interactors.simpleView.driver.DriverContract;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
-public class PersonTableModel extends AbstractTableModel {
-    private static final String[] columns = {"Имя", "Фамили", "Адрес", "Номер"};
-    private List<Person> items;
+public class DriverTableModel extends AbstractTableModel {
+    private static final String[] columns = {"Сотрудник", "Номер прав"};
+    private List<DriverContract> users;
 
-    PersonTableModel(List<Person> users) {
-        this.items = users;
+    DriverTableModel(List<DriverContract> users) {
+        this.users = users;
     }
 
     @Override
     public int getRowCount() {
-        return items.size();
+        return users.size();
     }
 
     @Override
@@ -25,17 +26,13 @@ public class PersonTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int i, int i1) {
-        var row = items.get(i);
+        var row = users.get(i);
 
         switch (i1) {
             case 0:
-                return row.getFirstName();
+                return row.getPerson();
             case 1:
-                return row.getLastName();
-            case 2:
-                return row.getHomeAddress();
-            case 3:
-                return row.getNumber();
+                return row.getId();
         }
 
         return null;
@@ -45,9 +42,8 @@ public class PersonTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
+                return Person.class;
             case 1:
-            case 2:
-            case 3:
                 return String.class;
         }
         return super.getColumnClass(columnIndex);
@@ -63,23 +59,16 @@ public class PersonTableModel extends AbstractTableModel {
         return true;
     }
 
-
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        var item = items.get(rowIndex);
+        var item = users.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
-                item.setFirstName((String) aValue);
+                item.setPerson((Person) aValue);
                 break;
             case 1:
-                item.setLastName((String) aValue);
-                break;
-            case 2:
-                item.setHomeAddress((String) aValue);
-                break;
-            case 3:
-                item.setNumber((String) aValue);
+                item.setCard((String) aValue);
                 break;
         }
 

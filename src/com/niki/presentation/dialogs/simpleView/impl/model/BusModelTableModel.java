@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class BusModelTableModel extends AbstractTableModel {
-    private static final String[] columns = {"Название", "Запас хода", "Сидения"};
+    private static final String[] columns = {"Название", "Бренд", "Запас хода", "Сидения"};
     private List<BusModelContract> items;
 
     BusModelTableModel(List<BusModelContract> items) {
@@ -79,10 +79,10 @@ public class BusModelTableModel extends AbstractTableModel {
                 item.setBrand((BusBrand) aValue);
                 break;
             case 2:
-                item.setPowerReserve((Integer) aValue);
+                item.setPowerReserve(Integer.parseInt((String)aValue));
                 break;
             case 3:
-                item.setSeats((Integer) aValue);
+                item.setSeats(Integer.parseInt((String)aValue));
                 break;
         }
 

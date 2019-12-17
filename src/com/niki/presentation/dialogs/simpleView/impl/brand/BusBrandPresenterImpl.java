@@ -7,13 +7,13 @@ import com.niki.presentation.dialogs.simpleView.CatalogView;
 
 import java.util.List;
 
-public class BusModelPresenterImpl extends BaseCatalogPresenter {
+public class BusBrandPresenterImpl extends BaseCatalogPresenter {
     private final BusBrandInteractor busBrandInteractor;
 
-    private BusModelTableModel tableModel;
+    private BusBrandTableModel tableModel;
     private List<BusBrand> items;
 
-    public BusModelPresenterImpl(CatalogView view, BusBrandInteractor busBrandInteractor) {
+    public BusBrandPresenterImpl(CatalogView view, BusBrandInteractor busBrandInteractor) {
         super(view);
         this.busBrandInteractor = busBrandInteractor;
 
@@ -22,7 +22,7 @@ public class BusModelPresenterImpl extends BaseCatalogPresenter {
 
     private void initTableModel() {
         this.items = busBrandInteractor.get();
-        this.tableModel = new BusModelTableModel(items);
+        this.tableModel = new BusBrandTableModel(items);
         view.setTableModel(tableModel);
     }
 

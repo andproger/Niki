@@ -14,6 +14,10 @@ public class Flight {
     int routeId;
     @Column("cost")
     double cost;
+    @Column("departure_time")
+    long departureTime;
+    @Column("arrival_time")
+    long arrivalTime;
 
     public Flight() {
     }
@@ -22,11 +26,13 @@ public class Flight {
         this.id = id;
     }
 
-    public Flight(int id, int busId, int routeId, double cost) {
+    public Flight(int id, int busId, int routeId, double cost, long departureTime, long arrivalTime) {
         this.id = id;
         this.busId = busId;
         this.routeId = routeId;
         this.cost = cost;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
     }
 
     public int getId() {
@@ -59,5 +65,21 @@ public class Flight {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public long getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(int departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public long getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(int arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 }

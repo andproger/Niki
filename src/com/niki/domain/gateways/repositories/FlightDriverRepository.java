@@ -8,6 +8,8 @@ public interface FlightDriverRepository {
 
     List<FlightDriver> get();
 
+    List<FlightDriver> getByFlight(int id);
+
     FlightDriver get(int id);
 
     void save(List<FlightDriver> items);

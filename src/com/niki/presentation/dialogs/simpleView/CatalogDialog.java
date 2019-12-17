@@ -4,10 +4,22 @@ import com.niki.data.cache.database.datastores.*;
 import com.niki.data.repository.*;
 import com.niki.domain.interactors.simpleView.admin.AdminInteractorImpl;
 import com.niki.domain.interactors.simpleView.bus.BusInteractorImpl;
+import com.niki.domain.interactors.simpleView.busBrand.BusBrandInteractorImpl;
+import com.niki.domain.interactors.simpleView.busColor.BusColorInteractorImpl;
+import com.niki.domain.interactors.simpleView.driver.DriverInteractorImpl;
+import com.niki.domain.interactors.simpleView.model.BusModelModelInteractorImpl;
 import com.niki.domain.interactors.simpleView.person.PersonInteractorImpl;
+import com.niki.domain.interactors.simpleView.route.RouteInteractorImpl;
+import com.niki.domain.interactors.simpleView.station.StationInteractorImpl;
 import com.niki.presentation.dialogs.simpleView.impl.admin.AdminPresenterImpl;
+import com.niki.presentation.dialogs.simpleView.impl.brand.BusBrandPresenterImpl;
 import com.niki.presentation.dialogs.simpleView.impl.bus.BusPresenterImpl;
+import com.niki.presentation.dialogs.simpleView.impl.color.BusColorPresenterImpl;
+import com.niki.presentation.dialogs.simpleView.impl.driver.DriverPresenterImpl;
+import com.niki.presentation.dialogs.simpleView.impl.model.BusModelPresenterImpl;
 import com.niki.presentation.dialogs.simpleView.impl.person.PersonPresenterImpl;
+import com.niki.presentation.dialogs.simpleView.impl.route.RoutePresenterImpl;
+import com.niki.presentation.dialogs.simpleView.impl.station.StationPresenterImpl;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -92,23 +104,59 @@ public class CatalogDialog extends JDialog implements CatalogView {
     private void setupPresenter(CatalogType type) {
         switch (type) {
             case ADMIN:
-                presenter = new AdminPresenterImpl(this,
-                        new AdminInteractorImpl(
-                                new AdminRepositorySql(new SqlAdminDataStore()),
-                                new PersonRepositorySql(new SqlPersonDataStore())
-                        ));
+                presenter = new AdminPresenterImpl(this, new AdminInteractorImpl(
+                        new AdminRepositorySql(new SqlAdminDataStore()),
+                        new PersonRepositorySql(new SqlPersonDataStore())
+                ));
                 break;
             case BUS:
-                presenter = new BusPresenterImpl(this,
-                        new BusInteractorImpl(
-                                new BusRepositorySql(new SqlBusDataStore()),
-                                new BusColorRepositorySql(new SqlBusColorDataStore()),
-                                new BusModelRepositorySql(new SqlBusModelDataStore())
-                        ));
-        case PERSON:
-                presenter = new PersonPresenterImpl(this,
-                        new PersonInteractorImpl(new PersonRepositorySql(new SqlPersonDataStore())));
+                presenter = new BusPresenterImpl(this, new BusInteractorImpl(
+                        new BusRepositorySql(new SqlBusDataStore()),
+                        new BusColorRepositorySql(new SqlBusColorDataStore()),
+                        new BusModelRepositorySql(new SqlBusModelDataStore())
+                ));
                 break;
+            case PERSON:
+                presenter = new PersonPresenterImpl(this, new PersonInteractorImpl(
+                        new PersonRepositorySql(new SqlPersonDataStore())
+                ));
+                break;
+            case BRAND:
+                presenter= new BusBrandPresenterImpl(this, new BusBrandInteractorImpl(
+                        new BusBrandRepositorySql(new SqlBusBrandDataStore())
+                ));
+                break;
+            case COLOR:
+                presenter = new BusColorPresenterImpl(this, new BusColorInteractorImpl(
+                        new BusColorRepositorySql(new SqlBusColorDataStore())
+                ));
+                break;
+            case MODEL:
+                presenter = new BusModelPresenterImpl(this, new BusModelModelInteractorImpl(
+                        new BusModelRepositorySql(new SqlBusModelDataStore()),
+                        new BusBrandRepositorySql(new SqlBusBrandDataStore())
+                ));
+                break;
+            case DRIVER:
+                presenter = new DriverPresenterImpl(this, new DriverInteractorImpl(
+                        new DriverRepositorySql(new SqlDriverDataStore()),
+                        new PersonRepositorySql(new SqlPersonDataStore())
+                ));
+                break;
+            case STATION:
+                presenter = new StationPresenterImpl(this, new StationInteractorImpl(
+                        new StationRepositorySql(new SqlStationDataStore())
+                ));
+                break;
+            case ROUTE:
+                presenter = new RoutePresenterImpl(this, new RouteInteractorImpl(
+                        new RouteRepositorySql(new SqlRouteDataStore()),
+                        new StationRepositorySql(new SqlStationDataStore())
+                ));
+                break;
+            case FLIGHTS:
+                presenter = new Fligh
+
 
             default:
                 throw new IllegalStateException();
@@ -120,5 +168,11 @@ public class CatalogDialog extends JDialog implements CatalogView {
         BRAND,
         BUS,
         PERSON,
+        COLOR,
+        MODEL,
+        DRIVER,
+        STATION,
+        ROUTE,
+        FLIGHTS,
     }
 }
