@@ -5,7 +5,7 @@ import com.niki.domain.interactors.simpleView.admin.AdminContract;
 import com.niki.domain.interactors.simpleView.admin.AdminInteractor;
 import com.niki.presentation.dialogs.simpleView.BaseCatalogPresenter;
 import com.niki.presentation.dialogs.simpleView.CatalogView;
-import com.niki.presentation.dialogs.simpleView.CellEditor;
+import com.niki.presentation.dialogs.simpleView.ComboboxCellEditor;
 import com.niki.presentation.dialogs.simpleView.impl.admin.create.CreateAdminDialog;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class AdminPresenterImpl extends BaseCatalogPresenter {
         this.adminContracts = adminInteractor.get();
         this.tableModel = new AdminTableModel(adminContracts);
         view.setTableModel(tableModel);
-        view.setTableCellEditor(Person.class, new CellEditor<>(adminInteractor.getPersons()));
+        view.setTableCellEditor(Person.class, new ComboboxCellEditor<>(adminInteractor.getPersons()));
     }
 
     @Override
